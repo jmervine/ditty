@@ -1,0 +1,5 @@
+default:
+  store: "./store"
+test:
+  store: "/tmp/rspec-store" # trailing slash will break tests
+
