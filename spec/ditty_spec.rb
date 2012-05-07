@@ -28,7 +28,7 @@ describe Ditty do
     describe :list do
       it "should return directory contents" do
         helpers.list.should_not be_empty
-        helpers.list.should eq ["#{CONFIG["store"]}/2011", "#{CONFIG["store"]}/2012"]
+        helpers.list.sort.should eq ["#{CONFIG["store"]}/2011", "#{CONFIG["store"]}/2012"].sort
       end
     end
     describe :list_all do
