@@ -1,14 +1,18 @@
 <%
   page_title ||= settings.default_title
+  navigation ||= :nav_archive
+  path ||= nil
 %>
 <html>
   <head>
-    <title> Sing a little Ditty! </title>
+    <title><%= page_title %></title>
     <link rel="stylesheet" type="text/css" href="/ss/main.css" />
   </head>
   <body>
     <div class="header">
       <h1><%=page_title%></h1>
+      <div class="header_time"><%= path.nil? ? '&nbsp;' : time_display(path)%></div>
+      <span class="clear" />
     </div>
 
     <div class="main">
@@ -17,22 +21,7 @@
       </div>
 
       <div class="nav">
-        <div class="header">
-          <h3>Archive</h3>
-        </div>
-        <ul class="nav_list">
-          <% find_d("[0-9]{4}").each do |ydir| %>
-            <li class="nav_item"><b><%=ydir.split("/").last%></b></li>
-            <% mdirs = find_d("[0-9]{2}").select! { |m| m =~ Regexp.new(ydir) } %>
-            <% unless mdirs.empty? %>
-              <ul class="nav_sub_list">
-                <% mdirs.each do |mdir| %>
-                  <li class="nav_item"><%=archive_link(mdir)%></li>
-                <% end %>
-              </ul>
-            <% end %>
-          <% end %>
-        </ul>
+        <%= erb navigation, :layout => false %>
       </div>
       <br class="clear" />
     </div>

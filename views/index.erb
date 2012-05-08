@@ -1,7 +1,5 @@
 <% latest.each do |post| %>
-  <div class="header">
-    <h3><%= post_title(post) %></h3>
-  </div>
+  <h3 class="header sub_header"><%= post_title(post) %></h3>
   <div class="post">
     <%= post_contents(post) %>
   </div>

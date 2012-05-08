@@ -1,14 +1,14 @@
 body {
   font-family: monospace;
   margin: 10px;
-  min-width: 1000px;
+  min-width: 1050px;
 }
 
 h1 {
   font-size: 26pt;
   line-height: 23px;
   padding: 0 0 0 5px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid gray;
   margin: 10px 0px 0px 0px;
   font-weight: bold;
 }
@@ -16,8 +16,12 @@ h1 {
 h3 {
   font-size: 16pt;
   line-height: 13px;
-  margin: 10px 0px 10px 0px;
-  padding: 0 0 0 5px;
+  margin-left: 5px;
+}
+
+h3.sub_header {
+  padding-bottom: 10px;
+  width: 100%;
 }
 
 ul li:before {
@@ -26,6 +30,22 @@ ul li:before {
 
 a {
   color: gray;
+}
+
+pre {
+  font-family: monospace;
+  color: #333;
+}
+
+pre#markdown_text {
+  width: 225px;
+  margin: 20px 0 10px -25px;
+  padding: 0;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 textarea.value {
@@ -52,6 +72,13 @@ input.value {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
+div.header_time {
+  float: right;
+  margin-top: -16px;
+  margin-right: 10px;
+
+}
+
 .value {
   font-family: monospace;
   color: gray;
@@ -70,50 +97,63 @@ input.button {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
+.main {
+  margin: 5px;
+  padding: 20px;
+  width: 100%;
+}
+
 .header {
   color: gray;
   text-align: bottom;
-  padding-top: 20px;
-}
-
-.main {
+  float: left;
   width: 100%;
 }
 
 .contents {
-  width: 75%;
+  width: 70%;
   float: left;
-  margin-right: 20px;
+  padding-right: 30px;
+}
+
+.contents li:before {
+  content: none;
 }
 
 .post {
-  margin-left: 5px;
-  padding: 10px 0 20px 20px;
-  border-bottom: 1px solid black;
+  margin-bottom: 15px;
+  padding: 20px;
+  border-bottom: 1px solid gray;
 }
 
 .nav {
   width: 20%;
-  /*margin: 5px;*/
+  min-width: 250px;
   float: left;
-  border-left: 1px solid black;
+  border-left: 1px solid gray;
   padding-left: 20px;
-  height: 800px;
+  min-height: 1000px;
 }
 
 .clear {
   float: clear;
+  height: 0;
 }
 
 .nav_list {
   list-style: none;
   line-height: 200%;
   text-indent: -30px;
+  clear: both;
 }
 
 .nav_sub_list {
   list-style: none;
   text-indent: -50px;
+}
+
+.nav_text {
+  margin: 5px 10px 5px 10px;
 }
 
 #form_buttons {
