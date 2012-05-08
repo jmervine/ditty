@@ -1,0 +1,8 @@
+<div class="header">
+  <h3><%= archive_title %></h3>
+</div>
+<ul class="nav_list">
+  <% archive.each do |f| %>
+    <li class="nav_item"><%=post_link(f)%></li>
+  <% end %>
+</ul>

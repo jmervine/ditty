@@ -1,5 +1,9 @@
 default:
   store: "./store"
+  default_title: "My little Ditty's!"
 test:
   store: "/tmp/rspec-store" # trailing slash will break tests
-
+#production:
+  #store: /your/path
+  #default_title: Your title!
+  

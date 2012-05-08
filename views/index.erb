@@ -1,38 +1,8 @@
-<div class="header">
-  <h1> Latest Posts </h1>
-</div>
-
-<div class="body">
-  <div class="contents">
-    <% latest(settings.store).each do |post| %>
-      <div class="header">
-        <h3><%= post_title(post) %></h3>
-      </div>
-      <div class="post">
-        <%= post_contents(post) %>
-      </div>
-    <% end %>
+<% latest.each do |post| %>
+  <div class="header">
+    <h3><%= post_title(post) %></h3>
   </div>
-
-  <div class="nav">
-    <div class="header">
-      <h3>Archive</h3>
-    </div>
-    <ul class="nav_list">
-      <% find_d(settings.store, "[0-9]{4}").each do |ydir| %>
-        <li class="nav_item"><%=ydir%></li>
-        <% mdirs = find_d(ydir) %>
-        <% unless mdirs.empty? %>
-          <ul class="nav_sub_list">
-            <% mdirs.each do |mdir| %>
-              <li class="nav_item"><%=mdir%></li>
-            <% end %>
-          </ul>
-        <% end %>
-      <% end %>
-    </ul>
+  <div class="post">
+    <%= post_contents(post) %>
   </div>
-
-  <br class="clear" />
-</div>
-
+<% end %>
