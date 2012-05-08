@@ -5,7 +5,11 @@ module TemplateHelpers
     fh = File.open(path, "r")
     file = fh.read
     fh.close
-    return file
+    return markdown file
+  end
+
+  def time_display path
+    "<span class='header_time'>Updated: #{Time.at(File.mtime(path)).strftime("%B %d, %Y at %r")}</span>"
   end
 
   def post_title path
@@ -16,7 +20,11 @@ module TemplateHelpers
     link = path.gsub!(settings.store, "/archive")
     text = path.split("/").last
     text = months[text.to_i-1].capitalize if text.to_i < 13
-    "<a href='#{link}'>#{text}</a>" 
+    if request.path_info =~ Regexp.new(link)
+      return text
+    else
+      return "<a href='#{link}'>#{text}</a>" 
+    end
   end
 
   def post_link path

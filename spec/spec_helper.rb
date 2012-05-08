@@ -27,7 +27,7 @@ FileUtils.rm_rf CONFIG["store"] if File.directory? CONFIG["store"]
       FileUtils.touch path
       fh = File.open(path, "w")
       fh.puts "Contents for #{file}!\n"
-      fh.close
+      fh.close # because they were getting stuck open
     end
   end
 end
@@ -40,14 +40,22 @@ end
 
 class TestTemplateHelpers
   include TemplateHelpers
+
+  # monkey patch for request.path_info sinatra helper
+  class RequestStub
+    def path_info
+      ""
+    end
+  end
+
+  def request
+    RequestStub.new
+  end
+
+  # monkey patch to ignore 'markdown' calls
+  def markdown p
+    p
+  end
+
 end
 
-#Rspec.configure do |conf|
-  #conf.include Rack::Test::Methods
-#end
-
-#before do
-  #def app
-    #Sinatra::Application
-  #end
-#end
