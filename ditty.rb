@@ -70,10 +70,36 @@ class Ditty < Sinatra::Application
     erb :index; 
   end
 
+  post "/save" do
+    begin
+      if params["post_action"] == "update"
+        file = params["post_path"]
+        raise StandardError, "File does not exist on update action! (#{file})" unless File.exists?(file) 
+        fh = File.open(file, "w")
+        fh.puts params["post_contents"]
+        fh.close
+        logger.info "update: #{file}"
+      else
+        file = File.join(settings.store, Time.now.strftime("%Y/%m"), post_file(params["post_title"]+".md"))
+        raise StandardError, "File exists on create action! (#{file})" if File.exists?(file) 
+        fh = File.open(file, "w")
+        fh.puts params["post_contents"]
+        fh.close
+        logger.info "created: #{file}"
+      end
+      erb :post, :locals => { :page_title => post_title(file), :path => file }
+    rescue Exception => e
+      logger.error e
+      pass
+    end
+  end
 
-  #post "/post"    { @ditty.save params }
   #post "/edit"    { @ditty.update params }  
   #post "/comment" { @ditty.comment params }
+  
+  post "/?*" do
+    erb :index; 
+  end
 
 end
 

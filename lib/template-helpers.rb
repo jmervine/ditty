@@ -1,11 +1,16 @@
+require 'open-uri'
 module TemplateHelpers
 
   def post_contents path
+    markdown file_contents(path)
+  end
+
+  def file_contents path
     raise StandardError, "File not found (#{path})!" unless File.exists?(path)
     fh = File.open(path, "r")
     file = fh.read
-    fh.close
-    return markdown file
+    fh.close 
+    file
   end
 
   def time_display path
@@ -13,7 +18,12 @@ module TemplateHelpers
   end
 
   def post_title path
-    (File.basename(path, ".*").gsub("_", " ").gsub("-", " ").split.map! { |i| i.capitalize! }).join(" ")
+    (URI::decode(File.basename(path, ".*")).gsub("_", " ").split.map! { |i| i.capitalize! }).join(" ")
+  end
+
+  def post_file string
+    string.gsub!(" ", "_")
+    URI::encode(string)
   end
 
   def archive_link path

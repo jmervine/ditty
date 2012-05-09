@@ -4,7 +4,7 @@
 <div id="form_post">
   <form method="post" name="form_post" action="/save">
     <input type="hidden" name="post_action" value="<%= path.nil? ? 'create' : 'update' %>" />
-    <input type="hidden" name="post_path" value="<%= path.nil? ? 'create' : 'update' %>" />
+    <input type="hidden" name="post_path" value="<%= path.nil? ? '' : path %>" />
     <div class="header">
       <h3>Title: 
         <% if path.nil? %>
@@ -18,7 +18,7 @@
       <div class="header">
         <h3>Post:</h3>
       </div>
-      <textarea class="value"><%= path.nil? ? '' : post_contents(path) %></textarea>
+      <textarea name="post_contents" class="value"><%= path.nil? ? '' : file_contents(path) %></textarea>
     </div>
     <div id="form_buttons">
       <input class="button" type="button" value="Cancel!" onClick="javascript:window.location.href='/'" /> &nbsp;
