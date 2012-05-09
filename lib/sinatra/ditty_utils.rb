@@ -1,5 +1,5 @@
 module Sinatra
-  module DirectoryHelpers
+  module DittyUtils
 
     @@store = nil
     def self.registered(app)
@@ -49,21 +49,34 @@ module Sinatra
       File.delete path
     end
 
-    def create path, data
-      FileUtils.mkdir_p(File.dirname(path)) unless File.directory?(File.dirname(path))
+    def create_file path, data
       raise StandardError, "File found, it shouldn't have been!" if File.exists?(path)
-      FileUtils.touch(path)
-      update(path, data)
+      FileUtils.mkdir_p(File.dirname(path)) unless File.directory?(File.dirname(path))
+      write_file path, data
     end
 
-    def update path, data
+    def update_file path, data
       raise StandardError, "File not found!" unless File.exists?(path)
+      write_file path, data
+    end
+
+    def md_path path
+      path += ".md" unless path =~ /\.md$/
+      path
+    end
+
+    def strip_md_path path
+      path.gsub(/\.md$/, "")
+    end
+
+    private
+    def write_file path, data
       file_handle = File.open(path, "w")
-      file_handle.write(data)
+      file_handle.puts(data)
       file_handle.close
-      true
+      path
     end
 
   end
-  register DirectoryHelpers
+  register DittyUtils
 end

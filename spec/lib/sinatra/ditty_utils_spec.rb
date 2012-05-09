@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Sinatra::DirectoryHelpers do
+describe Sinatra::DittyUtils do
   before(:all) do
-    @helpers = TestDirectoryHelpers.new
+    @helpers = TestDittyUtils.new
   end
   let(:helpers) { @helpers }
 
@@ -39,14 +39,14 @@ describe Sinatra::DirectoryHelpers do
     it "should sort by File.mtime" do
       s = CONFIG["store"]
       files = [
-        "#{s}/2011/01/file2.txt",
-        "#{s}/2012/01/file2.txt",
-        "#{s}/2012/11/file1.txt"
+        "#{s}/2011/01/file2.md",
+        "#{s}/2012/01/file2.md",
+        "#{s}/2012/11/file1.md"
       ]
       helpers.mtime_sort(files).should eq [
-        "#{s}/2012/11/file1.txt",
-        "#{s}/2012/01/file2.txt",
-        "#{s}/2011/01/file2.txt"
+        "#{s}/2012/11/file1.md",
+        "#{s}/2012/01/file2.md",
+        "#{s}/2011/01/file2.md"
       ]
     end
   end
@@ -54,7 +54,7 @@ describe Sinatra::DirectoryHelpers do
     it "should return the latest _n_ files" do
       helpers.latest.count.should eq 5        
       helpers.latest(10).count.should eq 10
-      helpers.latest.first.should match(/2012\/11\/file4\.txt$/)
+      helpers.latest.first.should match(/2012\/11\/file4\.md$/)
     end
   end
   describe :delete do
@@ -64,30 +64,46 @@ describe Sinatra::DirectoryHelpers do
       File.exists?(file).should_not be_true
     end
   end
-  describe :create do
+  describe :create_file do
     it "should raise an error if it can't create the file" do
-      expect { helpers.create("/should_fail.txt", "foo") }.should raise_error
+      expect { helpers.create_file("/should_fail.md", "foo") }.should raise_error
     end
     it "should raise an error if the file exists" do
-      expect { helpers.create(File.join(CONFIG["store"], "2012", "01", "file1.txt"), "foo") }.should raise_error StandardError
+      expect { helpers.create_file(File.join(CONFIG["store"], "2012", "01", "file1.md"), "foo") }.should raise_error StandardError
     end
     it "should create a file with passed data" do
-      file = File.join(CONFIG["store"], "2012", "12", "file1.txt")
-      helpers.create(file, "foobar").should be
+      file = File.join(CONFIG["store"], "2012", "12", "file1.md")
+      helpers.create_file(file, "foobar").should be
       File.exists?(file).should be_true
       File.read(file).should match /foobar/
     end
   end
-  describe :update do
+  describe :update_file do
     it "should raise an error if it can't find the file" do
-      expect { helpers.create("/should_fail.txt", "foo") }.should raise_error
+      expect { helpers.update_file("/should_fail.md", "foo") }.should raise_error
     end
     it "should update the file" do
-      file = File.join(CONFIG["store"], "2012", "12", "file1.txt")
+      file = File.join(CONFIG["store"], "2012", "12", "file1.md")
       File.read(file).should match /foobar/
-      helpers.update(file, "bazboo").should be_true
+      helpers.update_file(file, "bazboo").should be_true
       File.read(file).should_not match /foobar/
       File.read(file).should match /bazboo/
+    end
+  end
+  describe :md_path do
+    it "should add .md to the end of the passed path" do
+      helpers.md_path("/foo/bar").should eq("/foo/bar.md")
+    end
+    it "should do nothing if the path ends in .md" do
+      helpers.md_path("/foo/bar.md").should eq("/foo/bar.md")
+    end
+  end
+  describe :strip_md_path do
+    it "should remove .md to the end of the passed path" do
+      helpers.strip_md_path("/foo/bar.md").should eq("/foo/bar")
+    end
+    it "should do nothing if the path doesn't end in .md" do
+      helpers.strip_md_path("/foo/bar").should eq("/foo/bar")
     end
   end
 end
