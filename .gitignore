@@ -1,4 +1,5 @@
 vendor/bundle
 log/*.log
+log/*.pid
 .*.sw*
 
