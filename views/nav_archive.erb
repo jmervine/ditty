@@ -4,7 +4,7 @@
   <ul class="nav_list">
     <% find_d("[0-9]{4}").each do |ydir| %>
       <li class="nav_item"><b><%=ydir.split("/").last%></b></li>
-      <% mdirs = find_d("[0-9]{2}").select! { |m| m =~ Regexp.new(ydir) } %>
+      <% mdirs = find_d("[0-9]{2}").select { |m| m =~ Regexp.new(Regexp.escape(File.basename(ydir))) } %>
       <% unless mdirs.empty? %>
         <ul class="nav_sub_list">
           <% mdirs.each do |mdir| %>
