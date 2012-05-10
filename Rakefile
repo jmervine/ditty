@@ -21,6 +21,7 @@ namespace :unicorn do
   desc "Restart unicorn deamonized" 
   task :hup do
     Rake::Task['unicorn:stop'].invoke
+    sleep 5
     Rake::Task['unicorn:start_d'].invoke
   end
 
