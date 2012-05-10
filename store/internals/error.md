@@ -1,1 +1,1 @@
-Error page!
+Something interupted your Ditty!
