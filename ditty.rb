@@ -19,6 +19,15 @@ class Ditty < Sinatra::Application
 
   set :title, begin settings.config["title"] rescue "My little Ditty's!" end
 
+  get "/" do 
+    begin
+      erb :index
+    rescue
+      logger.info "error on : #{params.to_s}"
+      pass if settings.pass_errors
+    end
+  end
+
   get "/new" do
     begin
       erb :form_post, :locals => { :navigation => :nav_help }
