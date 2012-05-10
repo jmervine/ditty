@@ -28,7 +28,7 @@ module TemplateHelpers
   end
 
   def post_file string
-    string.gsub!(" ", "_")
+    string.gsub!(" ", "_").downcase!
     URI::encode(string)
   end
 
