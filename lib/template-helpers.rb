@@ -14,7 +14,13 @@ module TemplateHelpers
   end
 
   def time_display path
-    "<span class='header_time'>Updated: #{Time.at(File.mtime(path)).strftime("%B %d, %Y at %r")}</span>"
+    mt = Time.at(File.mtime(path))
+    nt = Time.now
+    if nt.to_i > mt.to_i+(1000*60*60*24)
+      "<span class='header_time'>Updated on #{mt.strftime("%B %d, %Y")}</span>"
+    else
+      "<span class='header_time'>Updated at #{mt.strftime("%r")}</span>"
+    end
   end
 
   def post_title path
@@ -27,6 +33,7 @@ module TemplateHelpers
   end
 
   def archive_link path
+    path = strip_md_path path
     link = path.gsub!(settings.store, "/archive")
     text = path.split("/").last
     text = months[text.to_i-1].capitalize if text.to_i < 13
@@ -38,6 +45,7 @@ module TemplateHelpers
   end
 
   def post_link path
+    path = strip_md_path path
     link = path.gsub!(settings.store, "/post")
     "<a href='#{link}'>#{post_title(path)}</a>"
   end

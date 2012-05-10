@@ -9,7 +9,7 @@ require 'pp'
 
 class Ditty < Sinatra::Application
 
-  enable :logging, :dump_errors, :raise_errors
+  enable :logging#, :dump_errors, :raise_errors
 
   set :pass_errors, false
 
@@ -65,21 +65,6 @@ class Ditty < Sinatra::Application
     end
   end
 
-  get "/getting_started" do
-    path = File.join(settings.root, "store", "internals", "getting_started.md")
-    erb :post, :locals => { :path => path }
-  end
-
-  get "/error" do
-    path = File.join(settings.root, "store", "internals", "error.md")
-    erb :post, :locals => { :path => path }
-  end
-
-  # catch all others
-  get "/?*" do
-    erb :index; 
-  end
-
   post "/save" do
     begin
       file = params["post_path"]
@@ -98,8 +83,25 @@ class Ditty < Sinatra::Application
     end
   end
 
+  # catch all others
+  get "/?*" do
+    begin 
+      path = File.join(settings.root, "store", "internals", "getting_started.md")
+      erb :post, :locals => { :path => path }
+    rescue 
+      path = File.join(settings.root, "store", "internals", "error.md")
+      erb :post, :locals => { :path => path }
+    end
+  end
+
   post "/?*" do
-    erb :index; 
+    begin 
+      path = File.join(settings.root, "store", "internals", "getting_started.md")
+      erb :post, :locals => { :path => path }
+    rescue 
+      path = File.join(settings.root, "store", "internals", "error.md")
+      erb :post, :locals => { :path => path }
+    end
   end
 
 end

@@ -1,18 +1,16 @@
 <%
-  page_title ||= settings.default_title
   navigation ||= :nav_archive
   path ||= nil
 %>
 <html>
   <head>
-    <title><%= page_title %></title>
+    <title><%= settings.title %></title>
     <link rel="stylesheet" type="text/css" href="/ss/main.css" />
   </head>
   <body>
+    <div id="new_link"><a href="/new">new post</a></div>
     <div class="header">
-      <h1><%=page_title%></h1>
-      <div class="header_time"><%= path.nil? ? '&nbsp;' : time_display(path)%></div>
-      <span class="clear" />
+      <h1><%=settings.title%></h1>
     </div>
 
     <div class="main">

@@ -1,7 +1,7 @@
 require './ditty'
 
 require 'sinatra'
-require 'sinatra/directory-helpers'
+require 'sinatra/ditty_utils'
 require 'rack/test'
 require 'rspec'
 require 'pp'
@@ -21,7 +21,7 @@ FileUtils.rm_rf CONFIG["store"] if File.directory? CONFIG["store"]
 # create test directory tree
 %w{ 2011 2012 }.each do |year|
   %w{ 01 03 05 07 09 11 }.each do |month|
-    %w{ file1.txt file2.txt file3.txt file4.txt }.each do |file|
+    %w{ file1.md file2.md file3.md file4.md }.each do |file|
       path = File.join(CONFIG["store"], year, month, file)
       FileUtils.mkdir_p File.dirname(path)
       FileUtils.touch path
@@ -32,8 +32,8 @@ FileUtils.rm_rf CONFIG["store"] if File.directory? CONFIG["store"]
   end
 end
 
-class TestDirectoryHelpers
-  include Sinatra::DirectoryHelpers
+class TestDittyUtils
+  include Sinatra::DittyUtils
   include TemplateHelpers
   @@store = CONFIG["store"]
 end

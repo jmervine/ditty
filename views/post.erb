@@ -1,1 +1,8 @@
-<%= post_contents(path) %>
+<div class="header post_header">
+  <h3 class="sub_header"><%= post_title(path) %></h3>
+  <div class="header_time"><%= path.nil? ? '&nbsp;' : time_display(path)%></div>
+</div>
+<span class="clear" />
+<div class="post">
+  <%= post_contents(path) %>
+</div>

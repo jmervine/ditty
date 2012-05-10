@@ -1,6 +1,3 @@
 <% latest.each do |post| %>
-  <h3 class="header sub_header"><%= post_title(post) %></h3>
-  <div class="post">
-    <%= post_contents(post) %>
-  </div>
+  <%= erb :post, :layout => false, :locals => { :path => post } %>
 <% end %>
