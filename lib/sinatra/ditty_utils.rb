@@ -2,6 +2,7 @@ module Sinatra
   module DittyUtils
 
     @@store = nil
+    @@exclude = %w{ internals }
     def self.registered(app)
       conf = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))  
       config = begin conf["default"].merge!(conf[ENV['RACK_ENV']]) rescue conf["default"] end
@@ -17,18 +18,28 @@ module Sinatra
 
     def list_all path=nil
       path = (path.nil? ? store : path)
-      mtime_sort((Dir[ File.join(path, "**") ] + Dir[ File.join(path, "**", "*") ] + Dir[ File.join(path, "**", "*.*") ]).uniq!)
+      list = mtime_sort((Dir[ File.join(path, "**") ] + Dir[ File.join(path, "**", "*") ] + Dir[ File.join(path, "**", "*.*") ]).uniq!)
+      @@exclude.each do |ex|
+        list.reject! { |i| i =~ Regexp.new(ex) }
+      end
+      list
     end
 
     def find_d query=nil
       list = list_all(store).select { |i| File.directory?(i) }
       list.select! { |i| i =~ Regexp.new("\/"+query+"$") } unless query.nil?
+      @@exclude.each do |ex|
+        list.reject! { |i| i =~ Regexp.new(ex) }
+      end
       return list
     end
 
     def find_f query=nil
       list = list_all(store).select { |i| !File.directory?(i) }
       list.select! { |i| i =~ Regexp.new(query+".*$") } unless query.nil?
+      @@exclude.each do |ex|
+        list.reject! { |i| i =~ Regexp.new(ex) }
+      end
       return list
     end
 
