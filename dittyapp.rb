@@ -30,28 +30,40 @@ class DittyApp < Sinatra::Application
     #@@store = settings.store
   end
 
-  get "/" do 
-    erb :index
-  end
-
-  get "/new" do
+  get "/post" do
     erb :form_new, :locals => { :navigation => :nav_help, :post => Post.new }
   end
 
   get "/post/:id" do
     post = begin
-             Post.new params[:id]
+             Post.load params[:id]
            rescue
-             Post.new(settings.store.find("title" => delinkify_title(params[:id])).first["_id"]) rescue nil
+             Post.load(settings.store.find("title" => delinkify_title(params[:id])).first) rescue nil
            end
     erb :post, :locals => { :post => post }
   end
 
+  post "/post" do
+    post = Post.new(params["params"]).insert
+    erb :post, :locals => { :post => post }
+  end
+
+  post "/post/:id" do
+    post = Post.load(params[:id])
+    post.merge!(params["params"]).update
+    erb :post, :locals => { :post => post }
+  end
+
+  delete "/post/:id" do
+    Post.load(params[:id]).remove
+    erb :index
+  end
+
   get "/edit/:id" do
     post = begin
-             Post.new params[:id]
+             Post.load params[:id]
            rescue
-             Post.new(settings.store.find("title" => delinkify_title(params[:id])).first["_id"]) rescue nil
+             Post.load(settings.store.find("title" => delinkify_title(params[:id])).first) rescue nil
            end
     erb :form_edit, :locals => { :post => post, :navigation => :nav_help }
   end
@@ -66,76 +78,37 @@ class DittyApp < Sinatra::Application
   end
 
   get "/archive/:year/:month" do
-      erb :archive
+    #archive_items[params[:year].to_i].include?(params[:month].to_i)
+    items = settings.store.find.select { |p| p["created_at"].year.to_i == params[:year].to_i and p["created_at"].month.to_i == params[:month].to_i }
+    posts = items.collect { |i| Post.load(i) }
+    erb :index, :locals => { :latest => posts } # little hack to not duplicate code
   end
 
-  post "/save" do
-    begin
-      file = params["post_path"]
-      if params["post_action"] == "update"
-        update_file(file, params["post_contents"])
-        logger.info "update: #{file}"
-      else
-        file = File.join(settings.store, Time.now.strftime("%Y/%m"), post_file(params["post_title"]+".md"))
-        create_file(file, params["post_contents"])
-        logger.info "created: #{file}"
-      end
-      erb :post, :locals => { :path => file }
-    rescue Exception => e
-      logger.info "error on : #{params.to_s}"
-      pass if settings.pass_errors
-    end
+  get "/" do 
+    erb :index
   end
 
   not_found do
-    logger.error "requested file wasn't found"
-    ename = env['sinatra.error'].name
-    emesg = env['sinatra.error'].message
     begin 
       erb :index
     rescue 
-      path = File.join(settings.root, "store", "internals", "getting_started.md")
-      erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
-    else
-      path = File.join(settings.root, "store", "internals", "error.md")
-      erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
+      erb "Action couldn't be completed!"
     end
   end
 
-
-  #error do
-    #logger.info "entering error block"
-    #ename = env['sinatra.error'].name
-    #emesg = env['sinatra.error'].message
-    #begin 
-      #path = File.join(settings.root, "store", "internals", "getting_started.md")
-      #erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
-    #rescue 
-      #path = File.join(settings.root, "store", "internals", "error.md")
-      #erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
-    #end
-  #end
-
-  # catch all others
-  get "/?*" do
+  error do
+    logger.info "entering error block"
+    ename = env['sinatra.error'].name
+    emesg = env['sinatra.error'].message
     begin 
       path = File.join(settings.root, "store", "internals", "getting_started.md")
-      erb :post, :locals => { :path => path }
+      erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
     rescue 
       path = File.join(settings.root, "store", "internals", "error.md")
-      erb :post, :locals => { :path => path }
+      erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
     end
   end
 
-  #post "/?*" do
-    #begin 
-      #path = File.join(settings.root, "store", "internals", "getting_started.md")
-      #erb :post, :locals => { :path => path }
-    #rescue 
-      #path = File.join(settings.root, "store", "internals", "error.md")
-      #erb :post, :locals => { :path => path }
-    #end
-  #end
-
+  # catch all others
 end
 

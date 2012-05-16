@@ -9,7 +9,7 @@ describe DittyApp, "< Sinatra::Application" do
     before(:all) do
       get "/"
     end
-    it "should load" do
+    it "should load index page" do
       last_response.should be_ok
     end
     it "should have title" do
@@ -27,11 +27,11 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  describe "GET /new" do 
+  describe "GET /post" do 
     before(:all) do
-      get "/new"
+      get "/post"
     end
-    it "should load" do
+    it "should load new post form" do
       last_response.should be_ok
     end
     it "should have title" do
@@ -49,7 +49,7 @@ describe DittyApp, "< Sinatra::Application" do
     before(:all) do
       get "/post/#{settings.store.find.first["_id"]}" # find a real post via it's id
     end
-    it "should load" do
+    it "should load post" do
       last_response.should be_ok
     end
     it "should have title" do
@@ -65,7 +65,7 @@ describe DittyApp, "< Sinatra::Application" do
     before(:all) do
       get "/post/post%20title%20-%202011.7.9" 
     end
-    it "should load" do
+    it "should load a post" do
       last_response.should be_ok
     end
     it "should have title" do
@@ -82,7 +82,7 @@ describe DittyApp, "< Sinatra::Application" do
     before(:all) do
       get "/edit/#{settings.store.find.first["_id"]}" # find a real post via it's id
     end
-    it "should load" do
+    it "should load post edit form" do
       last_response.should be_ok
     end
     it "should have title" do
@@ -104,7 +104,7 @@ describe DittyApp, "< Sinatra::Application" do
     before(:all) do
       get "/edit/post%20title%20-%202011.7.9" 
     end
-    it "should load" do
+    it "should load post edit form" do
       last_response.should be_ok
     end
     it "should have title" do
@@ -158,21 +158,163 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  #describe "GET /bad/path" do
-    #it "should load an error page" do
-      #pending
-    #end
-  #end
+  describe "GET /archive/:year/:month" do
+    before(:all) do
+      get "/archive/2012/05"
+    end
+    it "should load" do
+      last_response.should be_ok
+    end
+    it "should have title" do
+      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should have archive" do
+      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+    end
+    it "should have archive list items" do
+      last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
+    end
+    it "should have posts" do
+      last_response.should match Regexp.new(Regexp.escape("post body"))
+      last_response.should match Regexp.new(Regexp.escape("post title"))
+    end
+  end
 
-  #describe "GET /archive/(?*)" do
-    #it "should load a list of all posts" do
-      #pending
-    #end
-    #it "should load a list of specific posts if qualified" do
-      #pending
-    #end
-  #end
+  describe "GET /bad/path" do
+    before(:all) do
+      get "/bad/path"
+    end
+    it "should return a 404" do
+      last_response.status.should eq 404
+    end
+    it "should have title" do
+      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should have archive" do
+      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+    end
+    it "should have archive list items" do
+      last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
+    end
+    it "should have posts" do
+      last_response.should match Regexp.new(Regexp.escape("post body"))
+      last_response.should match Regexp.new(Regexp.escape("post title"))
+    end
+  end
 
-  pending "tests need a lot of love"
+  describe "POST /bad/path" do
+    before(:all) do
+      post "/bad/path"
+    end
+    it "should return a 404" do
+      last_response.status.should eq 404
+    end
+    it "should have title" do
+      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should have archive" do
+      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+    end
+    it "should have archive list items" do
+      last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
+    end
+    it "should have posts" do
+      last_response.should match Regexp.new(Regexp.escape("post body"))
+      last_response.should match Regexp.new(Regexp.escape("post title"))
+    end
+  end
+
+  describe "BAD /bad/path" do
+    before(:all) do
+      delete "/bad/path"
+    end
+    it "should return a 404" do
+      last_response.status.should eq 404
+    end
+    it "should have title" do
+      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should have archive" do
+      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+    end
+    it "should have archive list items" do
+      last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
+    end
+    it "should have posts" do
+      last_response.should match Regexp.new(Regexp.escape("post body"))
+      last_response.should match Regexp.new(Regexp.escape("post title"))
+    end
+  end
+
+  describe "POST /post" do
+    before(:all) do
+      post "/post", :params => { :title => "create test title", :body => "create test body" }
+    end
+    it "should have added to the data store" do
+      this = Post.load(settings.store.find.last)
+      this.title.should eq "create test title"
+    end
+    it "should load created post" do
+      last_response.should be_ok
+    end
+    it "should have title" do
+      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should be the right post" do
+      last_response.should match Regexp.new("create test title")
+      last_response.should match Regexp.new("create test body")
+    end
+  end
+
+  describe "POST /post/:id" do
+    before(:all) do
+      @update_id = settings.store.find.last['_id'].to_s
+      post "/post/#{@update_id}", :params => { :title => "updated test title", :body => "updated test body" }
+    end
+    it "should have added to the data store" do
+      this = Post.load(@update_id)
+      this.title.should eq "updated test title"
+    end
+    it "should have changed updated_at" do
+      this = Post.load(@update_id)
+      this.updated_at.should_not eq this.created_at
+    end
+    it "should load the updated post" do
+      last_response.should be_ok
+    end
+    it "should have title" do
+      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should be the right post" do
+      last_response.should match Regexp.new("updated test title")
+      last_response.should match Regexp.new("updated test body")
+    end
+  end
+
+  describe "DELETE /post/:id" do
+    before(:all) do
+      @del_id = settings.store.find.last['_id'].to_s
+      delete "/post/#{@del_id}"
+    end
+    it "should have deleted it from data store" do
+      expect { Post.load(@update_id) }.should raise_error
+    end
+    it "should load the index" do
+      last_response.should be_ok
+    end
+    it "should have title" do
+      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should have archive" do
+      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+    end
+    it "should have archive list items" do
+      last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
+    end
+    it "should have posts" do
+      last_response.should match Regexp.new(Regexp.escape("post body"))
+      last_response.should match Regexp.new(Regexp.escape("post title"))
+    end
+  end
 
 end
