@@ -4,6 +4,8 @@ gem 'unicorn'
 gem 'sinatra'
 gem 'rake'
 gem 'redcarpet'
+gem 'mongo'
+gem 'bson_ext'
 
 group :test, :development do
   gem 'rspec'

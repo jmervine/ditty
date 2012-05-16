@@ -1,28 +1,21 @@
-module Sinatra
-  module DittyUtils
+module Ditty
+  module Utils
 
     @@store = nil
     @@exclude = %w{ internals }
-    def self.registered(app)
-      conf = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))  
-      config = begin conf["default"].merge!(conf[ENV['RACK_ENV']]) rescue conf["default"] end
-      app.set :config, config
-      app.set :store, config["store"]
-      @@store = config["store"]
-    end
 
     def store
-      raise StandardError, "store not set!" if @@store.nil?
       @@store
     end
 
     def list_all path=nil
-      path = (path.nil? ? store : path)
+      path = exists?((path.nil? ? store : path))
+      return nil unless path
       list = mtime_sort((Dir[ File.join(path, "**") ] + Dir[ File.join(path, "**", "*") ] + Dir[ File.join(path, "**", "*.*") ]).uniq!)
       @@exclude.each do |ex|
         list.reject! { |i| i =~ Regexp.new(ex) }
       end
-      list
+      empty_list?(list)
     end
 
     def find_d query=nil
@@ -31,7 +24,7 @@ module Sinatra
       @@exclude.each do |ex|
         list.reject! { |i| i =~ Regexp.new(ex) }
       end
-      return list
+      empty_list?(list)
     end
 
     def find_f query=nil
@@ -40,7 +33,7 @@ module Sinatra
       @@exclude.each do |ex|
         list.reject! { |i| i =~ Regexp.new(ex) }
       end
-      return list
+      empty_list?(list)
     end
 
     def latest limit=5
@@ -48,16 +41,17 @@ module Sinatra
     end
 
     def list path=nil
-      path = (path.nil? ? store : path)
-      Dir[ File.join(path, "*") ]
+      path = exists?((path.nil? ? store : path))
+      empty_list?(Dir[ File.join(path, "*") ])
     end
 
     def mtime_sort list
-      (list.sort_by! { |i| File.mtime(i) }).sort! { |x,y| y <=> x } unless list.count == 0
+      list = empty_list?(list)
+      (list.sort_by! { |i| File.mtime(exists?(i)) }).sort! { |x,y| y <=> x } unless list.count == 0
     end
 
     def delete path
-      File.delete path
+      File.delete exists?(path)
     end
 
     def create_file path, data
@@ -67,7 +61,6 @@ module Sinatra
     end
 
     def update_file path, data
-      raise StandardError, "File not found!" unless File.exists?(path)
       write_file path, data
     end
 
@@ -82,12 +75,27 @@ module Sinatra
 
     private
     def write_file path, data
+      raise Sinatra::NotFound, File.dirname(path) unless exists?(File.dirname(path))
       file_handle = File.open(path, "w")
       file_handle.puts(data)
       file_handle.close
       path
     end
 
+    def exists? path
+      if File.exists?(path)
+        return path
+      else
+        raise Sinatra::NotFound, path
+      end
+    end
+   
+    def empty_list? list
+      if list.nil? or list.empty?
+        raise Sinatra::NotFound, "empty list"
+      else
+        return list
+      end
+    end
   end
-  register DittyUtils
 end

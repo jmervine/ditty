@@ -1,9 +1,12 @@
 default:
-  store: "./store"
+  database: ditty
+  table: posts
   title: "My little Ditty's!"
 test:
-  store: "/tmp/rspec-store" # trailing slash will break tests
+  database: ditty_test
+  table: rspec
 #production:
-  #store: /your/path
+  #database: ditty_production
+  #table: posts
   #title: Your title!
   

@@ -19,7 +19,9 @@
       </div>
 
       <div class="nav">
-        <%= erb navigation, :layout => false %>
+        <% begin %>
+          <%= erb navigation, :layout => false %>
+        <% end %>
       </div>
       <br class="clear" />
     </div>
