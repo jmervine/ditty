@@ -1,6 +1,5 @@
 <div id="form_post">
-  <form method="post" name="form_post" action="/update">
-    <input type="hidden" name="post_id" value="<%=post.id%>" />
+  <form method="post" name="form_post" action="/post/<%=post.id.to_s%>">
     <div class="header">
       <h3>Title: <span class="value"><%= post_title(post) %></span> </h3>
     </div>
@@ -8,10 +7,11 @@
       <div class="header">
         <h3>Post:</h3>
       </div>
-      <textarea name="post_contents" class="value"><%= post_contents(post) %></textarea>
+      <textarea name="body" class="value"><%= post_contents(post) %></textarea>
     </div>
     <div id="form_buttons">
       <input class="button" type="button" value="Cancel!" onClick="javascript:window.location.href='/'" /> &nbsp;
       <input class="button" type="submit" value="Save!" />
     </div>
+  </form>
 </div>
