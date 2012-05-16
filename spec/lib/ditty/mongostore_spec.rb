@@ -123,10 +123,10 @@ describe Ditty::MongoStore do
       end
     end
 
-    describe :find, "(via Ditty::Item.new)" do
+    describe :find, "(via Ditty::Item.load)" do
       before(:all) do
         @id = store.find.first["_id"]
-        @item_three = Ditty::Item.new(@id)
+        @item_three = Ditty::Item.load(@id)
       end
       it "should return a Ditty::Item" do
         @item_three.should be_a_kind_of Ditty::Item
@@ -154,7 +154,7 @@ describe Ditty::MongoStore do
     describe :update do
       before(:all) do
         @id = store.find.first["_id"]
-        @item_three = Ditty::Item.new(@id)
+        @item_three = Ditty::Item.load(@id)
       end
       it "should update the item" do
         @item_three.title = "title three updated"
@@ -162,7 +162,7 @@ describe Ditty::MongoStore do
         lambda {
           @item_three.update
         }.should change(@item_three, :updated_at)
-        updated_item = Ditty::Item.new(@id)
+        updated_item = Ditty::Item.load(@id)
         updated_item.title.should eq "title three updated"
         updated_item.updated_at.should_not eq updated_item.created_at
         updated_item.updated_at.should be > updated_item.created_at
@@ -172,12 +172,12 @@ describe Ditty::MongoStore do
     describe :remove, "specifc record (via :method_missing)" do
       before(:all) do
         @id = store.find.first["_id"]
-        @item_three = Ditty::Item.new(@id)
+        @item_three = Ditty::Item.load(@id)
       end
       it "should remove the specified record" do
         @item_three.remove
         expect { 
-          Ditty::Item.new(@id)
+          Ditty::Item.load(@id)
         }.should raise_error
       end
       it "should remove protected keys" do

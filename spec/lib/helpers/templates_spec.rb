@@ -11,8 +11,8 @@ describe HelpersTemplates do
   end
   let(:helpers) { @helpers }
   let(:collection) { @collection }
-  let(:post_one) { Ditty::Item.new(@post_one["_id"]) }
-  let(:post_two) { Ditty::Item.new(@post_two["_id"]) }
+  let(:post_one) { Ditty::Item.load(@post_one) }
+  let(:post_two) { Ditty::Item.load(@post_two) }
 
   describe :time_display do
     it "should be" do

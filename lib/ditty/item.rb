@@ -30,13 +30,17 @@ module Ditty
     end
 
     def initialize options={}
-      unless options.kind_of? Hash
-        raise MissingDataStoreError if @@data_store.nil?
-        merge! data_store.find("_id" => options).first
-      else
-        options.each { |opt, val| store opt.to_s, val }
-      end
+      options.each { |opt, val| store opt.to_s, val }
       return self
+    end
+
+    def self.load item
+      if item.kind_of? Hash
+        return self.new.merge item
+      else
+        raise MissingDataStoreError if @@data_store.nil?
+        return self.new.merge(data_store.find("_id" => item).first)
+      end
     end
 
     # overwrite hash methods to be strict
@@ -53,6 +57,7 @@ module Ditty
     end
 
     def store k,v
+      k = (k.kind_of? Symbol) ? k.to_s : k
       raise InvalidOptionError, "#{k} cannot be set" unless keys_public.include? k 
       super k,v 
     end
@@ -78,7 +83,7 @@ module Ditty
     def insert 
       raise InvalidSaveError, "on create item already exists" if keys.include? "_id" 
       time = Time.now
-      data_store.insert self.merge!("created_at" => time, "updated_at" => time)
+      self.merge!("_id" => data_store.insert(self.merge!("created_at" => time, "updated_at" => time)))
     end
 
     def save

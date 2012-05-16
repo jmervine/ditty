@@ -20,11 +20,6 @@ module HelpersTemplates
     post.title
   end
 
-  def post_file string
-    string.gsub!(" ", "_").downcase!
-    URI::encode(string)
-  end
-
   def archive_link year, month
     month = "%02d" % month
     if request.path_info =~ Regexp.new("#{year}\/#{month}$")
@@ -77,10 +72,10 @@ module HelpersTemplates
     %w{ january february march april may june july august september october november december }
   end
 
-  # TODO: there has to be a better way
+  # TODO: don't store id and then create post, just store post and create it
   def latest n=5
     ids = collection_sort(settings.store.find)[0..n-1].collect { |i| i["_id"] }
-    ids.collect { |id| Ditty::Post.new id }
+    ids.collect { |id| Ditty::Post.load id }
   end
 
   def linkify_title title
