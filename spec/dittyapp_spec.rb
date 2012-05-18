@@ -207,9 +207,9 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
     end
-    #it "post title should be a link" do
-      #last_response.should match Regexp.new("<a href=\'\/post\/([a-z0-9]+)'>post title - (.+)</a>")
-    #end
+    it "post title should be a link" do
+      last_response.should match Regexp.new("<a href=\'\/post\/([a-z0-9]+)'>post title - (.+)</a>")
+    end
     it "should have new post link" do
       last_response.should match Regexp.new(Regexp.escape("new post</a>"))
     end
@@ -237,9 +237,9 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have new post link" do
       last_response.should match Regexp.new(Regexp.escape("new post</a>"))
     end
-    #it "post title should be a link" do
-      #last_response.should match Regexp.new("<a href=\'\/post\/([a-z0-9]+)'>post title - (.+)</a>")
-    #end
+    it "post title should be a link" do
+      last_response.should match Regexp.new("<a href=\'\/post\/([a-z0-9]+)'>post title - (.+)</a>")
+    end
     it "should not have edit post link" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end

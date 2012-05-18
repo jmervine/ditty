@@ -30,11 +30,11 @@ class DittyApp < Sinatra::Application
     #@@store = settings.store
   end
 
-  get "/post" do
+  get "/post/?" do
     erb :_post, :locals => { :navigation => :nav_help, :post => Post.new }
   end
 
-  get "/post/:id" do
+  get "/post/:id/?" do
     post = begin
              Post.load params[:id]
            rescue
@@ -43,7 +43,7 @@ class DittyApp < Sinatra::Application
     erb :post, :locals => { :post => post }
   end
 
-  get "/post/:id/edit" do
+  get "/post/:id/edit/?" do
     post = begin
              Post.load params[:id]
            rescue
@@ -70,20 +70,22 @@ class DittyApp < Sinatra::Application
     erb :index
   end
 
-  get "/archive" do
-      erb :archive
+  get "/archive/?" do
+    items = archive_items
+    erb :archive#, :locals => { :archives => items }
   end
 
-  get "/archive/:year" do
-    items = archive_items[params[:year].to_i]
+  get "/archive/:year/?" do
+    items = { params[:year].to_i => archive_items[params[:year].to_i] }
     erb :archive, :locals => { :archives => items }
   end
 
-  get "/archive/:year/:month" do
-    #archive_items[params[:year].to_i].include?(params[:month].to_i)
+  get "/archive/:year/:month/?" do
     items = settings.store.find.select { |p| p["created_at"].year.to_i == params[:year].to_i and p["created_at"].month.to_i == params[:month].to_i }
     posts = items.collect { |i| Post.load(i) }
     erb :index, :locals => { :latest => posts } # little hack to not duplicate code
+    #items = archive_items[params[:year].to_i][params[:month].to_i
+    #erb :archive, :locals => { :archives => items }
   end
 
   get "/" do 
