@@ -10,7 +10,7 @@
       <div class="header">
         <h3>Post:</h3>
       </div>
-      <textarea name="post[body]" class="value"><%= post_contents(post)||"" %></textarea>
+      <textarea name="post[body]" class="value"><%= post.body||"" %></textarea>
     </div>
     <div id="form_buttons">
       <input class="button" type="button" value="Cancel!" onClick="javascript:window.location.href='/'" /> &nbsp;

@@ -80,7 +80,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should match Regexp.new("post title - ")
     end
     it "should have post body" do
-      last_response.should match Regexp.new("post body - ")
+      last_response.should match Regexp.new("<p>post body - ")
     end
     it "post title should be a link" do
       last_response.should match Regexp.new("<a href=\'\/post\/([a-z0-9]+)'>post title - (.+)</a>")
@@ -111,7 +111,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should match Regexp.new("post title - ")
     end
     it "should have post body" do
-      last_response.should match Regexp.new("post body - ")
+      last_response.should match Regexp.new("<p>post body - ")
     end
     it "post title should be a link" do
       last_response.should match Regexp.new("<a href=\'\/post\/([a-z0-9]+)'>post title - (.+)</a>")
@@ -144,6 +144,9 @@ describe DittyApp, "< Sinatra::Application" do
     end
     it "should have post body" do
       last_response.should match Regexp.new("post body - ")
+    end
+    it "post body should be raw markdown" do
+      last_response.should_not match Regexp.new("<p>post body - ")
     end
     it "should not have new post link" do
       last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
@@ -178,6 +181,9 @@ describe DittyApp, "< Sinatra::Application" do
     end
     it "should have post body" do
       last_response.should match Regexp.new("post body - ")
+    end
+    it "post body should be raw markdown" do
+      last_response.should_not match Regexp.new("<p>post body - ")
     end
     it "should not have new post link" do
       last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
