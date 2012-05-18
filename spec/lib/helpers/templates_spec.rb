@@ -60,11 +60,11 @@ describe HelpersTemplates do
   end
   describe :archive_nav_list do
     describe "should build an archive list" do
-      it "with years" do
-        helpers.archive_nav_list.should match /2011/
-        helpers.archive_nav_list.should match /2012/
+      it "with years as links" do
+        helpers.archive_nav_list.should match /2011<\/a>/
+        helpers.archive_nav_list.should match /2012<\/a>/
       end
-      it "with months" do
+      it "with months as links" do
         (2011..2012).each do |y|
           (5..10).each do |m| 
             str = "/archive/" + y.to_s + "/" + ("%02d" % m )
@@ -83,11 +83,11 @@ describe HelpersTemplates do
   end
   describe :archive_list do
     describe "should build an archive list" do
-      it "with years" do
-        helpers.archive_list.should match /2011/
-        helpers.archive_list.should match /2012/
+      it "with years as links" do
+        helpers.archive_nav_list.should match /2011<\/a>/
+        helpers.archive_nav_list.should match /2012<\/a>/
       end
-      it "with months" do
+      it "with months as links" do
         (2011..2012).each do |y|
           (5..10).each do |m| 
             str = "/archive/" + y.to_s + "/" + ("%02d" % m )
@@ -95,7 +95,7 @@ describe HelpersTemplates do
           end
         end
       end
-      it "with items" do
+      it "with items as links" do
         (2011..2012).each do |y|
           (5..10).each do |m| 
             helpers.archive_list.should match Regexp.new("\/post\/([a-z0-9]+)\'\>post title")

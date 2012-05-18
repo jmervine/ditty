@@ -31,7 +31,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
-      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+      last_response.should match Regexp.new(Regexp.escape('Archive</a></h3>'))
     end
     it "should have archive list items" do
       last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
@@ -217,7 +217,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
-      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+      last_response.should match Regexp.new(Regexp.escape('Archive</a></h3>'))
     end
     it "should have archive list items" do
       last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
@@ -244,7 +244,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
-      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+      last_response.should match Regexp.new(Regexp.escape('Archive</a></h3>'))
     end
     it "should have archive list items" do
       last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
@@ -271,7 +271,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
-      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+      last_response.should match Regexp.new(Regexp.escape('Archive</a></h3>'))
     end
     it "should have archive list items" do
       last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
@@ -299,7 +299,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
-      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+      last_response.should match Regexp.new(Regexp.escape('Archive</a></h3>'))
     end
     it "should have archive list items" do
       last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
@@ -327,7 +327,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
-      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+      last_response.should match Regexp.new(Regexp.escape('Archive</a></h3>'))
     end
     it "should have archive list items" do
       last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
@@ -355,7 +355,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
-      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+      last_response.should match Regexp.new(Regexp.escape('Archive</a></h3>'))
     end
     it "should have archive list items" do
       last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
@@ -444,7 +444,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
-      last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
+      last_response.should match Regexp.new(Regexp.escape('Archive</a></h3>'))
     end
     it "should have archive list items" do
       last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))

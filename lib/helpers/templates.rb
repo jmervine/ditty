@@ -24,13 +24,16 @@ module HelpersTemplates
     post.title
   end
 
-  def archive_link year, month
-    month = "%02d" % month
-    if request.path_info =~ Regexp.new("#{year}\/#{month}$")
-      return months[month.to_i-1].capitalize
+  def archive_link year, month=nil
+    if month.nil?
+      path = year.to_s
+      name = path
     else
-      return "<a href='/archive/#{year}/#{month}'>#{months[month.to_i-1].capitalize}</a>" 
+      path  = "#{year}/#{"%02d" % month}"
+      name  = months[month.to_i-1].capitalize
     end
+    return name if request.path_info =~ Regexp.new(Regexp.escape(path)+"(\/?)$")
+    return "<a href='/archive/#{path}'>#{name}</a>" 
   end
 
   def archive_items
@@ -52,7 +55,7 @@ module HelpersTemplates
     markup = ""
     markup << %{ <ul class="nav_list"> }
     archive.each_key do |year|
-      markup << %{ <li class="nav_item"><b>#{year}</b></li> }
+      markup << %{ <li class="nav_item"><b>#{archive_link(year)}</b></li> }
       markup << %{ <ul class="nav_sub_list"> }
       archive[year].each_key do |month|
         markup << %{ <li class="nav_item">#{ archive_link(year, month) }</li> }
@@ -70,7 +73,7 @@ module HelpersTemplates
     markup << %{ <ul class="nav_list"> }
 
     archive.each_key do |year|
-      markup << %{ <li class="nav_item"><b>#{year}</b></li> }
+      markup << %{ <li class="nav_item"><b>#{archive_link(year)}</b></li> }
       markup << %{ <ul class="nav_sub_list"> }
       archive[year].each_key do |month|
         markup << %{ <li class="nav_item">#{ archive_link(year, month) }</li> }
