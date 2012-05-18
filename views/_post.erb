@@ -1,13 +1,16 @@
+<% 
+%>
+  
 <div id="form_post">
-  <form method="post" name="form_post" action="/post/<%=post.id.to_s%>">
+  <form method="post" name="post" action="/post/<%= post.id||"" %>">
     <div class="header">
-      <h3>Title: <span class="value"><%= post_title(post) %></span> </h3>
+      <h3>Title: <input class="value" type="text" name="post[title]" value="<%= post_title(post)||"" %>" /> </h3>
     </div>
     <div id="form_contents">
       <div class="header">
         <h3>Post:</h3>
       </div>
-      <textarea name="body" class="value"><%= post_contents(post) %></textarea>
+      <textarea name="post[body]" class="value"><%= post_contents(post)||"" %></textarea>
     </div>
     <div id="form_buttons">
       <input class="button" type="button" value="Cancel!" onClick="javascript:window.location.href='/'" /> &nbsp;

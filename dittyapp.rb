@@ -31,7 +31,7 @@ class DittyApp < Sinatra::Application
   end
 
   get "/post" do
-    erb :form_new, :locals => { :navigation => :nav_help, :post => Post.new }
+    erb :_post, :locals => { :navigation => :nav_help, :post => Post.new }
   end
 
   get "/post/:id" do
@@ -43,29 +43,31 @@ class DittyApp < Sinatra::Application
     erb :post, :locals => { :post => post }
   end
 
+  get "/post/:id/edit" do
+    post = begin
+             Post.load params[:id]
+           rescue
+             Post.load(settings.store.find("title" => delinkify_title(params[:id])).first) rescue nil
+           end
+    erb :_post, :locals => { :post => post, :navigation => :nav_help }
+  end
+
   post "/post" do
-    post = Post.new(params["params"]).insert
+    post = Post.new(params[:post])
+    post.insert
     erb :post, :locals => { :post => post }
   end
 
   post "/post/:id" do
     post = Post.load(params[:id])
-    post.merge!(params["params"]).update
+    post.merge!(params[:post])
+    post.update
     erb :post, :locals => { :post => post }
   end
 
   delete "/post/:id" do
     Post.load(params[:id]).remove
     erb :index
-  end
-
-  get "/edit/:id" do
-    post = begin
-             Post.load params[:id]
-           rescue
-             Post.load(settings.store.find("title" => delinkify_title(params[:id])).first) rescue nil
-           end
-    erb :form_edit, :locals => { :post => post, :navigation => :nav_help }
   end
 
   get "/archive" do

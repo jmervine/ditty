@@ -15,6 +15,12 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
     end
+    it "should have new post link" do
+      last_response.should match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
+    end
     it "should have archive" do
       last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
     end
@@ -37,6 +43,12 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
     end
+    it "should have new post link" do
+      last_response.should match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
+    end
     it "should have a submit button" do
       last_response.should match Regexp.new(Regexp.escape('<input class="button" type="submit" value="Save!" />'))
     end
@@ -55,6 +67,12 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
     end
+    it "should not have new post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should have edit post link" do
+      last_response.should match Regexp.new(Regexp.escape("edit post</a>"))
+    end
     it "should be the right post" do
       last_response.should match Regexp.new(Regexp.escape(settings.store.find.first["title"]))
       last_response.should match Regexp.new(Regexp.escape(settings.store.find.first["body"]))
@@ -71,6 +89,12 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
     end
+    it "should not have new post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should have edit post link" do
+      last_response.should match Regexp.new(Regexp.escape("edit post</a>"))
+    end
     it "should be the right post" do
       last_response.should match Regexp.new(Regexp.escape("post title - 2011.7.9"))
       last_response.should match Regexp.new(Regexp.escape("post body - 2011.7.9"))
@@ -78,15 +102,21 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  describe "GET /edit/:id" do
+  describe "GET /post/:id/edit" do
     before(:all) do
-      get "/edit/#{settings.store.find.first["_id"]}" # find a real post via it's id
+      get "/post/#{settings.store.find.first["_id"]}/edit" # find a real post via it's id
     end
     it "should load post edit form" do
       last_response.should be_ok
     end
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should not have new post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should be the right post" do
       last_response.should match Regexp.new(Regexp.escape(settings.store.find.first["title"]))
@@ -100,15 +130,21 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  describe "GET /edit/:title" do
+  describe "GET /post/:title/edit" do
     before(:all) do
-      get "/edit/post%20title%20-%202011.7.9" 
+      get "/post/post%20title%20-%202011.7.9/edit" 
     end
     it "should load post edit form" do
       last_response.should be_ok
     end
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should not have new post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should be the right post" do
       last_response.should match Regexp.new(Regexp.escape("post title - 2011.7.9"))
@@ -132,6 +168,12 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
     end
+    it "should have new post link" do
+      last_response.should match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
+    end
     it "should have archive" do
       last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
     end
@@ -150,6 +192,12 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
     end
+    it "should have new post link" do
+      last_response.should match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
+    end
     it "should have archive" do
       last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
     end
@@ -167,6 +215,12 @@ describe DittyApp, "< Sinatra::Application" do
     end
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should have new post link" do
+      last_response.should match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
       last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
@@ -190,6 +244,12 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
     end
+    it "should have new post link" do
+      last_response.should match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
+    end
     it "should have archive" do
       last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
     end
@@ -211,6 +271,12 @@ describe DittyApp, "< Sinatra::Application" do
     end
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should have new post link" do
+      last_response.should match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
       last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
@@ -234,6 +300,12 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
     end
+    it "should have new post link" do
+      last_response.should match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
+    end
     it "should have archive" do
       last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))
     end
@@ -248,7 +320,7 @@ describe DittyApp, "< Sinatra::Application" do
 
   describe "POST /post" do
     before(:all) do
-      post "/post", :params => { :title => "create test title", :body => "create test body" }
+      post "/post", :post => { "title" => "create test title", "body" => "create test body" }
     end
     it "should have added to the data store" do
       this = Post.load(settings.store.find.last)
@@ -256,6 +328,12 @@ describe DittyApp, "< Sinatra::Application" do
     end
     it "should load created post" do
       last_response.should be_ok
+    end
+    it "should not have new post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should have edit post link" do
+      last_response.should match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
@@ -269,7 +347,7 @@ describe DittyApp, "< Sinatra::Application" do
   describe "POST /post/:id" do
     before(:all) do
       @update_id = settings.store.find.last['_id'].to_s
-      post "/post/#{@update_id}", :params => { :title => "updated test title", :body => "updated test body" }
+      post "/post/#{@update_id}", :post => { "title" => "updated test title", "body" => "updated test body" }
     end
     it "should have added to the data store" do
       this = Post.load(@update_id)
@@ -284,6 +362,12 @@ describe DittyApp, "< Sinatra::Application" do
     end
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should not have new post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should have edit post link" do
+      last_response.should match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should be the right post" do
       last_response.should match Regexp.new("updated test title")
@@ -304,6 +388,12 @@ describe DittyApp, "< Sinatra::Application" do
     end
     it "should have title" do
       last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+    end
+    it "should have new post link" do
+      last_response.should match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have archive" do
       last_response.should match Regexp.new(Regexp.escape('<h3 class="sub_header">Archive</h3>'))

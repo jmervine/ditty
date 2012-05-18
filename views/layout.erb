@@ -1,6 +1,6 @@
 <%
   navigation ||= :nav_archive
-  path ||= nil
+  post ||= nil
 %>
 <html>
   <head>
@@ -8,7 +8,12 @@
     <link rel="stylesheet" type="text/css" href="/ss/main.css" />
   </head>
   <body>
-    <div id="new_link"><a href="/new">new post</a></div>
+    <div id="new_link">
+    <%unless request.path_info =~ /edit$/%>
+      <% if (post and !post.nil? and post.id and !post.id.nil?) %><a href="/post/<%=post.id%>/edit">edit post</a><%else %><a href="/post">new post</a><%end%> | 
+    <%end%>
+    <a href="/">home</a>
+    </div>
     <div class="header">
       <h1><%=settings.title%></h1>
     </div>
