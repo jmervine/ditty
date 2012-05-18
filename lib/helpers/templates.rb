@@ -1,5 +1,6 @@
 require 'open-uri'
 module HelpersTemplates
+  include Ditty
 
   def post_contents post
     return "" if post.nil? or post.empty?
@@ -34,26 +35,51 @@ module HelpersTemplates
 
   def archive_items
     date_key="created_at"
-    collection = settings.store.find
+    collection = collection_sort(settings.store.find)
     archive = {}
     # TODO: there has to be a better way
-    collection_sort(collection).each do |item| 
+    collection.each do |item| 
       date = Time.parse(item[date_key]) rescue item[date_key]
-      archive[date.year] = [] unless archive.has_key? date.year
-      archive[date.year].push date.month unless archive[date.year].include? date.month
+      archive[date.year] = {} unless archive.has_key? date.year
+      archive[date.year][date.month] = [] unless archive[date.year].has_key? date.month
+      archive[date.year][date.month].push Post.load(item)
     end
     archive
   end
 
-  def archive_list 
+  def archive_nav_list 
     archive = archive_items
     markup = ""
     markup << %{ <ul class="nav_list"> }
     archive.each_key do |year|
       markup << %{ <li class="nav_item"><b>#{year}</b></li> }
       markup << %{ <ul class="nav_sub_list"> }
-      archive[year].each do |month|
+      archive[year].each_key do |month|
         markup << %{ <li class="nav_item">#{ archive_link(year, month) }</li> }
+      end
+      markup << %{ </ul> }
+      markup << %{ </li> }
+    end
+    markup << %{ </ul> }
+    markup
+  end
+
+  def archive_list archive=nil
+    archive = archive_items if archive.nil?
+    markup = ""
+    markup << %{ <ul class="nav_list"> }
+
+    archive.each_key do |year|
+      markup << %{ <li class="nav_item"><b>#{year}</b></li> }
+      markup << %{ <ul class="nav_sub_list"> }
+      archive[year].each_key do |month|
+        markup << %{ <li class="nav_item">#{ archive_link(year, month) }</li> }
+        markup << %{ <ul class="nav_sub_list"> }
+        archive[year][month].each do |item|
+          markup << %{ <li class="nav_item">#{ post_link(item) }</li> }
+        end
+        markup << %{ </ul> }
+        markup << %{ </li> }
       end
       markup << %{ </ul> }
       markup << %{ </li> }
@@ -79,7 +105,7 @@ module HelpersTemplates
   # TODO: don't store id and then create post, just store post and create it
   def latest n=5
     ids = collection_sort(settings.store.find)[0..n-1].collect { |i| i["_id"] }
-    ids.collect { |id| Ditty::Post.load id }
+    ids.collect { |id| Post.load id }
   end
 
   def linkify_title title

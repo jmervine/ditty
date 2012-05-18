@@ -39,6 +39,48 @@ describe HelpersTemplates do
       helpers.archive_link("2012", "01").should match /a href='\/archive\/2012\/01/
     end
   end
+  describe :archive_items do
+    it "should return a hash of all posts" do
+      helpers.archive_items.should have(2).items # top level keys
+      helpers.archive_items.shift.last.should have(6).items # second level keys
+      helpers.archive_items.shift.last.shift.last.should have(6).items # thrid level items
+    end
+    it "top level should be years" do
+      helpers.archive_items.should have(2).items
+      helpers.archive_items.keys.should eq [2012,2011]
+    end
+    it "second level should be months" do
+      helpers.archive_items[2012].should have(6).items
+      helpers.archive_items[2012].keys.should eq [10,9,8,7,6,5]
+    end
+    it "third level should be items" do
+      helpers.archive_items[2012][5].should have(6).items
+      helpers.archive_items[2012][5].first.should be_a Ditty::Post
+    end
+  end
+  describe :archive_nav_list do
+    describe "should build an archive list" do
+      it "with years" do
+        helpers.archive_nav_list.should match /2011/
+        helpers.archive_nav_list.should match /2012/
+      end
+      it "with months" do
+        (2011..2012).each do |y|
+          (5..10).each do |m| 
+            str = "/archive/" + y.to_s + "/" + ("%02d" % m )
+            helpers.archive_nav_list.should match Regexp.new(Regexp.escape(str))
+          end
+        end
+      end
+      it "without items" do
+        (2011..2012).each do |y|
+          (5..10).each do |m| 
+            helpers.archive_nav_list.should_not match Regexp.new("\/post\/([a-z0-9]+)\'\>post title")
+          end
+        end
+      end
+    end
+  end
   describe :archive_list do
     describe "should build an archive list" do
       it "with years" do
@@ -50,6 +92,13 @@ describe HelpersTemplates do
           (5..10).each do |m| 
             str = "/archive/" + y.to_s + "/" + ("%02d" % m )
             helpers.archive_list.should match Regexp.new(Regexp.escape(str))
+          end
+        end
+      end
+      it "with items" do
+        (2011..2012).each do |y|
+          (5..10).each do |m| 
+            helpers.archive_list.should match Regexp.new("\/post\/([a-z0-9]+)\'\>post title")
           end
         end
       end
