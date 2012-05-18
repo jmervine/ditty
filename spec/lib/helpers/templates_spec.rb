@@ -16,7 +16,7 @@ describe HelpersTemplates do
 
   describe :time_display do
     it "should be" do
-      helpers.time_display(post_one).should match Regexp.new(Regexp.escape("<span class='header_time'>Created on "))
+      helpers.time_display(post_one).should match Regexp.new(Regexp.escape("<span class='header_time'>Created "))
     end
   end
 

@@ -2,10 +2,12 @@ require 'open-uri'
 module HelpersTemplates
 
   def post_contents post
+    return "" if post.nil? or post.empty?
     markdown post.body
   end
 
   def time_display post
+    return "" if post.nil? or post.empty?
     action = (post.created_at == post.updated_at ? "Created" : "Updated")
     mt = post.updated_at
     nt = Time.now
@@ -17,6 +19,7 @@ module HelpersTemplates
   end
 
   def post_title post
+    return "" if post.nil? or post.empty?
     post.title
   end
 
@@ -60,6 +63,7 @@ module HelpersTemplates
   end
 
   def post_link post, use_title=false
+    return "" if post.nil? or post.empty?
     link = if use_title
              linkify_title(post_title(post)) 
            else

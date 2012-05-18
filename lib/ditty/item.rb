@@ -105,7 +105,7 @@ module Ditty
         return store($1, args.first) if keys_public.include?($1)
       end
       if keys_all.include? meth.to_s
-        return fetch(meth.to_s) rescue raise InvalidOptionError, "#{meth} not set"
+        return fetch(meth.to_s) rescue return nil #raise InvalidOptionError, "#{meth} not set"
       end
       #return fetch(meth.to_s) if keys_all.include? meth.to_s rescue nil
       super

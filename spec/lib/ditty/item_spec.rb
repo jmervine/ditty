@@ -57,7 +57,8 @@ describe Ditty::Item do
     end
     it "created_at should raise an error when not set" do
       new_item = Item.new
-      expect { new_item.created_at }.should raise_error InvalidOptionError
+      #expect { new_item.created_at }.should raise_error InvalidOptionError
+      new_item.created_at.should be_nil
     end
     it "setting created_at should raise an error" do
       new_item = Item.new
@@ -67,7 +68,8 @@ describe Ditty::Item do
     end
     it "updated_at should raise an error when not set" do
       new_item = Item.new
-      expect { new_item.updated_at }.should raise_error InvalidOptionError
+      #expect { new_item.updated_at }.should raise_error InvalidOptionError
+      new_item.updated_at.should be_nil
     end
     it "setting updated_at should raise error" do
       new_item = Item.new
