@@ -106,7 +106,7 @@ module HelpersTemplates
   end
 
   # TODO: don't store id and then create post, just store post and create it
-  def latest n=5
+  def latest n=25
     ids = collection_sort(settings.store.find)[0..n-1].collect { |i| i["_id"] }
     ids.collect { |id| Post.load id }
   end
