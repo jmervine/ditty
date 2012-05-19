@@ -1,4 +1,5 @@
 ENV['RACK_ENV'] = 'test' # needs to be first
+puts "Running with RACK_ENV=#{ENV['RACK_ENV']}."
 require './dittyapp'
 
 # gems
@@ -14,7 +15,7 @@ CONFIG = begin conf["default"].merge!(conf["test"]) rescue conf["default"] end
 
 # with mongo
 def build_clean_data
-  connection = Mongo::Connection.new.db(CONFIG['database'])[CONFIG['table']]
+  connection = Mongo::Connection.new.db(CONFIG['database']['name'])[CONFIG['database']['table']]
   connection.remove # clean database
   (2011..2012).each do |year|
     (5..10).each do |month|
@@ -47,9 +48,24 @@ class TestHelpersTemplates
   end
 end
 
+class TestHelpersApplication
+  include HelpersApplication
+  def settings; SettingsStub.new; end
+  def response; {}; end
+  def request; RequestStub.new; end
+  class RequestStub
+    def env; {}; end
+  end
+  class SettingsStub
+    def root; File.join(File.dirname(__FILE__), ".."); end
+    def protect; [ "test" ]; end
+    def config; { "auth" => { "username" => "test", "password" => "test" } }; end
+  end
+end
+
 set :environment, :test
 set :views, File.join(File.dirname(__FILE__), "..", "views")
-set :store, Ditty::MongoStore.new(CONFIG['database'], CONFIG['table'])
+set :store, Ditty::MongoStore.new(CONFIG['database']['name'], CONFIG['database']['table'])
 
 include Rack::Test::Methods
 def app 

@@ -1,12 +1,34 @@
 default:
-  database: ditty
-  table: posts
   title: "My little Ditty's!"
+  database: 
+    name: ditty
+    table: posts
+    #username: do_not_set
+    #password: do_not_set
+  # no auth here so prod will fail
+  # auth:
+  #   username: do_not_set
+  #   password: do_not_set
+development:
+  title: "My DEV Ditty's!"
+  auth:
+    username: dev
+    password: dev
 test:
-  database: ditty_test
-  table: rspec
+  title: "My TEST Ditty's!"
+  database: 
+    name: ditty_test
+    table: rspec
+    #username:
+    #password:
+  auth:
+    username: test
+    password: test
 #production:
   #database: ditty_production
   #table: posts
   #title: Your title!
+  #auth:
+    #username: setme
+    #password: setme
   

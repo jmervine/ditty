@@ -13,7 +13,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have post titles" do
       last_response.should match Regexp.new("post title - ")
@@ -42,15 +42,25 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  describe "GET /post" do 
+  describe "GET /post", "without auth" do
     before(:all) do
+      get "/post"
+    end
+    it "should reject" do
+      last_response.status.should be 401
+    end
+  end
+
+  describe "GET /post", "with auth" do 
+    before(:all) do
+      authorize 'test', 'test'
       get "/post"
     end
     it "should load new post form" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have new post link" do
       last_response.should match Regexp.new(Regexp.escape("new post</a>"))
@@ -74,7 +84,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have post title" do
       last_response.should match Regexp.new("post title - ")
@@ -105,7 +115,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have post title" do
       last_response.should match Regexp.new("post title - ")
@@ -129,15 +139,25 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  describe "GET /post/:id/edit" do
+  describe "GET /post/:id/edit", "without auth" do
     before(:all) do
+      get "/post/#{settings.store.find.first["_id"]}/edit" # find a real post via it's id
+    end
+    it "should reject" do
+      last_response.status.should be 401
+    end
+  end
+
+  describe "GET /post/:id/edit", "with auth" do
+    before(:all) do
+      authorize 'test', 'test'
       get "/post/#{settings.store.find.first["_id"]}/edit" # find a real post via it's id
     end
     it "should load post edit form" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have post title" do
       last_response.should match Regexp.new("post title - ")
@@ -166,15 +186,25 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  describe "GET /post/:title/edit" do
+  describe "GET /post/:id/edit", "without auth" do
     before(:all) do
+      get "/post/post%20title%20-%202011.7.9/edit" 
+    end
+    it "should reject" do
+      last_response.status.should be 401
+    end
+  end
+
+  describe "GET /post/:title/edit", "with auth" do
+    before(:all) do
+      authorize 'test', 'test'
       get "/post/post%20title%20-%202011.7.9/edit" 
     end
     it "should load post edit form" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have post title" do
       last_response.should match Regexp.new("post title - ")
@@ -211,7 +241,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "post title should be a link" do
       last_response.should match Regexp.new("<a href=\'\/post\/([a-z0-9]+)'>post title - (.+)</a>")
@@ -238,7 +268,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have new post link" do
       last_response.should match Regexp.new(Regexp.escape("new post</a>"))
@@ -265,7 +295,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "post title should be a link" do
       last_response.should match Regexp.new("<a href=\'\/post\/([a-z0-9]+)'>post title - (.+)</a>")
@@ -296,7 +326,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.status.should eq 404
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have new post link" do
       last_response.should match Regexp.new(Regexp.escape("new post</a>"))
@@ -324,7 +354,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.status.should eq 404
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have new post link" do
       last_response.should match Regexp.new(Regexp.escape("new post</a>"))
@@ -352,7 +382,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.status.should eq 404
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have new post link" do
       last_response.should match Regexp.new(Regexp.escape("new post</a>"))
@@ -372,12 +402,22 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  describe "POST /post" do
+  describe "POST /post", "without auth" do
     before(:all) do
       post "/post", :post => { "title" => "create test title", "body" => "create test body" }
     end
+    it "should reject" do
+      last_response.status.should be 401
+    end
+  end
+
+  describe "POST /post" do
+    before(:all) do
+      authorize "test", "test"
+      post "/post", :post => { "title" => "create test title", "body" => "create test body" }
+    end
     it "should have added to the data store" do
-      this = Post.load(settings.store.find.last)
+      this = Ditty::Post.load(settings.store.find("title" => "create test title").first)
       this.title.should eq "create test title"
     end
     it "should load created post" do
@@ -390,7 +430,7 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should be the right post" do
       last_response.should match Regexp.new("create test title")
@@ -398,24 +438,35 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  describe "POST /post/:id" do
+  describe "POST /post/:id", "without auth" do
     before(:all) do
       @update_id = settings.store.find.last['_id'].to_s
       post "/post/#{@update_id}", :post => { "title" => "updated test title", "body" => "updated test body" }
     end
+    it "should reject" do
+      last_response.status.should be 401
+    end
+  end
+
+  describe "POST /post/:id" do
+    before(:all) do
+      authorize "test", "test"
+      @update_id = settings.store.find.last['_id'].to_s
+      post "/post/#{@update_id}", :post => { "title" => "updated test title", "body" => "updated test body" }
+    end
     it "should have added to the data store" do
-      this = Post.load(@update_id)
+      this = Ditty::Post.load(@update_id)
       this.title.should eq "updated test title"
     end
     it "should have changed updated_at" do
-      this = Post.load(@update_id)
+      this = Ditty::Post.load(@update_id)
       this.updated_at.should_not eq this.created_at
     end
     it "should load the updated post" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should not have new post link" do
       last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
@@ -429,19 +480,30 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
-  describe "DELETE /post/:id" do
+  describe "DELETE /post/:id", "without auth" do
     before(:all) do
       @del_id = settings.store.find.last['_id'].to_s
       delete "/post/#{@del_id}"
     end
+    it "should reject" do
+      last_response.status.should be 401
+    end
+  end
+
+  describe "DELETE /post/:id" do
+    before(:all) do
+      authorize "test", "test"
+      @del_id = settings.store.find.last['_id'].to_s
+      delete "/post/#{@del_id}"
+    end
     it "should have deleted it from data store" do
-      expect { Post.load(@update_id) }.should raise_error
+      expect { Ditty::Post.load(@update_id) }.should raise_error
     end
     it "should load the index" do
       last_response.should be_ok
     end
     it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My little Ditty's!</title>"))
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have new post link" do
       last_response.should match Regexp.new(Regexp.escape("new post</a>"))

@@ -4,7 +4,7 @@ describe HelpersTemplates do
   before(:all) do
     build_clean_data
     @helpers = TestHelpersTemplates.new
-    @collection = Mongo::Connection.new.db(CONFIG['database'])[CONFIG['table']]
+    @collection = Mongo::Connection.new.db(CONFIG['database']['name'])[CONFIG['database']['table']]
     @post_one = @collection.find.to_a.first
     @post_two = @collection.find.to_a.last
     Ditty::Item.data_store = @collection

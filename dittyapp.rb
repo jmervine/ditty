@@ -13,22 +13,24 @@ require 'helpers'
 class DittyApp < Sinatra::Application
   include Ditty
 
+  helpers do
+    include HelpersTemplates
+    include HelpersApplication
+  end
+
   enable :logging, :raise_errors#, :dump_errors
 
   set :pass_errors, false
-
-  conf = YAML.load_file(File.join(root, "config", "ditty.yml"))  
-  set :config, begin conf["default"].merge!(conf[ENV['RACK_ENV']]) rescue conf["default"] end
-  set :store, MongoStore.new(settings.config['database'], settings.config['table'])
-  set :title, begin settings.config["title"] rescue "My little Ditty's!" end
+  set :config,      HelpersApplication.configure!
+  set :store,       HelpersApplication.database!( settings.config )
+  set :title,       HelpersApplication.app_title( settings.config )
+  set :protect,     [ "production", "test" ] # environments to protect
 
   Post.data_store = settings.store
 
-  helpers do
-    include HelpersTemplates
-  end
 
   get "/post/?" do
+    protected!
     erb :_post, :locals => { :navigation => :nav_help, :post => Post.new }
   end
 
@@ -42,6 +44,7 @@ class DittyApp < Sinatra::Application
   end
 
   get "/post/:id/edit/?" do
+    protected!
     post = begin
              Post.load params[:id]
            rescue
@@ -51,12 +54,14 @@ class DittyApp < Sinatra::Application
   end
 
   post "/post" do
+    protected!
     post = Post.new(params[:post])
     post.insert
     erb :post, :locals => { :post => post }
   end
 
   post "/post/:id" do
+    protected!
     post = Post.load(params[:id])
     post.merge!(params[:post])
     post.update
@@ -64,6 +69,7 @@ class DittyApp < Sinatra::Application
   end
 
   delete "/post/:id" do
+    protected!
     Post.load(params[:id]).remove
     erb :index
   end
