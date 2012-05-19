@@ -17,4 +17,9 @@ group :deployment do
   gem 'vlad-git'
 end
 
+group :import do
+  gem 'jekyll'
+  gem 'nokogiri'
+end
+
 # vim: filetype=ruby
