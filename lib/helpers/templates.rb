@@ -38,7 +38,7 @@ module HelpersTemplates
 
   def archive_items
     date_key="created_at"
-    collection = collection_sort(settings.store.find)
+    collection = collection_rsort(settings.store.find)
     archive = {}
     # TODO: there has to be a better way
     collection.each do |item| 
@@ -69,6 +69,7 @@ module HelpersTemplates
 
   def archive_list archive=nil
     archive = archive_items if archive.nil?
+
     markup = ""
     markup << %{ <ul class="nav_list"> }
 
@@ -107,7 +108,7 @@ module HelpersTemplates
 
   # TODO: don't store id and then create post, just store post and create it
   def latest n=25
-    ids = collection_sort(settings.store.find)[0..n-1].collect { |i| i["_id"] }
+    ids = collection_rsort(settings.store.find)[0..n-1].collect { |i| i["_id"] }
     ids.collect { |id| Post.load id }
   end
 
@@ -122,6 +123,9 @@ module HelpersTemplates
   protected
   # TODO: there has to be a better way
   def collection_sort collection, date_key="created_at"
-    (collection.sort_by { |item| item[date_key] }).reverse
+    (collection.sort_by { |item| item[date_key] })
+  end
+  def collection_rsort collection, date_key="created_at"
+    collection_sort(collection, date_key).reverse
   end
 end

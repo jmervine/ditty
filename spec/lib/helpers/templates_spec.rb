@@ -126,7 +126,7 @@ describe HelpersTemplates do
 
   describe :latest do
     it "should return the _n_ most recent posts" do
-      helpers.latest.should have(5).items
+      helpers.latest.should have(25).items
       helpers.latest(10).should have(10).items
     end
     it "should return the most recent items" do

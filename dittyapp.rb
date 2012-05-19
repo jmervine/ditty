@@ -87,9 +87,7 @@ class DittyApp < Sinatra::Application
   get "/archive/:year/:month/?" do
     items = settings.store.find.select { |p| p["created_at"].year.to_i == params[:year].to_i and p["created_at"].month.to_i == params[:month].to_i }
     posts = items.collect { |i| Post.load(i) }
-    erb :index, :locals => { :latest => posts } # little hack to not duplicate code
-    #items = archive_items[params[:year].to_i][params[:month].to_i
-    #erb :archive, :locals => { :archives => items }
+    erb :index, :locals => { :latest => collection_rsort(posts) } 
   end
 
   get "/" do 
