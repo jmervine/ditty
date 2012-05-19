@@ -6,17 +6,17 @@ require 'fileutils'
 RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 
-ENV['RACK_ENV'] ||= "test"
+ENV['RACK_ENV'] ||= "stage"
 
 namespace :unicorn do
   desc "Start unicorn"
   task :start do
-    %x{ RACK_ENV=#{ENV['RACK_ENV']} unicorn -c ./config/unicorn.rb }
+    %x{ unicorn -c ./config/unicorn.rb }
   end
 
   desc "Start unicorn deamonized"
   task :start_d do
-    %x{ RACK_ENV=#{ENV['RACK_ENV']} unicorn -c ./config/unicorn.rb -D }
+    %x{ unicorn -c ./config/unicorn.rb -D }
   end
 
   desc "Stop unicorn"
@@ -62,7 +62,8 @@ namespace :import do
 
   task :tumblr_load do
     tumblr = File.join( File.dirname(__FILE__), "_posts", "tumblr" ) 
-    connection = Mongo::Connection.new.db("ditty_test")['rspec']
+    dbconf = YAML.load_file(File.join(File.dirname(__FILE__), "config", "ditty.yml"))[ENV['RACK_ENV']]["database"]
+    connection = Mongo::Connection.new.db(dbconf['name'])[dbconf['table']]
 
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "
     puts "!! WARNING                                                             !!"
