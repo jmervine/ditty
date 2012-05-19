@@ -3,4 +3,5 @@ log/*.log
 log/*.pid
 .*.sw*
 store/20*
-
+public/tumblr_files
+_posts
