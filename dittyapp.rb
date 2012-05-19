@@ -28,6 +28,11 @@ class DittyApp < Sinatra::Application
 
   Post.data_store = settings.store
 
+  get "/login" do
+    protected!
+    redirect params[:from] if params[:from]
+    redirect "/"
+  end
 
   get "/post/?" do
     protected!

@@ -523,4 +523,39 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
+  describe "GET /login", "without auth" do
+    before(:all) do
+      get "/login"
+    end
+    it "should reject" do
+      last_response.status.should be 401
+    end
+  end
+
+  describe "GET /login", "with auth, without :from" do 
+    before(:all) do
+      authorize 'test', 'test'
+      get "/login"
+    end
+    it "should load new post form" do
+      last_response.should be_redirect
+      follow_redirect!
+      last_request.url.should == 'http://example.org/'
+    end
+  end
+
+  describe "GET /login", "with auth, with :from" do 
+    before(:all) do
+      authorize 'test', 'test'
+      @from = "/archive/2012"
+      get "/login?from=#{@from}"
+    end
+    it "should load new post form" do
+      last_response.should be_redirect
+      follow_redirect!
+      last_request.url.should == "http://example.org#{@from}"
+    end
+  end
+
+
 end
