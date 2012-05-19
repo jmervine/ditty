@@ -26,8 +26,6 @@ class DittyApp < Sinatra::Application
 
   helpers do
     include HelpersTemplates
-    #include DittyUtils
-    #@@store = settings.store
   end
 
   get "/post/?" do
