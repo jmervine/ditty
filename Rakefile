@@ -6,6 +6,10 @@ require 'fileutils'
 begin
   require 'vlad'
   Vlad.load :scm => :git
+  desc "deploy"
+  task "vlad:deploy" => %w[
+      vlad:update vlad:bundle:install
+  ]
 rescue LoadError
   # do nothing
 end
@@ -72,7 +76,9 @@ namespace :import do
   task :tumblr_load do
     tumblr = File.join( File.dirname(__FILE__), "_posts", "tumblr" ) 
     dbconf = YAML.load_file(File.join(File.dirname(__FILE__), "config", "ditty.yml"))[ENV['RACK_ENV']]["database"]
-    connection = Mongo::Connection.new.db(dbconf['name'])[dbconf['table']]
+    require './lib/ditty/mongostore'
+    #connection = Mongo::Connection.new.db(dbconf['name'])[dbconf['table']]
+    connection = Ditty::MongoStore.new(dbconf)
 
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "
     puts "!! WARNING                                                             !!"
