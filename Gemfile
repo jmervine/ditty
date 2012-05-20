@@ -1,15 +1,21 @@
 source :rubygems
 
-gem 'unicorn'
 gem 'sinatra'
 gem 'rake'
 gem 'redcarpet'
-gem 'mongo'
-gem 'bson_ext'
+
+group :mongo do
+  gem 'mongo'
+  gem 'bson_ext'
+end
 
 group :test, :development do
   gem 'rspec'
   gem 'rack-test'
+end
+
+group :unicorn do
+  gem 'unicorn'
 end
 
 group :deployment do
