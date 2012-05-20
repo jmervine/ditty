@@ -100,6 +100,12 @@ input.button {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
+input.button_delete {
+  float: left;
+  background-color: maroon;
+  color: white;
+}
+
 .main {
   margin: 5px;
   padding: 20px;

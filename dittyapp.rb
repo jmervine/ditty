@@ -29,8 +29,6 @@ class DittyApp < Sinatra::Application
 
   get "/login" do
     protected!
-    #redirect params[:from] if params[:from]
-    #redirect "/"
     erb :index
   end
 
@@ -73,7 +71,7 @@ class DittyApp < Sinatra::Application
     erb :post, :locals => { :post => post }
   end
 
-  delete "/post/:id" do
+  get "/post/:id/delete" do
     protected!
     Post.load(params[:id]).remove
     erb :index

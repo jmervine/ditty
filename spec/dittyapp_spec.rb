@@ -384,7 +384,7 @@ describe DittyApp, "< Sinatra::Application" do
 
   describe "BAD /bad/path" do
     before(:all) do
-      delete "/bad/path"
+      put "/bad/path"
     end
     it "should return a 404" do
       last_response.status.should eq 404
@@ -493,7 +493,7 @@ describe DittyApp, "< Sinatra::Application" do
   describe "DELETE /post/:id", "without auth" do
     before(:all) do
       @del_id = settings.store.find.last['_id'].to_s
-      delete "/post/#{@del_id}"
+      get "/post/#{@del_id}/delete"
     end
     it "should reject" do
       last_response.status.should be 401
@@ -505,7 +505,7 @@ describe DittyApp, "< Sinatra::Application" do
       authorize "test", "test"
       HelpersApplication.stub(:authorized?).and_return true
       @del_id = settings.store.find.last['_id'].to_s
-      delete "/post/#{@del_id}"
+      get "/post/#{@del_id}/delete"
     end
     it "should have deleted it from data store" do
       expect { Ditty::Post.load(@update_id) }.should raise_error
@@ -550,25 +550,8 @@ describe DittyApp, "< Sinatra::Application" do
       get "/login"
     end
     it "should load new post form" do
-      #last_response.should be_redirect
-      #follow_redirect!
-      #last_request.url.should == 'http://example.org/'
       last_response.should be_ok
     end
   end
-
-  #describe "GET /login", "with auth, with :from" do 
-    #before(:all) do
-      #authorize 'test', 'test'
-      #HelpersApplication.stub(:authorized?).and_return true
-      #@from = "/archive/2012"
-      #get "/login?from=#{@from}"
-    #end
-    #it "should load new post form" do
-      #last_response.should be_redirect
-      #follow_redirect!
-      #last_request.url.should == "http://example.org#{@from}"
-    #end
-  #end
 
 end

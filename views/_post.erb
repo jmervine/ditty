@@ -12,7 +12,15 @@
       </div>
       <textarea name="post[body]" class="value"><%= post.body||"" %></textarea>
     </div>
+    <script>
+      function confirmDelete() {
+        if (confirm("Are you sure you want to delete?")) {
+          window.location.href='/post/<%=post.id%>/delete';
+        }
+      }
+    </script>
     <div id="form_buttons">
+      <input class="button button_delete" type="button" value="DELETE" onClick="javascript:confirmDelete();" /> &nbsp;
       <input class="button" type="button" value="Cancel!" onClick="javascript:window.location.href='/'" /> &nbsp;
       <input class="button" type="submit" value="Save!" />
     </div>

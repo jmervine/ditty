@@ -24,6 +24,10 @@ namespace :unicorn do
     %x{ kill -QUIT $( cat log/unicorn.pid ) }
   end
 
+  task :stop_f do
+    %x{ ps aux | grep unicorn | grep -v grep | awk '{print $1}' | xargs kill -9 }
+  end
+
   desc "Restart unicorn deamonized" 
   task :hup do
     Rake::Task['unicorn:stop'].invoke
