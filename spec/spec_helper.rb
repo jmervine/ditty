@@ -1,4 +1,4 @@
-ENV['RACK_ENV'] = 'test' # needs to be first
+ENV['RACK_ENV'] ||= 'test' # needs to be first
 puts "Running with RACK_ENV=#{ENV['RACK_ENV']}."
 require './dittyapp'
 require './lib/ditty'
@@ -13,7 +13,7 @@ require 'pp'
 
 # load configuration
 conf = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))
-CONFIG = begin conf["default"].merge!(conf["test"]) rescue conf["default"] end
+CONFIG = begin conf["default"].merge!(conf[ENV['RACK_ENV']]) rescue conf["default"] end
 
 # with mongo
 def build_clean_data

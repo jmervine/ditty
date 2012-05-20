@@ -1,20 +1,10 @@
 default:
   title: "My little Ditty's!"
-  database: 
-    name: ditty
-    table: posts
-    #username: do_not_set
-    #password: do_not_set
-  # no auth here so prod will fail
-  # auth:
-  #   username: do_not_set
-  #   password: do_not_set
 development:
-  title: "My DEV Ditty's!"
   auth:
     username: dev
     password: dev
-test:
+test: 
   title: "My TEST Ditty's!"
   database: 
     name: ditty_test
@@ -24,8 +14,16 @@ test:
   auth:
     username: test
     password: test
+travis:
+  title: "My TEST Ditty's!"
+  database: 
+    name: ditty_travis
+    table: ditty_travis
+  auth:
+    username: test
+    password: test
 stage:
-  title: "f2.h1.gg"
+  title: "blog.mervine.net"
   database: 
     name: ditty_stage
     table: blog

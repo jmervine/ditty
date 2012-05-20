@@ -13,8 +13,6 @@ end
 RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 
-ENV['RACK_ENV'] ||= "stage"
-
 namespace :unicorn do
   desc "Start unicorn"
   task :start do
