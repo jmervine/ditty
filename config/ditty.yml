@@ -29,11 +29,11 @@ stage:
   database: 
     name: ditty_stage
     table: f2h1gg
-    #username:
-    #password:
-  #auth:
-    #username: test
-    #password: test
+    username: 
+    password:
+  auth:
+    username: test
+    password: test
 #production:
   #database: ditty_production
   #table: posts

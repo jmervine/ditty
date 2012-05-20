@@ -9,10 +9,17 @@
   </head>
   <body>
     <div id="new_link">
-    <%unless request.path_info =~ /edit$/%>
-      <% if (post and !post.nil? and post.id and !post.id.nil?) %><a href="/post/<%=post.id%>/edit">edit post</a><%else %><a href="/post">new post</a><%end%> | 
-    <%end%>
-    <a href="/">home</a>
+    <% unless authorized? %>   
+      <a href="/login">login</a>
+    <% end %>
+    <% if authorized? %>   
+      <% if post.nil? %>   
+        <a href="/post">new post</a>
+      <% elsif !post.empty? and request.path_info !~ /edit$/ %>
+        <a href="/post/<%=post.id%>/edit">edit post</a>
+      <% end %>
+    <% end %>
+    &nbsp; &nbsp; <a href="/">home</a>
     </div>
     <div class="header">
       <h1><%=settings.title%></h1>

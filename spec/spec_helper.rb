@@ -1,6 +1,8 @@
 ENV['RACK_ENV'] = 'test' # needs to be first
 puts "Running with RACK_ENV=#{ENV['RACK_ENV']}."
 require './dittyapp'
+require './lib/ditty'
+require './lib/helpers'
 
 # gems
 require 'sinatra'
@@ -64,8 +66,9 @@ class TestHelpersApplication
 end
 
 set :environment, :test
-set :views, File.join(File.dirname(__FILE__), "..", "views")
-set :store, Ditty::MongoStore.new(CONFIG['database']['name'], CONFIG['database']['table'])
+set :config, CONFIG
+set :views,  File.join(File.dirname(__FILE__), "..", "views")
+set :store,  Ditty::MongoStore.new(CONFIG['database']['name'], CONFIG['database']['table'])
 
 include Rack::Test::Methods
 def app 

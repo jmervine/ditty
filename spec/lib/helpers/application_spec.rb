@@ -16,19 +16,14 @@ describe HelpersApplication do
   end
 
   describe :authorized? do
-    it "should return true if ENV isn't protected" do
-      ENV['RACK_ENV'] = "fake"
-      app.authorized?.should be true
-      ENV['RACK_ENV'] = "test" # put back
-    end
     it "should return false if username or password is missing" do
       app.authorized?.should be_false
     end
     it "should return false if username or password is wrong" do
-      pending "not sure how to test this"
+      pending "need to research how to test this"
     end
     it "should return true if username or password is correct" do
-      pending "not sure how to test this"
+      pending "need to research how to test this"
     end
   end
 

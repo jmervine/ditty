@@ -1,15 +1,14 @@
 module HelpersApplication
   extend self
   def protected!
-    unless authorized?
+    unless authorized? 
       response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
       throw(:halt, [401, "Not authorized\n"])
     end
   end
 
   def authorized?
-    return true unless settings.protect.include? ENV['RACK_ENV']
-    @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+    @auth ||= Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [username, password]
   end
 
@@ -41,4 +40,5 @@ module HelpersApplication
   def password
     settings.config["auth"]["password"]
   end
+
 end

@@ -133,5 +133,6 @@ describe HelpersTemplates do
       helpers.latest.first.should eq (collection.find.to_a.sort_by { |i| i["created_at"] }).reverse.first
     end
   end
+
 end
 

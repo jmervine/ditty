@@ -24,14 +24,14 @@ class DittyApp < Sinatra::Application
   set :config,      HelpersApplication.configure!
   set :store,       HelpersApplication.database!( settings.config )
   set :title,       HelpersApplication.app_title( settings.config )
-  set :protect,     [ "production", "test" ] # environments to protect
 
   Post.data_store = settings.store
 
   get "/login" do
     protected!
-    redirect params[:from] if params[:from]
-    redirect "/"
+    #redirect params[:from] if params[:from]
+    #redirect "/"
+    erb :index
   end
 
   get "/post/?" do
@@ -96,6 +96,7 @@ class DittyApp < Sinatra::Application
   end
 
   get "/" do 
+    logger.info authorized?
     erb :index
   end
 
