@@ -3,13 +3,6 @@ require 'spec_helper'
 
 describe Ditty::MongoStore do
   before(:all) do
-    # TODO: pull from ditty.yml
-    #Ditty::Item.data_store = Ditty::MongoStore.new({ 
-       #"name" => "ditty_test", 
-       #"table" => "ditty_test", 
-       #"username" => "test", 
-       #"password" => "test"
-     #})
     Ditty::Item.data_store = Ditty::MongoStore.new(CONFIG['database'])
 
     @item_one = Ditty::Item.new( { "title" => "title one", "body" => "body one" } )
@@ -26,7 +19,7 @@ describe Ditty::MongoStore do
   end
   describe :name do
     it "should be set" do
-      store.name.should eq "ditty_test"
+      store.name.should match /^ditty_/
     end
     it "should not set" do
       expect { store.name = "test_set" }.should raise_error NoMethodError
@@ -34,7 +27,7 @@ describe Ditty::MongoStore do
   end
   describe :table do
     it "should be set" do
-      store.table.should eq "ditty_test"
+      store.table.should match /^ditty_/
     end
     it "should not set" do
       expect { store.table = "test_set" }.should raise_error NoMethodError
@@ -56,6 +49,17 @@ describe Ditty::MongoStore do
   describe :find, "when empty" do
     it "should return an empty Array" do
       store.find.should be_empty
+    end
+  end
+
+  describe :auth? do
+    it "should return false if not auth_worked" do
+      store.instance_variable_set(:@auth_worked, false)
+      store.auth?.should be_false
+    end
+    it "should return true if auth_worked" do
+      store.instance_variable_set(:@auth_worked, true)
+      store.auth?.should be_true
     end
   end
 
@@ -194,6 +198,19 @@ describe Ditty::MongoStore do
       end
     end
 
+  end
+
+  describe "Bad Authentication" do
+    it "should raise an error with username is bad" do
+      #expect {
+        Ditty::MongoStore.new({ 
+         "name" => "ditty_test", 
+         "table" => "ditty_test", 
+         "username" => "bad", 
+         "password" => "test"
+       })
+      #}.should raise_error
+    end
   end
 
 end

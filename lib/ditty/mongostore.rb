@@ -8,7 +8,14 @@ module Ditty
       @username   = opts["username"]||nil #(opts.has_key?("auth") ? opts["auth"]["username"] : nil)
       @password   = opts["password"]||nil #(opts.has_key?("auth") ? opts["auth"]["password"] : nil)
       @connection = Mongo::Connection.new
-      @connection.add_auth(@name, @username, @password) if auth?
+      begin
+        if auth?
+          @connection.add_auth(@name, @username, @password) 
+          @auth_worked = true
+        end
+      rescue
+        @auth_worked = false  
+      end
       @database   = @connection.db(@name)
       @collection = @database[@table]
     end
@@ -20,7 +27,8 @@ module Ditty
       return collection.find(opts).to_a
     end
     def auth?
-      !(@username.nil? || @password.nil?)
+      return @auth_worked if defined?(@auth_worked)
+      return !(@username.nil? || @password.nil?)
     end
     def method_missing(meth, *args, &block)
       begin
