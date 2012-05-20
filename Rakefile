@@ -5,7 +5,7 @@ require 'fileutils'
 
 begin
   require 'vlad'
-  Vlad.load
+  Vlad.load :scm => :git
 rescue LoadError
   # do nothing
 end
