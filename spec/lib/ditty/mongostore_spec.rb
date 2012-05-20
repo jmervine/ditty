@@ -1,12 +1,19 @@
 require 'spec_helper'
+#require './lib/ditty'
 
 describe Ditty::MongoStore do
   before(:all) do
-    Ditty::Item.data_store = Ditty::MongoStore.new("rspec", "test")
+    # TODO: pull from ditty.yml
+    #Ditty::Item.data_store = Ditty::MongoStore.new({ 
+       #"name" => "ditty_test", 
+       #"table" => "ditty_test", 
+       #"username" => "test", 
+       #"password" => "test"
+     #})
+    Ditty::Item.data_store = Ditty::MongoStore.new(CONFIG['database'])
 
     @item_one = Ditty::Item.new( { "title" => "title one", "body" => "body one" } )
     @item_two = Ditty::Item.new( { "title" => "title two", "body" => "body two" } )
-    #@item_three = nil
   end
   let(:store) { Ditty::Item.data_store }
   let(:item_one)   { @item_one }
@@ -17,25 +24,25 @@ describe Ditty::MongoStore do
       store.should be 
     end
   end
-  describe :database do
+  describe :name do
     it "should be set" do
-      store.database.should eq "rspec"
+      store.name.should eq "ditty_test"
     end
     it "should not set" do
-      expect { store.database = "test_set" }.should raise_error NoMethodError
+      expect { store.name = "test_set" }.should raise_error NoMethodError
     end
   end
   describe :table do
     it "should be set" do
-      store.table.should eq "test"
+      store.table.should eq "ditty_test"
     end
     it "should not set" do
       expect { store.table = "test_set" }.should raise_error NoMethodError
     end
   end
-  describe :connection do
+  describe :collection do
     it "should be a mongo collection" do
-      store.connection.should be_a_kind_of Mongo::Collection
+      store.collection.should be_a_kind_of Mongo::Collection
     end
   end
 

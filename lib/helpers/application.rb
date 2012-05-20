@@ -23,7 +23,7 @@ module HelpersApplication
   end
 
   def database! config
-    Ditty::MongoStore.new(config['database']['name'], config['database']['table'])
+    Ditty::MongoStore.new(config['database'])
   end
 
   def app_title config

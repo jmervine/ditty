@@ -18,9 +18,9 @@ test:
   title: "My TEST Ditty's!"
   database: 
     name: ditty_test
-    table: rspec
-    #username:
-    #password:
+    table: ditty_test
+    username: test
+    password: test
   auth:
     username: test
     password: test
@@ -28,15 +28,15 @@ stage:
   title: "f2.h1.gg"
   database: 
     name: ditty_stage
-    table: f2h1gg
-    username: 
-    password:
+    table: blog
+    username: stage
+    password: stage
   auth:
     username: test
     password: test
 #production:
   #database: ditty_production
-  #table: posts
+  #table: ditty
   #title: Your title!
   #auth:
     #username: setme

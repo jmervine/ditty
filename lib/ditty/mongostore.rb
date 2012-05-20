@@ -1,23 +1,30 @@
 require 'mongo'
 module Ditty
   class MongoStore
-    attr_reader :database, :table, :connection
-    def initialize( database, table, opts = {} )
-      # Mongo::Connection.new.db("irbdb")['test']
-      @database   = database
-      @table      = table
-      @connection = Mongo::Connection.new.db(database)[table]
+    attr_reader :name, :database, :table, :connection, :collection
+    def initialize( opts )
+      @name       = opts["name"]
+      @table      = opts["table"]
+      @username   = opts["username"]||nil #(opts.has_key?("auth") ? opts["auth"]["username"] : nil)
+      @password   = opts["password"]||nil #(opts.has_key?("auth") ? opts["auth"]["password"] : nil)
+      @connection = Mongo::Connection.new
+      @connection.add_auth(@name, @username, @password) if auth?
+      @database   = @connection.db(@name)
+      @collection = @database[@table]
     end
     def find opts=nil
-      return connection.find.to_a if opts.nil?
+      return collection.find.to_a if opts.nil?
       if opts.has_key? "_id" and not opts["_id"].kind_of? BSON::ObjectId
         opts["_id"] = BSON::ObjectId(opts["_id"])
       end
-      return connection.find(opts).to_a
+      return collection.find(opts).to_a
+    end
+    def auth?
+      !(@username.nil? || @password.nil?)
     end
     def method_missing(meth, *args, &block)
       begin
-        connection.send(meth, *args, &block)
+        collection.send(meth, *args, &block)
       rescue
         super
       end

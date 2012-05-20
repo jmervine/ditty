@@ -17,7 +17,7 @@ CONFIG = begin conf["default"].merge!(conf["test"]) rescue conf["default"] end
 
 # with mongo
 def build_clean_data
-  connection = Mongo::Connection.new.db(CONFIG['database']['name'])[CONFIG['database']['table']]
+  connection = Ditty::MongoStore.new(CONFIG['database'])
   connection.remove # clean database
   (2011..2012).each do |year|
     (5..10).each do |month|
@@ -65,10 +65,13 @@ class TestHelpersApplication
   end
 end
 
+def setup_database
+
+end
 set :environment, :test
 set :config, CONFIG
 set :views,  File.join(File.dirname(__FILE__), "..", "views")
-set :store,  Ditty::MongoStore.new(CONFIG['database']['name'], CONFIG['database']['table'])
+set :store, Ditty::MongoStore.new(CONFIG['database'])
 
 include Rack::Test::Methods
 def app 
