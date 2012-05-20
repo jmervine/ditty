@@ -4,9 +4,10 @@ describe HelpersTemplates do
   before(:all) do
     build_clean_data
     @helpers = TestHelpersTemplates.new
-    db = Mongo::Connection.new.db(CONFIG['database']['name'])
-    db.authenticate(CONFIG['auth']['username'], CONFIG['auth']['password'])
-    @collection = db[CONFIG['database']['table']]
+    #db = Mongo::Connection.new.db(CONFIG['database']['name'])
+    #db.authenticate(CONFIG['auth']['username'], CONFIG['auth']['password'])
+    #@collection = db[CONFIG['database']['table']]
+    @collection = Ditty::MongoStore.new(CONFIG['database'])
     @post_one = @collection.find.to_a.first
     @post_two = @collection.find.to_a.last
     Ditty::Item.data_store = @collection
