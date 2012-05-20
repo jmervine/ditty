@@ -3,6 +3,13 @@ require 'pp'
 require 'mongo'
 require 'fileutils'
 
+begin
+  require 'vlad'
+  Vlad.load
+rescue LoadError
+  # do nothing
+end
+
 RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 
