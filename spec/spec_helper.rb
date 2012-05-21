@@ -67,6 +67,9 @@ class TestHelpersApplication
     def root; File.join(File.dirname(__FILE__), ".."); end
     def protect; [ "test" ]; end
     def config; { "auth" => { "username" => "test", "password" => "test" } }; end
+    #def environment
+      #(ENV['RACK_ENV']||"test").to_sym
+    #end
   end
 end
 

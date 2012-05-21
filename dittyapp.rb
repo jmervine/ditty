@@ -17,8 +17,8 @@ class DittyApp < Sinatra::Application
     enable :logging, :raise_errors#, :dump_errors
 
     set :pass_errors, false
-    set :config,      HelpersApplication.configure!
-    #set :store,       HelpersApplication.database!( settings.config['database'] )
+    set :environment, ENV['RACK_ENV']||"development"
+    set :config,      HelpersApplication.configure!( settings.environment )
     set :title,       HelpersApplication.app_title( settings.config )
 
     HelpersApplication.database!( settings.config['database'] )

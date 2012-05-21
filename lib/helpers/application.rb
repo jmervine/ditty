@@ -13,12 +13,11 @@ module HelpersApplication
     @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [username, password]
   end
 
-  def configure!
-    yaml = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))  
-    begin 
-      return yaml["default"].merge!(yaml[ENV['RACK_ENV']]) 
-    rescue 
-      return yaml["default"] 
+  def configure! env
+    begin
+      YAML.load_file(File.join(settings.root, "config", "ditty.yml"))[env]
+    rescue
+      raise "Missing configuration for #{env}."
     end
   end
 
@@ -26,6 +25,8 @@ module HelpersApplication
     MongoMapper.database = config['name']
     if config['username'] && config['password']
       MongoMapper.database.authenticate(config['username'], config['password'])
+    else
+      true
     end
   end
 
