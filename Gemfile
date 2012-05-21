@@ -6,6 +6,7 @@ gem 'redcarpet'
 
 group :mongo do
   gem 'mongo'
+  gem 'mongo_mapper'
   gem 'bson_ext'
 end
 

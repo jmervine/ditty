@@ -43,7 +43,7 @@ describe HelpersApplication do
 
   describe :database! do
     it "should load the database connection" do
-      app.database!(app.configure!).should be_a Ditty::MongoStore
+      app.database!(app.configure!['database']).should be
     end
   end
 

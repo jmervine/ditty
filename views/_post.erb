@@ -1,8 +1,7 @@
 <div id="form_post">
-  <% if post.id.nil? or post.id == "" %>
+  <% if state == :new %>
     <form method="post" name="post" action="/post">
   <% else %>
-    <!-- post: %<%=post.id%>% -->
     <form method="post" name="post" action="/post/<%= post.id %>">
   <% end %>
     <div class="header">

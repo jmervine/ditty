@@ -4,12 +4,12 @@ module HelpersTemplates
   include Ditty
 
   def post_contents post
-    return "" if post.nil? or post.empty?
+    return "" if post.nil? or post.body.nil?
     markdown post.body
   end
 
   def time_display post
-    return "" if post.nil? or post.empty?
+    return "" if post.nil? or post.created_at.nil?
     action = (post.created_at == post.updated_at ? "Created" : "Updated")
     mt = post.updated_at
     nt = Time.now
@@ -21,7 +21,7 @@ module HelpersTemplates
   end
 
   def post_title post
-    return "" if post.nil? or post.empty?
+    return "" if post.nil?
     post.title
   end
 
@@ -38,15 +38,14 @@ module HelpersTemplates
   end
 
   def archive_items
-    date_key="created_at"
-    collection = collection_rsort(settings.store.find)
+    collection = Ditty::Post.all(:order => :created_at.desc)
     archive = {}
     # TODO: there has to be a better way
     collection.each do |item| 
-      date = Time.parse(item[date_key]) rescue item[date_key]
+      date = item.created_at
       archive[date.year] = {} unless archive.has_key? date.year
       archive[date.year][date.month] = [] unless archive[date.year].has_key? date.month
-      archive[date.year][date.month].push Post.load(item)
+      archive[date.year][date.month].push item
     end
     archive
   end
@@ -94,7 +93,7 @@ module HelpersTemplates
   end
 
   def post_link post, use_title=false
-    return "" if post.nil? or post.empty?
+    return "" if post.nil? or post.id.blank?
     link = if use_title
              linkify_title(post_title(post)) 
            else
@@ -107,10 +106,8 @@ module HelpersTemplates
     %w{ january february march april may june july august september october november december }
   end
 
-  # TODO: don't store id and then create post, just store post and create it
   def latest n=25
-    ids = collection_rsort(settings.store.find)[0..n-1].collect { |i| i["_id"] }
-    ids.collect { |id| Post.load id }
+    Ditty::Post.all(:order => :created_at.desc)[0..n-1]
   end
 
   def linkify_title title

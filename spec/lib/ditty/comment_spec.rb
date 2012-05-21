@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Ditty::Comment do
   before(:all) do
-    @comment = Ditty::Comment.new({"post_id" => '0', 
-                                   "body" => 'body',
-                                   "created_by" => 'commenter'})
+    @comment = Ditty::Comment.new(:post_id => '0', 
+                                  :body => 'body',
+                                  :created_by => 'commenter')
   end
   let(:comment) { @comment }
 

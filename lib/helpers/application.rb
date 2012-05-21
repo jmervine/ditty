@@ -23,7 +23,10 @@ module HelpersApplication
   end
 
   def database! config
-    Ditty::MongoStore.new(config['database'])
+    MongoMapper.database = config['name']
+    if config['username'] && config['password']
+      MongoMapper.database.authenticate(config['username'], config['password'])
+    end
   end
 
   def app_title config
