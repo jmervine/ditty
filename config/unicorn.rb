@@ -4,7 +4,7 @@ APP_ROOT = File.expand_path(File.dirname(File.dirname(__FILE__)))
 working_directory APP_ROOT
 stderr_path APP_ROOT+"/log/unicorn_stderr.log"
 stdout_path APP_ROOT+"/log/unicorn_stdout.log"
-timout 30
+timeout 30
 
 if ENV['RACK_ENV'] == "production"
   # production conf
