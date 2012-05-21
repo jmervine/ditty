@@ -10,6 +10,7 @@ timout 30
 if ENV['RACK_ENV'] == "production"
   # production conf
   worker_processes 2
+  listen "/home/jmervine/ditty/shared/sockets/unicorn.sock", :backlog => 64
 else
   # non-prod conf
   worker_processes 1
