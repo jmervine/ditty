@@ -6,9 +6,15 @@ begin
   require 'vlad'
   Vlad.load :scm => :git, :app => :unicorn
   desc "deploy"
-  task "vlad:deploy" => %w[
-      vlad:update vlad:bundle:install
-  ]
+  task "vlad:deploy" => %w[ vlad:update vlad:bundle:install vlad:link_config vlad:start_app vlad:cleanup ]
+
+  namespace :vlad do
+    desc ""
+    remote_task :link_config, :roles => :app do
+      break unless target_host == Rake::RemoteTask.hosts_for(:app).first
+      run "ln -s #{deploy_to}/shared/ditty.yml #{deploy_to}/current/config/ditty.yml"
+    end
+  end
 rescue LoadError
   # do nothing
 end

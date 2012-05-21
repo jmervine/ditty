@@ -74,6 +74,9 @@ describe DittyApp, "< Sinatra::Application" do
     it "should not have edit post link" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
+    it "should not have a trailing slash at the end of the form action" do
+      last_response.should match /action=\"\/post\"/
+    end
     it "should have a submit button" do
       last_response.should match Regexp.new(Regexp.escape('<input class="button" type="submit" value="Save!" />'))
     end

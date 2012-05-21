@@ -56,7 +56,7 @@ class DittyApp < Sinatra::Application
     erb :_post, :locals => { :post => post, :navigation => :nav_help }
   end
 
-  post "/post" do
+  post "/post/?" do
     protected!
     post = Post.new(params[:post])
     post.insert

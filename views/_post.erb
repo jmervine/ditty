@@ -1,8 +1,10 @@
-<% 
-%>
-  
 <div id="form_post">
-  <form method="post" name="post" action="/post/<%= post.id||"" %>">
+  <% if post.id.nil? or post.id == "" %>
+    <form method="post" name="post" action="/post">
+  <% else %>
+    <!-- post: %<%=post.id%>% -->
+    <form method="post" name="post" action="/post/<%= post.id %>">
+  <% end %>
     <div class="header">
       <h3>Title: <input class="value" type="text" name="post[title]" value="<%= post_title(post)||"" %>" /> </h3>
     </div>
