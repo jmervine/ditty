@@ -21,6 +21,7 @@ end
 group :deployment do
   gem 'vlad'
   gem 'vlad-git'
+  gem 'vlad-unicorn'
 end
 
 # vim: filetype=ruby

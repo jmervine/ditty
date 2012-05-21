@@ -4,7 +4,7 @@ require 'fileutils'
 
 begin
   require 'vlad'
-  Vlad.load :scm => :git
+  Vlad.load :scm => :git, :app => :unicorn
   desc "deploy"
   task "vlad:deploy" => %w[
       vlad:update vlad:bundle:install
