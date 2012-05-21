@@ -8,4 +8,5 @@ set :repository, 'git://github.com/jmervine/ditty.git'
 set :bundle_without,  [:development, :test, :deployment]
 
 # unicorn
-set :unicorn_pid, "/home/jmervine/ditty/shared/unicorn.pid"
+set :unicorn_pid, "/home/jmervine/ditty/shared/log/unicorn.pid"
+set :unicorn_command, "cd /home/jmervine/ditty/current && bundle exec unicorn"
