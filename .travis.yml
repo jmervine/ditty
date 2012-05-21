@@ -1,5 +1,6 @@
 bundler_args: --without deployment import unicorn
 env: RACK_ENV=travis
+before_script: cp ./config/example_ditty.yml ./config/ditty.yml
 rvm:
   - 1.9.2
   - 1.9.3
