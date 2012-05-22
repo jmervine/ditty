@@ -2,11 +2,21 @@
   navigation ||= :nav_archive
   post ||= nil
   state ||= :index
+  title = if post.nil? or post.title.blank?
+            settings.title
+          else
+            post_title(post)
+          end
 %>
 <html>
   <head>
-    <title><%= settings.title %></title>
+    <title><%= title %></title>
     <link rel="stylesheet" type="text/css" href="/ss/main.css" />
+    <% if state == :show or state == :index %>
+      <script type="text/javascript">var switchTo5x=true;</script>
+      <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+      <script type="text/javascript">stLight.options({publisher: "d70ec18a-3455-4f95-9c4c-43eb2d969408"}); </script>
+    <% end %>
   </head>
   <body>
     <div id="new_link">
@@ -31,6 +41,14 @@
       </div>
 
       <div class="nav">
+      <% if state == :show or state == :index %>
+        <div id="share_this">
+          <span class='st_facebook_large' displayText='Facebook'></span>
+          <span class='st_twitter_large' displayText='Tweet'></span>
+          <span class='st_linkedin_large' displayText='LinkedIn'></span>
+          <span class='st_email_large' displayText='Email'></span>
+        </div>
+      <% end %>
         <% begin %>
           <%= erb navigation, :layout => false %>
         <% end %>
