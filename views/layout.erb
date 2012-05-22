@@ -1,6 +1,7 @@
 <%
   navigation ||= :nav_archive
   post ||= nil
+  state ||= :index
 %>
 <html>
   <head>
@@ -11,12 +12,11 @@
     <div id="new_link">
     <% unless authorized? %>   
       <a href="/login">login</a>
-    <% end %>
-    <% if authorized? %>   
-      <% if post.nil? %>   
-        <a href="/post">new post</a>
-      <% elsif !post.empty? and request.path_info !~ /edit$/ %>
+    <% else %>
+      <% if state == :show %>   
         <a href="/post/<%=post.id%>/edit">edit post</a>
+      <% elsif state == :index %>
+        <a href="/post">new post</a>
       <% end %>
     <% end %>
     &nbsp; &nbsp; <a href="/">home</a>

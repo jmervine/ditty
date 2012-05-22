@@ -29,21 +29,16 @@ describe HelpersApplication do
 
   describe :configure! do
     it "should load a file as a hash" do
-      app.configure!.should be_a Hash
-    end
-    it "should load defaults if ENV isn't found" do
-      ENV['RACK_ENV'] = "fake"
-      app.configure!["title"].should_not eq "My TEST Ditty's!" 
-      ENV['RACK_ENV'] = "test" # put back
+      app.configure!(ENV['RACK_ENV']).should be_a Hash
     end
     it "should load ENV if it's found" do
-      app.configure!["title"].should eq "My TEST Ditty's!" 
+      app.configure!(ENV['RACK_ENV'])["title"].should eq "My TEST Ditty's!" 
     end
   end
 
   describe :database! do
     it "should load the database connection" do
-      app.database!(app.configure!).should be_a Ditty::MongoStore
+      app.database!(app.configure!(ENV['RACK_ENV'])['database']).should be
     end
   end
 
@@ -51,13 +46,8 @@ describe HelpersApplication do
     it "should return 'Ditty!' it doesn't know what to do" do
       app.app_title(nil).should eq "Ditty!"
     end
-    it "should return default when ENV isn't found" do
-      ENV['RACK_ENV'] = "fake"
-      app.app_title(app.configure!).should_not eq "My TEST Ditty's!" 
-      ENV['RACK_ENV'] = "test" # put back
-    end
     it "should return ENV title" do
-      app.app_title(app.configure!).should eq "My TEST Ditty's!" 
+      app.app_title(app.configure!(ENV['RACK_ENV'])).should eq "My TEST Ditty's!" 
     end
   end
 

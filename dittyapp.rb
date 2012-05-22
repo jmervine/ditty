@@ -13,19 +13,24 @@ require 'helpers'
 class DittyApp < Sinatra::Application
   include Ditty
 
+  configure do
+    enable :logging, :raise_errors#, :dump_errors
+
+    set :pass_errors, false
+    set :environment, ENV['RACK_ENV']||"development"
+    set :config,      HelpersApplication.configure!( settings.environment )
+    set :title,       HelpersApplication.app_title( settings.config )
+
+    HelpersApplication.database!( settings.config['database'] )
+  end
+
   helpers do
     include HelpersTemplates
     include HelpersApplication
   end
 
-  enable :logging, :raise_errors#, :dump_errors
 
-  set :pass_errors, false
-  set :config,      HelpersApplication.configure!
-  set :store,       HelpersApplication.database!( settings.config )
-  set :title,       HelpersApplication.app_title( settings.config )
-
-  Post.data_store = settings.store
+  #Post.data_store = settings.store
 
   get "/login" do
     protected!
@@ -34,46 +39,36 @@ class DittyApp < Sinatra::Application
 
   get "/post/?" do
     protected!
-    erb :_post, :locals => { :navigation => :nav_help, :post => Post.new }
+    erb :_post, :locals => { :navigation => :nav_help, :post => Post.new, :state => :new }
   end
 
   get "/post/:id/?" do
-    post = begin
-             Post.load params[:id]
-           rescue
-             Post.load(settings.store.find("title" => delinkify_title(params[:id])).first) rescue nil
-           end
-    erb :post, :locals => { :post => post }
+    erb :post, :locals => { :post => Post.find(params[:id]), :state => :show }
   end
 
   get "/post/:id/edit/?" do
     protected!
-    post = begin
-             Post.load params[:id]
-           rescue
-             Post.load(settings.store.find("title" => delinkify_title(params[:id])).first) rescue nil
-           end
-    erb :_post, :locals => { :post => post, :navigation => :nav_help }
+    erb :_post, :locals => { :post => Post.find( params[:id] ), :navigation => :nav_help, :state => :edit }
   end
 
   post "/post/?" do
     protected!
-    post = Post.new(params[:post])
-    post.insert
-    erb :post, :locals => { :post => post }
+    erb :post, :locals => { :post => Post.create(params[:post]), :state => :show }
   end
 
   post "/post/:id" do
     protected!
-    post = Post.load(params[:id])
-    post.merge!(params[:post])
-    post.update
-    erb :post, :locals => { :post => post }
+    post = Post.find params[:id] #params[:post]
+    params[:post].each do |key, val|
+      post[key.to_sym] = val
+    end
+    post.save!
+    erb :post, :locals => { :post => post, :state => :show }
   end
 
   get "/post/:id/delete" do
     protected!
-    Post.load(params[:id]).remove
+    Post.destroy params[:id]
     erb :index
   end
 
@@ -88,9 +83,8 @@ class DittyApp < Sinatra::Application
   end
 
   get "/archive/:year/:month/?" do
-    items = settings.store.find.select { |p| p["created_at"].year.to_i == params[:year].to_i and p["created_at"].month.to_i == params[:month].to_i }
-    posts = items.collect { |i| Post.load(i) }
-    erb :index, :locals => { :latest => collection_rsort(posts) } 
+    posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
+    erb :index, :locals => { :latest => posts } 
   end
 
   get "/" do 

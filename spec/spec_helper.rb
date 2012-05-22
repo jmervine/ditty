@@ -1,5 +1,6 @@
 ENV['RACK_ENV'] ||= 'test' # needs to be first
 puts "Running with RACK_ENV=#{ENV['RACK_ENV']}."
+
 require './dittyapp'
 require './lib/ditty'
 require './lib/helpers'
@@ -17,16 +18,20 @@ CONFIG = begin conf["default"].merge!(conf[ENV['RACK_ENV']]) rescue conf["defaul
 
 # with mongo
 def build_clean_data
-  connection = Ditty::MongoStore.new(CONFIG['database'])
-  connection.remove # clean database
+  config = CONFIG['database']
+  MongoMapper.database = config['name']
+  if config['username'] && config['password']
+    MongoMapper.database.authenticate(config['username'], config['password'])
+  end
+  Ditty::Post.destroy_all
   (2011..2012).each do |year|
     (5..10).each do |month|
       (5..10).each do |day|
         time = Time.new(year, month, day, 12)
-        connection.insert( { "created_at"  => time, 
-                              "updated_at"  => time, 
-                              "title"       => "post title - #{year}.#{month}.#{day}",
-                              "body"        => "post body - #{year}.#{month}.#{day}" } )
+        Ditty::Post.new( :created_at  => time, 
+                         :updated_at  => time, 
+                         :title       => "post title - #{year}.#{month}.#{day}",
+                         :body        => "post body - #{year}.#{month}.#{day}" ).save!
       end
     end
   end
@@ -62,6 +67,9 @@ class TestHelpersApplication
     def root; File.join(File.dirname(__FILE__), ".."); end
     def protect; [ "test" ]; end
     def config; { "auth" => { "username" => "test", "password" => "test" } }; end
+    #def environment
+      #(ENV['RACK_ENV']||"test").to_sym
+    #end
   end
 end
 
@@ -71,7 +79,7 @@ end
 set :environment, :test
 set :config, CONFIG
 set :views,  File.join(File.dirname(__FILE__), "..", "views")
-set :store, Ditty::MongoStore.new(CONFIG['database'])
+#set :store, Ditty::MongoStore.new(CONFIG['database'])
 
 include Rack::Test::Methods
 def app 

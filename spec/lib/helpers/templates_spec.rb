@@ -4,22 +4,26 @@ describe HelpersTemplates do
   before(:all) do
     build_clean_data
     @helpers = TestHelpersTemplates.new
-    #db = Mongo::Connection.new.db(CONFIG['database']['name'])
-    #db.authenticate(CONFIG['auth']['username'], CONFIG['auth']['password'])
-    #@collection = db[CONFIG['database']['table']]
-    @collection = Ditty::MongoStore.new(CONFIG['database'])
-    @post_one = @collection.find.to_a.first
-    @post_two = @collection.find.to_a.last
-    Ditty::Item.data_store = @collection
+    @connection = Ditty::Post.all
+    @post_one = Ditty::Post.first#(:order => :created_at.asc)
+    @post_two = Ditty::Post.last#(:order => :created_at.asc)
   end
   let(:helpers) { @helpers }
   let(:collection) { @collection }
-  let(:post_one) { Ditty::Item.load(@post_one) }
-  let(:post_two) { Ditty::Item.load(@post_two) }
+  let(:post_one) { @post_one }
+  let(:post_two) { @post_two }
 
   describe :time_display do
-    it "should be" do
-      helpers.time_display(post_one).should match Regexp.new(Regexp.escape("<span class='header_time'>Created "))
+    it "should show updated" do
+      helpers.time_display(post_one).should match Regexp.new(Regexp.escape("<span class='header_time'>Updated "))
+    end
+    it "should show created" do
+      post = Ditty::Post.new(:title => "foo")
+      post.save!
+      helpers.time_display(post).should match Regexp.new(Regexp.escape("<span class='header_time'>Created "))
+    end
+    it "should return blank when post is empty" do
+      helpers.time_display(Ditty::Post.new).should eq ""
     end
   end
 
@@ -27,12 +31,20 @@ describe HelpersTemplates do
     it "should return the body of a post" do
       helpers.post_contents(post_one).should match /^post body/
     end
+    it "should return blank when post is empty" do
+      helpers.time_display(Ditty::Post.new).should eq ""
+    end
   end
+
   describe :post_title do
     it "should return the title of a post" do
       helpers.post_title(post_one).should match /^post title/
     end
+    it "should return blank when post is empty" do
+      helpers.time_display(Ditty::Post.new).should eq ""
+    end
   end
+
   describe :archive_link do
     it "should return a link to an archive page" do
       helpers.archive_link(2012, 01).should match /January/
@@ -42,25 +54,30 @@ describe HelpersTemplates do
       helpers.archive_link("2012", "01").should match /a href='\/archive\/2012\/01/
     end
   end
+
   describe :archive_items do
+    before(:all) do
+      @archive = helpers.archive_items
+    end
     it "should return a hash of all posts" do
-      helpers.archive_items.should have(2).items # top level keys
-      helpers.archive_items.shift.last.should have(6).items # second level keys
-      helpers.archive_items.shift.last.shift.last.should have(6).items # thrid level items
+      @archive.should have(2).items # top level keys
+      @archive[2011].should have(6).items # second level keys
+      @archive[2011][05].should have(6).items # thrid level items
     end
     it "top level should be years" do
-      helpers.archive_items.should have(2).items
-      helpers.archive_items.keys.should eq [2012,2011]
+      @archive.should have(2).items
+      @archive.keys.should eq [2012,2011]
     end
     it "second level should be months" do
-      helpers.archive_items[2012].should have(6).items
-      helpers.archive_items[2012].keys.should eq [10,9,8,7,6,5]
+      @archive[2012].should have(6).items
+      @archive[2012].keys.should eq [10,9,8,7,6,5]
     end
     it "third level should be items" do
-      helpers.archive_items[2012][5].should have(6).items
-      helpers.archive_items[2012][5].first.should be_a Ditty::Post
+      @archive[2012][6].should have(6).items
+      @archive[2012][6].first.should be_a Ditty::Post
     end
   end
+
   describe :archive_nav_list do
     describe "should build an archive list" do
       it "with years as links" do
@@ -133,7 +150,7 @@ describe HelpersTemplates do
       helpers.latest(10).should have(10).items
     end
     it "should return the most recent items" do
-      helpers.latest.first.should eq (collection.find.to_a.sort_by { |i| i["created_at"] }).reverse.first
+      helpers.latest.first.should eq Ditty::Post.all(:order => :created_at.desc).first
     end
   end
 
