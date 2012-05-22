@@ -2,6 +2,7 @@ body {
   font-family: monospace;
   margin: 10px;
   min-width: 1050px;
+  background-color: whitesmoke;
 }
 
 h1 {
