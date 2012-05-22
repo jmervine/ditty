@@ -27,6 +27,17 @@ describe HelpersTemplates do
     end
   end
 
+  describe :post_tags do
+    before(:all) do
+      Ditty::Tag.destroy_all
+      Ditty::Tag.new(:tag => "foobar", :post_id => [ Ditty::Post.first.id, Ditty::Post.last.id ]).save!
+      Ditty::Tag.new(:tag => "bazboo", :post_id => [ Ditty::Post.first.id, Ditty::Post.last.id ]).save!
+    end
+    it "should return a list of tags" do
+      helpers.post_tags(Ditty::Post.first).should eq "foobar bazboo" 
+    end
+  end
+
   describe :post_contents do
     it "should return the body of a post" do
       helpers.post_contents(post_one).should match /^post body/

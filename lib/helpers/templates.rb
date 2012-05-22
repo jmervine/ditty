@@ -20,6 +20,10 @@ module HelpersTemplates
     end
   end
 
+  def post_tags post
+    (Tag.all.map { |tag| tag.tag if tag.has_id?(post.id) }).compact.join(" ")
+  end
+
   def post_title post
     return "" if post.nil?
     post.title

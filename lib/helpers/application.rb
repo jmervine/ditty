@@ -46,4 +46,15 @@ module HelpersApplication
     settings.config["auth"]["password"]
   end
 
+  def add_tags tag_string, post
+    tags = tag_string.split(",").split(" ").compact
+    tags.each do |tag|
+      if t = Ditty::Tag.where(:tag => tag).first
+        return t.add_tag(post.id).save! unless t.has_id?(post.id)
+      else
+        return Ditty::Tag.new(:tag => tag).add_tag(post.id).save!
+      end
+    end
+  end
+
 end

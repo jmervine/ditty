@@ -62,4 +62,18 @@ describe HelpersApplication do
       app.password.should eq "test"
     end
   end
+
+  describe :add_tags do
+    it "should add a tag if the tag doesn't exist" do
+      tag_one = app.add_tags("tag_one", Ditty::Post.first.id)
+      tag_one.tag.should eq "tag_one"
+      tag_one.post_id.should eq [ Ditty::Post.first.id ]
+    end
+    #it "should update a tag if the tag does exist and doesn't have the post" do
+
+    #end
+    #it "should not update a tag if the tag does exist and does have the post" do
+
+    #end
+  end
 end
