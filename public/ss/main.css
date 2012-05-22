@@ -89,7 +89,7 @@ div.header_time {
 }
 
 input.button {
-  font-size: 11pt;
+  font-size: 10pt;
   width: 150px;
   height: 30px;
   background-color: #eee;
@@ -133,6 +133,10 @@ input.button_delete {
   margin-bottom: 15px;
   padding: 20px;
   border-bottom: 1px solid gray;
+}
+
+.post .gist {
+  font-size: 10pt;
 }
 
 .nav {
