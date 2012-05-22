@@ -182,3 +182,9 @@ input.button_delete {
   /*border: 1px black solid;*/
 }
 
+#share_this {
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid gray;
+}

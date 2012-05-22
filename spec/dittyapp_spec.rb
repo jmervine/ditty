@@ -92,8 +92,8 @@ describe DittyApp, "< Sinatra::Application" do
     it "should load post" do
       last_response.should be_ok
     end
-    it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
+    it "should not have default title" do
+      last_response.should_not match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have post title" do
       last_response.should match Regexp.new("post title - ")
@@ -134,8 +134,8 @@ describe DittyApp, "< Sinatra::Application" do
     it "should load post edit form" do
       last_response.should be_ok
     end
-    it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
+    it "should not have default title" do
+      last_response.should_not match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should have post title" do
       last_response.should match Regexp.new("post title - ")
@@ -360,8 +360,8 @@ describe DittyApp, "< Sinatra::Application" do
     it "should have edit post link" do
       last_response.should match Regexp.new(Regexp.escape("edit post</a>"))
     end
-    it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
+    it "should not have default title" do
+      last_response.should_not match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should be the right post" do
       last_response.should match Regexp.new("create test title")
@@ -394,8 +394,8 @@ describe DittyApp, "< Sinatra::Application" do
     it "should load the updated post" do
       last_response.should be_ok
     end
-    it "should have title" do
-      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
+    it "should not have default title" do
+      last_response.should_not match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
     end
     it "should not have new post link" do
       last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
