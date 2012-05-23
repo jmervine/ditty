@@ -13,28 +13,35 @@ require 'rspec'
 require 'pp'
 
 # load configuration
-conf = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))
-CONFIG = begin conf["default"].merge!(conf[ENV['RACK_ENV']]) rescue conf["default"] end
+CONFIG = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))[ENV['RACK_ENV']]
 
 # with mongo
 def build_clean_data
+  puts " BULDING CLEAN DATA"
   config = CONFIG['database']
   MongoMapper.database = config['name']
   if config['username'] && config['password']
     MongoMapper.database.authenticate(config['username'], config['password'])
   end
   Ditty::Post.destroy_all
+  puts " - Ditty::Post.count is now: #{Ditty::Post.count}"
+  Ditty::Tag.destroy_all
+  puts " - Ditty::Tag.count is now: #{Ditty::Tag.count}"
+  tags = %w( tag_one tag_two tag_three tag_four tag_five )
   (2011..2012).each do |year|
     (5..10).each do |month|
       (5..10).each do |day|
         time = Time.new(year, month, day, 12)
-        Ditty::Post.new( :created_at  => time, 
+        post = Ditty::Post.create( :created_at  => time, 
                          :updated_at  => time, 
                          :title       => "post title - #{year}.#{month}.#{day}",
-                         :body        => "post body - #{year}.#{month}.#{day}" ).save!
+                         :body        => "post body - #{year}.#{month}.#{day}" )
+        Ditty::Tag.add( tags[Random.rand(5)], post.id )
       end
     end
   end
+  puts " - Ditty::Post.count is now: #{Ditty::Post.count}"
+  puts " - Ditty::Tag.count is now: #{Ditty::Tag.count}"
 end
 
 class TestHelpersTemplates

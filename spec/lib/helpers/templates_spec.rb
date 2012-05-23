@@ -29,12 +29,14 @@ describe HelpersTemplates do
 
   describe :post_tags do
     before(:all) do
-      Ditty::Tag.destroy_all
-      Ditty::Tag.new(:tag => "foobar", :post_id => [ Ditty::Post.first.id, Ditty::Post.last.id ]).save!
-      Ditty::Tag.new(:tag => "bazboo", :post_id => [ Ditty::Post.first.id, Ditty::Post.last.id ]).save!
+      Ditty::Tag.add( "foobar", Ditty::Post.first.id )
+      Ditty::Tag.add( "foobar", Ditty::Post.last.id )
+      Ditty::Tag.add( "bazboo", Ditty::Post.first.id )
+      Ditty::Tag.add( "bazboo", Ditty::Post.last.id )
+
     end
     it "should return a list of tags" do
-      helpers.post_tags(Ditty::Post.first).should eq "foobar bazboo" 
+      helpers.post_tags(Ditty::Post.first).should match /^bazboo foobar/
     end
   end
 

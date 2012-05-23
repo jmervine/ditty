@@ -65,9 +65,14 @@ describe HelpersApplication do
 
   describe :add_tags do
     it "should add a tag if the tag doesn't exist" do
-      tag_one = app.add_tags("tag_one", Ditty::Post.first.id)
-      tag_one.tag.should eq "tag_one"
-      tag_one.post_id.should eq [ Ditty::Post.first.id ]
+      app.add_tags("new_tag_one", Ditty::Post.first).should be
+      Ditty::Tag.where(:tag => "new_tag_one").first.should be
+    end
+    it "should add multiple tags if they don't exists" do
+      app.add_tags("new_tag_two new_tag_three new_tag_four", Ditty::Post.first).should be
+      Ditty::Tag.where(:tag => "new_tag_two").first.should be
+      Ditty::Tag.where(:tag => "new_tag_three").first.should be
+      Ditty::Tag.where(:tag => "new_tag_four").first.should be
     end
     #it "should update a tag if the tag does exist and doesn't have the post" do
 

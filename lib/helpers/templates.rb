@@ -21,7 +21,7 @@ module HelpersTemplates
   end
 
   def post_tags post
-    (Tag.all.map { |tag| tag.tag if tag.has_id?(post.id) }).compact.join(" ")
+    (Ditty::Tag.where( :post_id => post.id ).map { |t| t.tag }).compact.sort.join(" ")
   end
 
   def post_title post
