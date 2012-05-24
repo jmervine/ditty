@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <%
   navigation ||= :nav_archive
   post ||= nil
@@ -8,10 +9,11 @@
             post_title(post)
           end
 %>
-<html>
+<html lang="en-US">
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" type="text/css" href="/ss/main.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <link rel="stylesheet" type="text/css" href="/ss/layout.css" />
     <% if state == :show or state == :index %>
       <script type="text/javascript">var switchTo5x=true;</script>
       <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
@@ -19,41 +21,54 @@
     <% end %>
   </head>
   <body>
-    <div id="new_link">
-    <% unless authorized? %>   
-      <a href="/login">login</a>
-    <% else %>
-      <% if state == :show %>   
-        <a href="/post/<%=post.id%>/edit">edit post</a>
-      <% elsif state == :index %>
-        <a href="/post">new post</a>
-      <% end %>
-    <% end %>
-    &nbsp; &nbsp; <a href="/">home</a>
-    </div>
-    <div class="header">
-      <h1><%=settings.title%></h1>
-    </div>
 
-    <div class="main">
-      <div class="contents">
-        <%=yield%>
-      </div>
-
-      <div class="nav">
-      <% if state == :show or state == :index %>
-        <div id="share_this">
-          <span class='st_facebook_large' displayText='Facebook'></span>
-          <span class='st_twitter_large' displayText='Tweet'></span>
-          <span class='st_linkedin_large' displayText='LinkedIn'></span>
-          <span class='st_email_large' displayText='Email'></span>
+    <div id="page">
+      <div id="header">
+        <span class="main_title"><%=settings.title%></span>
+        <div id="top_links"> 
+          <% unless authorized? %>   
+            <a href="/login">login</a>
+          <% else %>
+            <% if state == :show %>   
+              <a href="/post/<%=post.id%>/edit">edit post</a>
+            <% elsif state == :index %>
+              <a href="/post">new post</a>
+            <% end %>
+          <% end %>
+          &nbsp; &nbsp; <a href="/">home</a>
         </div>
-      <% end %>
-        <% begin %>
-          <%= erb navigation, :layout => false %>
-        <% end %>
       </div>
-      <br class="clear" />
+
+      <div id="page_body">
+        <div id="content">
+          <div class="posts">
+            <%=yield%>
+          </div>
+          <!-- repeat posts -->
+        </div>
+
+        <div id="nav">
+          <% if state == :show or state == :index %>
+            <div id="share_this">
+              <span class='st_facebook_large' displayText='Facebook'></span>
+              <span class='st_twitter_large' displayText='Tweet'></span>
+              <span class='st_linkedin_large' displayText='LinkedIn'></span>
+              <span class='st_email_large' displayText='Email'></span>
+            </div>
+          <% end %>
+          <!-- nav section -->
+            <% begin %>
+              <%= erb navigation, :layout => false %>
+            <% end %>
+          <!-- / nav section -->
+        </div>
+        <br class="clear_both" />
+      </div>
+
+      <div id="footer">
+        <!-- footer here -->
+      </div>
     </div>
+
   </body>
 </html>
