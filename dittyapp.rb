@@ -27,14 +27,22 @@ class DittyApp < Sinatra::Application
   helpers do
     include HelpersTemplates
     include HelpersApplication
+    def get_layout
+      @layout_default = ( request.env['X_MOBILE_DEVICE'] ? :layout_mobile : :layout )
+      if ( request.path_info =~ /force=mobile/ )
+        @layout_default = :layout_mobile
+      end
+      logger.info "layout: #{@layout_default}"
+    end
   end
 
-
-  #Post.data_store = settings.store
+  before do
+    get_layout()
+  end
 
   get "/login" do
     protected!
-    erb :index
+    erb :index, :layout => @layout_default
   end
 
   get "/post/?" do
@@ -74,22 +82,22 @@ class DittyApp < Sinatra::Application
 
   get "/archive/?" do
     items = archive_items
-    erb :archive, :locals => { :state => :show }
+    erb :archive
   end
 
   get "/archive/:year/?" do
     items = { params[:year].to_i => archive_items[params[:year].to_i] }
-    erb :archive, :locals => { :archives => items, :state => :show }
+    erb :archive, :locals => { :archives => items }
   end
 
   get "/archive/:year/:month/?" do
     posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
-    erb :index, :locals => { :latest => posts, :state => :show } 
+    erb :index, :locals => { :latest => posts }
   end
 
   get "/" do 
     logger.info authorized?
-    erb :index
+    erb :index, :layout => @layout_default
   end
 
   not_found do

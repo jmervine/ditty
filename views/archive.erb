@@ -1,12 +1,7 @@
 <% 
   archives ||= archive_items
-  state_class = if state == :index
-                  "post_index"
-                else
-                  "post_show"
-                end
 %>
-<div class="post <%=state_class%>">
+<div class="post post_show">
   <div class="post_header">
     <span class="post_title">Archives</span>
   </div>

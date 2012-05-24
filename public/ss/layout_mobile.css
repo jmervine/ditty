@@ -1,50 +1,30 @@
 body {
   font-family: monospace;
-  background-color: whitesmoke;
+  background-color: #333;
+  zoom: 2; 
+  -moz-transform: scale(2); 
+  -moz-transform-origin: 0 0
 }
 
 #page {
   margin: 25px auto;
-  padding: 10px;
-  width: 1100px;
-  /*background-color: #660000;*/
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  -moz-border-radius-topleft: 10px;
-  -moz-border-radius-topright: 10px;
-  -moz-border-radius-bottomright: 10px;
-  -moz-border-radius-bottomleft: 10px;
-
-background-image: linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
-background-image: -o-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
-background-image: -moz-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
-background-image: -webkit-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
-background-image: -ms-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
-
-background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0.03, rgb(102,0,0)),
-        color-stop(0.25, rgb(235,235,235))
-);
-
+  background-color: green;
+  /*width: 100%;*/
 }
 
 #page #page_body {
+  background-color: #333;
   padding: 0;
 }
 
 #header {
-  padding: 25px 0 0 10px;
-  width: 1040px;
-  vertical-align: bottom;
+  padding: 10px 0 0 10px;
+  background-color: #333;
+  /*width: 100%;*/
 }
 
 #header .main_title {
-  color: #660000;
+  color: #333;
   font-size: 46px;
   font-weight: bold;
   line-height: 33px;
@@ -55,8 +35,9 @@ background-image: -webkit-gradient(
 
 #header #top_links {
   font-size: 11pt;
-  float: right;
-  margin-right: 15px;
+  /*float: right;*/
+  /*margin-right: 25px;*/
+  margin-left: 25px;
   line-height: 33px;
 }
 
@@ -65,47 +46,49 @@ background-image: -webkit-gradient(
 }
 
 #content {
-  float: left;
-  width: 845px;
-  min-height: 560px;
-  margin-right: 5px;
+  background-color: #333;
+  /*float: left;*/
+  /*width: 795px;*/
+  /*min-height: 560px;*/
+  /*margin-right: 5px;*/
 }
 
-#content .post_show {
-  min-height: 560px;
-}
+/*#content .post_show {*/
+  /*min-height: 560px;*/
+/*}*/
 
 #nav {
-  width: 250px;
-  float: right;
+  background-color: whitesmoke;
+  /*min-height: 600px;*/
+  /*width: 249px;*/
+  /*float: right;*/
   /*border-top-right-radius: 5px;*/
   /*border-bottom-right-radius: 5px;*/
-  /*border-bottom-left-radius: 5px;*/
+  /*[>border-bottom-left-radius: 5px;<]*/
   /*-moz-border-radius-topright: 5px;*/
   /*-moz-border-radius-bottomright: 5px;*/
-  /*-moz-border-radius-bottomleft: 5px;*/
+  /*[>-moz-border-radius-bottomleft: 5px;<]*/
 }
 
 #nav #share_this {
-  margin-bottom: 3px;
-  padding: 12px;
-  height: 35px;
-  /*vertical-align: bottom;*/
+  margin: 10px;
+  padding: 5px;
+  zoom: 2; 
+  -moz-transform: scale(2); 
+  -moz-transform-origin: 0 0
   /*border-bottom: 1px solid #333;*/
-  background-color: whitesmoke;
   text-align: center;
 }
 
-#nav .nav_section {
-  background-color: whitesmoke;
-  padding: 15px;
-}
+/*#nav .nav_section {*/
+  /*padding: 15px;*/
+/*}*/
 
-#nav .nav_section .nav_title {
-  font-size: 18px;
-  font-weight: bold;
-  color: gray;
-}
+/*#nav .nav_section .nav_title {*/
+  /*font-size: 18px;*/
+  /*font-weight: bold;*/
+  /*color: gray;*/
+/*}*/
 
 #nav a {
   color: #333;
@@ -118,7 +101,7 @@ background-image: -webkit-gradient(
   -moz-border-radius-topleft: 5px;
   -moz-border-radius-bottomleft: 5px;
   background-color: whitesmoke;
-  margin: 0 0 3px 0;
+  margin: 0 0 20px 0;
   padding: 20px;
 }
 
@@ -137,28 +120,27 @@ background-image: -webkit-gradient(
   font-size: 16pt;
   text-decoration: none;
   color: gray;
+  zoom: 2; 
+  -moz-transform: scale(2); 
+  -moz-transform-origin: 0 0
 }
 
 .post_header .post_date {
   font-size: 10pt;
-  float: right;
 }
 
 .post_contents {
   text-align: top;
   /*background-color: yellow;*/
   padding: 5px;
+  zoom: 2; 
+  -moz-transform: scale(2); 
+  -moz-transform-origin: 0 0
 }
 
 .post_contents a {
   color: #333;
 }
-
-/* handle code from gist.github.com */
-.post .post_contents .gist {
-  font-size: 10pt;
-}
-
 
 .clear_both {
   clear: both;
@@ -169,11 +151,6 @@ background-image: -webkit-gradient(
 }
 
 /* FORMS */
-#form_buttons {
-  width: 845px;
-  text-align: center;
-}
-
 input.button {
   font-size: 10pt;
   width: 150px;
@@ -187,16 +164,16 @@ input.button {
 }
 
 input.button_delete {
+  float: left;
   background-color: maroon;
   color: white;
 }
 
 textarea.value {
-  color: #333;
-  font-face: monospace;
-  font-size: 10pt;
+  font-size: 11pt;
   margin: 10px 10px 10px 10px;
-  height: 400px;
+  /*height: 400px;*/
+  width: 99%;
   width: 99%;
   border: 1px solid #999;
   border: inset 1px solid #333;
@@ -206,25 +183,15 @@ textarea.value {
 }
 
 input.value {
-  color: gray;
-  font-face: monospace;
-  font-size: 14pt;
-  height: 25px;
-  width: 500px;
+  font-weight: bold;
+  font-size: 16pt;
+  height: 35px;
+  /*width: 500px;*/
+  width: 100%;
   border: 1px solid #999;
   border: inset 1px solid #333;
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
-
-code {
-  display:block;
-  /*padding: 10px 5px 10px 5px;*/
-  padding: 5px;
-  margin: 10px 0;
-  word-wrap: break-word; 
-  background-color: lightgray;
-  /*border: lightgray solid 1px;*/
-}       
 
