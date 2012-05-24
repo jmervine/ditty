@@ -1,21 +1,22 @@
 body {
-  font-family: monospace;
+  font-family: Courier, monospace;
+  font-size: 14px;
   background-color: whitesmoke;
 }
 
 #page {
-  margin: 25px auto;
+  margin: 10px auto;
   padding: 10px;
   width: 1100px;
   /*background-color: #660000;*/
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  -moz-border-radius-topleft: 10px;
-  -moz-border-radius-topright: 10px;
-  -moz-border-radius-bottomright: 10px;
-  -moz-border-radius-bottomleft: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
 
 background-image: linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
 background-image: -o-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
@@ -44,8 +45,9 @@ background-image: -webkit-gradient(
 }
 
 #header .main_title {
-  color: #660000;
-  font-size: 46px;
+  font-family: Arial Black;
+  color: #333;
+  font-size: 40px;
   font-weight: bold;
   line-height: 33px;
   margin: 0;
