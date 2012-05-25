@@ -1,29 +1,27 @@
-<div id="form_post">
+<div class="post post_show">
   <% if state == :new %>
     <form method="post" name="post" action="/post">
   <% else %>
     <form method="post" name="post" action="/post/<%= post.id %>">
   <% end %>
-    <div class="header">
-      <h3>Title: <input class="value" type="text" name="post[title]" value="<%= post_title(post)||"" %>" /> </h3>
-    </div>
-    <div id="form_contents">
-      <div class="header">
-        <h3>Post:</h3>
-      </div>
-      <textarea name="post[body]" class="value"><%= post.body||"" %></textarea>
-    </div>
-    <script>
-      function confirmDelete() {
-        if (confirm("Are you sure you want to delete?")) {
-          window.location.href='/post/<%=post.id%>/delete';
-        }
+  <div class="post_header">
+    <span class="post_title">Title : <input class="value" type="text" name="post[title]" value="<%= post_title(post)||"" %>" /></span>
+  </div>
+  <div class="post_contents">
+    <span class="post_title">Post:</span><br />
+    <textarea name="post[body]" class="value"><%= post.body||"" %></textarea>
+  </div>
+  <script>
+    function confirmDelete() {
+      if (confirm("Are you sure you want to delete?")) {
+        window.location.href='/post/<%=post.id%>/delete';
       }
-    </script>
-    <div id="form_buttons">
-      <input class="button button_delete" type="button" value="DELETE" onClick="javascript:confirmDelete();" /> &nbsp;
-      <input class="button" type="button" value="Cancel!" onClick="javascript:window.location.href='/'" /> &nbsp;
-      <input class="button" type="submit" value="Save!" />
-    </div>
-  </form>
+    }
+  </script>
+  <div id="form_buttons">
+    <input class="button button_delete" type="button" value="DELETE" onClick="javascript:confirmDelete();" /> &nbsp;
+    <input class="button" type="button" value="Cancel!" onClick="javascript:window.location.href='/'" /> &nbsp;
+    <input class="button" type="submit" value="Save!" />
+  </div>
 </div>
+

@@ -1,8 +1,11 @@
 <% 
   archives ||= archive_items
 %>
-<div class="header">
-  <h3>Archive</h3>
+<div class="post post_show">
+  <div class="post_header">
+    <span class="post_title">Archives</span>
+  </div>
+  <div class="post_contents">
+    <%= archive_list archives %>
+  </div>
 </div>
-<%= archive_list archives %>
-
