@@ -50,7 +50,13 @@ class DittyApp < Sinatra::Application
 
   post "/post/?" do
     protected!
-    erb :post, :locals => { :post => Post.create(params[:post]), :state => :show }
+    if params[:post]["tags"]
+      tags = params[:post]["tags"].split(", ").map { |t| t.strip } unless params[:post]["tags"].blank?
+      params[:post].delete("tags")
+    end
+    post = Post.create(params[:post])
+    post.add_tags(tags) if tags
+    erb :post, :locals => { :post => post, :state => :show }
   end
 
   post "/post/:id" do

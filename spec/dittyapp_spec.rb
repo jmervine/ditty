@@ -377,7 +377,7 @@ describe DittyApp, "< Sinatra::Application" do
     before(:all) do
       authorize "test", "test"
       HelpersApplication.stub(:authorized?).and_return true
-      post "/post", :post => { "title" => "create test title", "body" => "create test body" }
+      post "/post", :post => { "title" => "create test title", "body" => "create test body", "tags" => "app_tag_one app_tag_two" }
     end
     it "should have added to the data store" do
       Post.where(:title => "create test title").should be
@@ -397,6 +397,10 @@ describe DittyApp, "< Sinatra::Application" do
     it "should be the right post" do
       last_response.should match Regexp.new("create test title")
       last_response.should match Regexp.new("create test body")
+    end
+    it "should have added tags" do
+      last_response.should match /app_tag_one/
+      last_response.should match /app_tag_two/
     end
   end
 
