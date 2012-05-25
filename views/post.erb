@@ -5,4 +5,8 @@
 <span class="clear" />
 <div class="post">
   <%= post_contents(post) %>
+  <% unless post.tags.empty? %>
+    <br /><br />
+    Tags: <% post.tags.each do |tag| %> <a href="/tag/<%=tag.name%>"><%=tag.name%></a>&nbsp;<% end %>
+  <% end %>
 </div>

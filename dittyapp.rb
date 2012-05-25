@@ -29,9 +29,6 @@ class DittyApp < Sinatra::Application
     include HelpersApplication
   end
 
-
-  #Post.data_store = settings.store
-
   get "/login" do
     protected!
     erb :index
