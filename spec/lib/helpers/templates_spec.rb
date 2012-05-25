@@ -27,19 +27,6 @@ describe HelpersTemplates do
     end
   end
 
-  describe :post_tags do
-    before(:all) do
-      Tag.add( "foobar", Post.first.id )
-      Tag.add( "foobar", Post.last.id )
-      Tag.add( "bazboo", Post.first.id )
-      Tag.add( "bazboo", Post.last.id )
-
-    end
-    it "should return a list of tags" do
-      helpers.post_tags(Post.first).should match /^bazboo foobar/
-    end
-  end
-
   describe :post_contents do
     it "should return the body of a post" do
       helpers.post_contents(post_one).should match /^post body/

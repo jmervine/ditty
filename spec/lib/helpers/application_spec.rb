@@ -63,22 +63,4 @@ describe HelpersApplication do
     end
   end
 
-  describe :add_tags do
-    it "should add a tag if the tag doesn't exist" do
-      app.add_tags("new_tag_one", Post.first).should be
-      Tag.where(:tag => "new_tag_one").first.should be
-    end
-    it "should add multiple tags if they don't exists" do
-      app.add_tags("new_tag_two new_tag_three new_tag_four", Post.first).should be
-      Tag.where(:tag => "new_tag_two").first.should be
-      Tag.where(:tag => "new_tag_three").first.should be
-      Tag.where(:tag => "new_tag_four").first.should be
-    end
-    #it "should update a tag if the tag does exist and doesn't have the post" do
-
-    #end
-    #it "should not update a tag if the tag does exist and does have the post" do
-
-    #end
-  end
 end

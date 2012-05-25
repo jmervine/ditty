@@ -46,11 +46,4 @@ module HelpersApplication
     settings.config["auth"]["password"]
   end
 
-  def add_tags tags, post
-    tags = ((tags.split(",").compact).map { |t| t.split(" ") }).flatten
-    tags.each do |tag|
-      Tag.add(tag, post.id)
-    end
-  end
-
 end
