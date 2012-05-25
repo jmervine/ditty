@@ -164,6 +164,37 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
+  describe "GET /tag/:tag" do
+    before(:all) do
+      get "/tag/tag_two"
+    end
+    it "should load" do
+      last_response.should be_ok
+    end
+    it "should have title" do
+      last_response.should match Regexp.new(Regexp.escape("<title>My TEST Ditty's!</title>"))
+    end
+    it "post title should be a link" do
+      last_response.should match Regexp.new("<a href=\'\/post\/([a-z0-9]+)'>post title - (.+)</a>")
+    end
+    it "should not have new post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("new post</a>"))
+    end
+    it "should not have edit post link" do
+      last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
+    end
+    it "should have archive" do
+      last_response.should match Regexp.new(Regexp.escape('Archive</a>'))
+    end
+    it "should have archive list items" do
+      last_response.should match Regexp.new(Regexp.escape("<a href='/archive"))
+    end
+    it "should have posts" do
+      last_response.should match Regexp.new(Regexp.escape("post body"))
+      last_response.should match Regexp.new(Regexp.escape("post title"))
+    end
+  end
+
   describe "GET /archive" do
     before(:all) do
       get "/archive"

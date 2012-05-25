@@ -69,6 +69,11 @@ class DittyApp < Sinatra::Application
     erb :index
   end
 
+  get "/tag/:tag" do
+    posts = Tag.where(:name => params[:tag]).first.posts
+    erb :index, :locals => { :latest => posts }
+  end
+
   get "/archive/?" do
     items = archive_items
     erb :archive

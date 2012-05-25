@@ -2,9 +2,9 @@
 require './dittyapp'
 #require 'rack/mobile-detect'
 
-ENV['RACK_ENV'] ||= "development"
+ENV['RACK_ENV'] ||= "production"
 
 use Rack::ShowExceptions
-#use Rack::Static
-use Rack::MobileDetect
+use Rack::Static
+#use Rack::MobileDetect
 run DittyApp.new
