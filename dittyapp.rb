@@ -27,22 +27,22 @@ class DittyApp < Sinatra::Application
   helpers do
     include HelpersTemplates
     include HelpersApplication
-    def get_layout
-      @layout_default = ( request.env['X_MOBILE_DEVICE'] ? :layout_mobile : :layout )
-      if ( request.path_info =~ /force=mobile/ )
-        @layout_default = :layout_mobile
-      end
-      logger.info "layout: #{@layout_default}"
-    end
+    #def get_layout
+      #@layout_default = ( request.env['X_MOBILE_DEVICE'] ? :layout_mobile : :layout )
+      #if ( request.path_info =~ /force=mobile/ )
+        #@layout_default = :layout_mobile
+      #end
+      #logger.info "layout: #{@layout_default}"
+    #end
   end
 
-  before do
-    get_layout()
-  end
+  #before do
+    #get_layout()
+  #end
 
   get "/login" do
     protected!
-    erb :index, :layout => @layout_default
+    erb :index#, :layout => @layout_default
   end
 
   get "/post/?" do
@@ -97,7 +97,7 @@ class DittyApp < Sinatra::Application
 
   get "/" do 
     logger.info authorized?
-    erb :index, :layout => @layout_default
+    erb :index#, :layout => @layout_default
   end
 
   not_found do
