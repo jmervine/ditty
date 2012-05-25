@@ -26,6 +26,12 @@ rescue LoadError
   # do nothing
 end
 
+desc "start console with env"
+task :console do
+  ENV['RACK_ENV'] ||= "test"
+  exec "irb -r 'pp' -r './dittyapp.rb'"
+end
+
 namespace :unicorn do
   desc "Start unicorn"
   task :start do

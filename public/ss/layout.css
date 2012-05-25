@@ -230,3 +230,17 @@ code {
   /*border: lightgray solid 1px;*/
 }       
 
+#nav_tag_list {
+  padding: 10px 5px 5px 10px;
+}
+
+.tag_link { 
+  margin: 5px 3px 5px 0;
+  padding: 1px;
+  /*border: 1px solid gray;*/
+}
+
+.tag_link a { 
+  text-decoration: none;
+}
+

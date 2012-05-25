@@ -15,7 +15,7 @@
     <%= post_contents(post) %>
     <% unless post.tags.empty? %>
       <br /><br />
-      Tags: <% post.tags.each do |tag| %> <a href="/tag/<%=tag.name%>"><%=tag.name%></a>&nbsp;<% end %>
+      Tags: <% post.tags.each do |tag| %> <span class="tag_link"><a href="/tag/<%=tag.name%>"><%=tag.name%></a></span><% end %>
     <% end %>
   </div>
 </div>
