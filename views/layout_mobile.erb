@@ -13,7 +13,7 @@
   <head>
     <title><%= title %></title>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-    <link rel="stylesheet" type="text/css" href="/ss/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/ss/layout_mobile.css" />
     <% if state == :show or state == :index %>
       <script type="text/javascript">var switchTo5x=true;</script>
       <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
@@ -56,11 +56,6 @@
               <span class='st_email_large' displayText='Email'></span>
             </div>
           <% end %>
-          <!-- nav section -->
-            <% begin %>
-              <%= erb navigation, :layout => false %>
-            <% end %>
-          <!-- / nav section -->
         </div>
         <br class="clear_both" />
       </div>

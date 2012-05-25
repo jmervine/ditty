@@ -3,6 +3,7 @@ source :rubygems
 gem 'sinatra'
 gem 'rake'
 gem 'redcarpet'
+#gem 'rack-mobile-detect'
 
 group :mongo do
   gem 'mongo'
