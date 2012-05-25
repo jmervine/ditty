@@ -25,6 +25,8 @@ GEM
     plucky (0.4.4)
       mongo (~> 1.5)
     rack (1.4.1)
+    rack-mobile-detect (0.3.0)
+      rack
     rack-protection (1.2.0)
       rack
     rack-test (0.6.1)
@@ -67,6 +69,7 @@ DEPENDENCIES
   bson_ext
   mongo
   mongo_mapper
+  rack-mobile-detect
   rack-test
   rake
   redcarpet

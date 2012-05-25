@@ -1,8 +1,17 @@
-<div class="header post_header">
-  <h3 class="sub_header"><%= post_link(post) %></h3>
-  <div class="header_time"><%= time_display(post) %></div>
-</div>
-<span class="clear" />
-<div class="post">
-  <%= post_contents(post) %>
+<% 
+  state ||= :index 
+  state_class = if state == :index
+                  "post_index"
+                else
+                  "post_show"
+                end
+%>
+<div class="post <%=state_class%>">
+  <div class="post_header">
+    <span class="post_title"><%= post_link(post) %></span>
+    <div class="post_date"><%= time_display(post) %></div>
+  </div>
+  <div class="post_contents">
+    <%= post_contents(post) %>
+  </div>
 </div>
