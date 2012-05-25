@@ -11,7 +11,7 @@ require 'ditty'
 require 'helpers'
 
 class DittyApp < Sinatra::Application
-  include Ditty
+  #include Ditty
 
   configure do
     enable :logging, :raise_errors#, :dump_errors

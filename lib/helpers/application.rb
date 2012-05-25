@@ -49,7 +49,7 @@ module HelpersApplication
   def add_tags tags, post
     tags = ((tags.split(",").compact).map { |t| t.split(" ") }).flatten
     tags.each do |tag|
-      Ditty::Tag.add(tag, post.id)
+      Tag.add(tag, post.id)
     end
   end
 

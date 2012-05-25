@@ -23,25 +23,25 @@ def build_clean_data
   if config['username'] && config['password']
     MongoMapper.database.authenticate(config['username'], config['password'])
   end
-  Ditty::Post.destroy_all
-  puts " - Ditty::Post.count is now: #{Ditty::Post.count}"
-  Ditty::Tag.destroy_all
-  puts " - Ditty::Tag.count is now: #{Ditty::Tag.count}"
+  Post.destroy_all
+  puts " - Post.count is now: #{Post.count}"
+  Tag.destroy_all
+  puts " - Tag.count is now: #{Tag.count}"
   tags = %w( tag_one tag_two tag_three tag_four tag_five )
   (2011..2012).each do |year|
     (5..10).each do |month|
       (5..10).each do |day|
         time = Time.new(year, month, day, 12)
-        post = Ditty::Post.create( :created_at  => time, 
+        post = Post.create( :created_at  => time, 
                          :updated_at  => time, 
                          :title       => "post title - #{year}.#{month}.#{day}",
                          :body        => "post body - #{year}.#{month}.#{day}" )
-        Ditty::Tag.add( tags[Random.rand(5)], post.id )
+        post.add_tag( tags[Random.rand(5)] )
       end
     end
   end
-  puts " - Ditty::Post.count is now: #{Ditty::Post.count}"
-  puts " - Ditty::Tag.count is now: #{Ditty::Tag.count}"
+  puts " - Post.count is now: #{Post.count}"
+  puts " - Tag.count is now: #{Tag.count}"
 end
 
 class TestHelpersTemplates
@@ -86,7 +86,7 @@ end
 set :environment, :test
 set :config, CONFIG
 set :views,  File.join(File.dirname(__FILE__), "..", "views")
-#set :store, Ditty::MongoStore.new(CONFIG['database'])
+#set :store, MongoStore.new(CONFIG['database'])
 
 include Rack::Test::Methods
 def app 

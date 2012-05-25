@@ -87,7 +87,7 @@ describe DittyApp, "< Sinatra::Application" do
 
   describe "GET /post/:id" do
     before(:all) do
-      get "/post/#{Ditty::Post.first.id.to_s}" # find a real post via it's id
+      get "/post/#{Post.first.id.to_s}" # find a real post via it's id
     end
     it "should load post" do
       last_response.should be_ok
@@ -111,14 +111,14 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should be the right post" do
-      last_response.should match Regexp.new(Regexp.escape(Ditty::Post.first.title))
-      last_response.should match Regexp.new(Regexp.escape(Ditty::Post.first.body))
+      last_response.should match Regexp.new(Regexp.escape(Post.first.title))
+      last_response.should match Regexp.new(Regexp.escape(Post.first.body))
     end
   end
 
   describe "GET /post/:id/edit", "without auth" do
     before(:all) do
-      get "/post/#{Ditty::Post.first.id.to_s}/edit" # find a real post via it's id
+      get "/post/#{Post.first.id.to_s}/edit" # find a real post via it's id
     end
     it "should reject" do
       last_response.status.should be 401
@@ -129,7 +129,7 @@ describe DittyApp, "< Sinatra::Application" do
     before(:all) do
       authorize 'test', 'test'
       HelpersApplication.stub(:authorized?).and_return true
-      get "/post/#{Ditty::Post.first.id.to_s}/edit" # find a real post via it's id
+      get "/post/#{Post.first.id.to_s}/edit" # find a real post via it's id
     end
     it "should load post edit form" do
       last_response.should be_ok
@@ -153,8 +153,8 @@ describe DittyApp, "< Sinatra::Application" do
       last_response.should_not match Regexp.new(Regexp.escape("edit post</a>"))
     end
     it "should be the right post" do
-      last_response.should match Regexp.new(Regexp.escape(Ditty::Post.first.title))
-      last_response.should match Regexp.new(Regexp.escape(Ditty::Post.first.body))
+      last_response.should match Regexp.new(Regexp.escape(Post.first.title))
+      last_response.should match Regexp.new(Regexp.escape(Post.first.body))
     end
     it "should have a submit button" do
       last_response.should match Regexp.new(Regexp.escape('<input class="button" type="submit" value="Save!" />'))
@@ -349,7 +349,7 @@ describe DittyApp, "< Sinatra::Application" do
       post "/post", :post => { "title" => "create test title", "body" => "create test body" }
     end
     it "should have added to the data store" do
-      Ditty::Post.where(:title => "create test title").should be
+      Post.where(:title => "create test title").should be
     end
     it "should load created post" do
       last_response.should be_ok
@@ -371,7 +371,7 @@ describe DittyApp, "< Sinatra::Application" do
 
   describe "POST /post/:id", "without auth" do
     before(:all) do
-      post "/post/#{Ditty::Post.last.id.to_s}", :post => { "title" => "updated test title", "body" => "updated test body" }
+      post "/post/#{Post.last.id.to_s}", :post => { "title" => "updated test title", "body" => "updated test body" }
     end
     it "should reject" do
       last_response.status.should be 401
@@ -382,14 +382,14 @@ describe DittyApp, "< Sinatra::Application" do
     before(:all) do
       authorize "test", "test"
       HelpersApplication.stub(:authorized?).and_return true
-      @update_id = Ditty::Post.last.id.to_s
+      @update_id = Post.last.id.to_s
       post "/post/#{@update_id}", :post => { "title" => "updated test title", "body" => "updated test body" }
     end
     it "should have added to the data store" do
-      Ditty::Post.find(@update_id).should be
+      Post.find(@update_id).should be
     end
     it "should have changed updated_at" do
-      Ditty::Post.find(@update_id).title.should eq "updated test title"
+      Post.find(@update_id).title.should eq "updated test title"
     end
     it "should load the updated post" do
       last_response.should be_ok
@@ -411,7 +411,7 @@ describe DittyApp, "< Sinatra::Application" do
 
   describe "DELETE /post/:id", "without auth" do
     before(:all) do
-      @del_id = Ditty::Post.first.id.to_s
+      @del_id = Post.first.id.to_s
       get "/post/#{@del_id}/delete"
     end
     it "should reject" do
@@ -423,11 +423,11 @@ describe DittyApp, "< Sinatra::Application" do
     before(:all) do
       authorize "test", "test"
       HelpersApplication.stub(:authorized?).and_return true
-      @del_id = Ditty::Post.first.id.to_s
+      @del_id = Post.first.id.to_s
       get "/post/#{@del_id}/delete"
     end
     it "should have deleted it from data store" do
-      expect { Ditty::Post.load(@del_id) }.should raise_error
+      expect { Post.load(@del_id) }.should raise_error
     end
     it "should load the index" do
       last_response.should be_ok

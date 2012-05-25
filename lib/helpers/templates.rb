@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'helpers'
 module HelpersTemplates
-  include Ditty
+  #include Ditty
 
   def post_contents post
     return "" if post.nil? or post.body.nil?
@@ -21,7 +21,7 @@ module HelpersTemplates
   end
 
   def post_tags post
-    (Ditty::Tag.where( :post_id => post.id ).map { |t| t.tag }).compact.sort.join(" ")
+    (Tag.where( :post_id => post.id ).map { |t| t.tag }).compact.sort.join(" ")
   end
 
   def post_title post
@@ -42,7 +42,7 @@ module HelpersTemplates
   end
 
   def archive_items
-    collection = Ditty::Post.all(:order => :created_at.desc)
+    collection = Post.all(:order => :created_at.desc)
     archive = {}
     # TODO: there has to be a better way
     collection.each do |item| 
@@ -111,7 +111,7 @@ module HelpersTemplates
   end
 
   def latest n=25
-    Ditty::Post.all(:order => :created_at.desc)[0..n-1]
+    Post.all(:order => :created_at.desc)[0..n-1]
   end
 
   def linkify_title title
