@@ -71,7 +71,7 @@ class DittyApp < Sinatra::Application
 
   get "/archive/?" do
     items = archive_items
-    erb :archive#, :locals => { :archives => items }
+    erb :archive
   end
 
   get "/archive/:year/?" do
@@ -81,7 +81,7 @@ class DittyApp < Sinatra::Application
 
   get "/archive/:year/:month/?" do
     posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
-    erb :index, :locals => { :latest => posts } 
+    erb :index, :locals => { :latest => posts }
   end
 
   get "/" do 
