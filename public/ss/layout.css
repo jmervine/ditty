@@ -235,9 +235,18 @@ code {
 }
 
 .tag_link { 
-  margin: 5px 3px 5px 0;
-  padding: 1px;
-  /*border: 1px solid gray;*/
+  padding: 5px 3px 5px 0;
+}
+
+.tag_page_link { 
+  padding: 5px;
+  margin: 4px;
+}
+
+.tag_page_link small {
+  font-size: 12px;
+  color: gray;
+  margin-left: -10px;
 }
 
 .tag_link a { 

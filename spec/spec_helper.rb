@@ -27,7 +27,7 @@ def build_clean_data
   puts " - Post.count is now: #{Post.count}"
   Tag.destroy_all
   puts " - Tag.count is now: #{Tag.count}"
-  tags = %w( tag_one tag_two tag_three tag_four tag_five )
+  tags = %w( tag_one tag_two tag_three tag_four tag_five foo bar baz boo blah )
   (2011..2012).each do |year|
     (5..10).each do |month|
       (5..10).each do |day|
@@ -36,7 +36,11 @@ def build_clean_data
                          :updated_at  => time, 
                          :title       => "post title - #{year}.#{month}.#{day}",
                          :body        => "post body - #{year}.#{month}.#{day}" )
-        post.add_tag( tags[Random.rand(5)] )
+        post.add_tag( tags[Random.rand(10)] )
+        post.add_tag( tags[Random.rand(10)] )
+        post.add_tag( tags[Random.rand(10)] )
+        post.add_tag( tags[Random.rand(10)] )
+        post.add_tag( tags[Random.rand(10)] )
       end
     end
   end

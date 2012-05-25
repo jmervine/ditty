@@ -69,6 +69,10 @@ class DittyApp < Sinatra::Application
     erb :index
   end
 
+  get "/tag" do
+    erb :tags, :locals => { :tags => (Tag.all.sort_by { |t| t.posts.count }).reverse }
+  end
+
   get "/tag/:tag" do
     posts = Tag.where(:name => params[:tag]).first.posts
     erb :tag, :locals => { :latest => posts, :tag => params[:tag] }
