@@ -243,6 +243,7 @@ code {
   padding: 5px;
   margin: 4px;
   line-height: 45px;
+  white-space: nowrap;
 }
 
 .tag_page_link small {
