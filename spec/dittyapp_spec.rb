@@ -418,7 +418,10 @@ describe DittyApp, "< Sinatra::Application" do
       authorize "test", "test"
       HelpersApplication.stub(:authorized?).and_return true
       @update_id = Post.last.id.to_s
-      post "/post/#{@update_id}", :post => { "title" => "updated test title", "body" => "updated test body" }
+      post "/post/#{@update_id}", :post => { 
+          "title" => "updated test title", 
+          "body" => "updated test body", 
+          "tags" => "new_post_tag_one new_post_tag_two" }
     end
     it "should have added to the data store" do
       Post.find(@update_id).should be
@@ -441,6 +444,10 @@ describe DittyApp, "< Sinatra::Application" do
     it "should be the right post" do
       last_response.should match Regexp.new("updated test title")
       last_response.should match Regexp.new("updated test body")
+    end
+    it "should have tags" do
+      last_response.should match /new_post_tag_one/
+      last_response.should match /new_post_tag_two/
     end
   end
 

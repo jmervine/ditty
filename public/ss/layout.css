@@ -236,11 +236,13 @@ code {
 
 .tag_link { 
   padding: 5px 3px 5px 0;
+  line-height: 25px;
 }
 
 .tag_page_link { 
   padding: 5px;
   margin: 4px;
+  line-height: 45px;
 }
 
 .tag_page_link small {
@@ -250,6 +252,21 @@ code {
 }
 
 .tag_link a { 
-  text-decoration: none;
+  /*text-decoration: none;*/
 }
 
+#form_tags {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+#form_tags small {
+  font-size: 12px;
+  color: gray;
+}
+
+#form_tags input {
+  width: 650px;
+  padding: 2px 5px;
+  font-size: 14px;
+}

@@ -61,11 +61,24 @@ class DittyApp < Sinatra::Application
 
   post "/post/:id" do
     protected!
-    post = Post.find params[:id] #params[:post]
+    # TODO: move to helper or model
+    if params[:post]["tags"]
+      tags = params[:post]["tags"].split(", ").map { |t| t.strip } unless params[:post]["tags"].blank?
+      params[:post].delete("tags")
+    end
+
+    post = Post.find params[:id]
+    post.tag_ids.reject! { |t| !tags.include? t }
+
     params[:post].each do |key, val|
       post[key.to_sym] = val
     end
-    post.save!
+
+    if tags
+      post.add_tags(tags)
+    else
+      post.save!
+    end
     erb :post, :locals => { :post => post, :state => :show }
   end
 

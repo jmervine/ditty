@@ -13,7 +13,7 @@
     <div id="form_tags">
       <br />
       <br />
-      Tags: <input class="tags" type="text" name="post[tags]" value="<%= post_tags(post)||"" %>" /> <br /> <small>comma seperated</small>
+      <span class="post_title">Tags:</span> <input class="value tags" type="text" name="post[tags]" value="<%=(post.tags.map { |t| t.name }).join(", ")%>" /> <br /> <small>comma seperated</small>
     </div>
   </div>
   <script>
