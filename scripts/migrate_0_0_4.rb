@@ -19,7 +19,8 @@ end
 #unless @database.
 
 # Moving from 'ditty.<obj>s' to '<obj>s'
-collections = %w{ posts tags }
+#collections = %w{ posts tags }
+collections = %w{ posts }
 
 collections.each do |col_name|
 
