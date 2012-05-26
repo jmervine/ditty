@@ -51,7 +51,7 @@ class DittyApp < Sinatra::Application
   post "/post/?" do
     protected!
     if params[:post]["tags"]
-      tags = params[:post]["tags"].split(", ").map { |t| t.strip } unless params[:post]["tags"].blank?
+      tags = params[:post]["tags"].split(",").map { |t| t.strip.downcase } unless params[:post]["tags"].blank?
       params[:post].delete("tags")
     end
     post = Post.create(params[:post])
@@ -63,7 +63,7 @@ class DittyApp < Sinatra::Application
     protected!
     # TODO: move to helper or model
     if params[:post]["tags"]
-      tags = params[:post]["tags"].split(", ").map { |t| t.strip } unless params[:post]["tags"].blank?
+      tags = params[:post]["tags"].split(", ").map { |t| t.strip.downcase } unless params[:post]["tags"].blank?
       params[:post].delete("tags")
     end
 
