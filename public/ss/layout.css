@@ -18,18 +18,18 @@ body {
   -moz-border-radius-bottomright: 5px;
   -moz-border-radius-bottomleft: 5px;
 
-background-image: linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
-background-image: -o-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
-background-image: -moz-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
-background-image: -webkit-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
-background-image: -ms-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
+  background-image: linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
+  background-image: -o-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
+  background-image: -moz-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
+  background-image: -webkit-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
+  background-image: -ms-linear-gradient(top, rgb(102,0,0) 3%, rgb(235,235,235) 25%);
 
-background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0.03, rgb(102,0,0)),
-        color-stop(0.25, rgb(235,235,235))
+  background-image: -webkit-gradient(
+     linear,
+     left top,
+     left bottom,
+     color-stop(0.03, rgb(102,0,0)),
+     color-stop(0.25, rgb(235,235,235))
 );
 
 }
@@ -237,13 +237,13 @@ code {
 .tag_link { 
   padding: 5px 3px 5px 0;
   line-height: 25px;
+  white-space: nowrap;
 }
 
 .tag_page_link { 
   padding: 5px;
   margin: 4px;
   line-height: 45px;
-  white-space: nowrap;
 }
 
 .tag_page_link small {
