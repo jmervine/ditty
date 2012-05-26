@@ -93,7 +93,7 @@ class DittyApp < Sinatra::Application
   end
 
   get "/tag/:tag" do
-    posts = Tag.where(:name => params[:tag]).first.posts
+    posts = Tag.where(:name => params[:tag]).first.posts.reverse
     erb :tag, :locals => { :latest => posts, :tag => params[:tag] }
   end
 
