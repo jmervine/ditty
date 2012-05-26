@@ -1,0 +1,12 @@
+<% unless tags.empty? %>
+<div class="post post_show">
+  <div class="post_header">
+    <span class="post_title">Tags</span>
+  </div>
+  <div class="post_contents">
+    <% tags.each do |tag| %>
+      <span class="tag_link tag_page_link" style="font-size: <%=(14+(tag.posts.count/5)).round(0)%>px"><a href="/tag/<%=tag.name%>"><%=tag.name%></a> <small>(<%=tag.posts.count%>)</small></span>
+    <% end %>
+  </div>
+</div>
+<% end %>

@@ -4,9 +4,9 @@ describe HelpersTemplates do
   before(:all) do
     build_clean_data
     @helpers = TestHelpersTemplates.new
-    @connection = Ditty::Post.all
-    @post_one = Ditty::Post.first#(:order => :created_at.asc)
-    @post_two = Ditty::Post.last#(:order => :created_at.asc)
+    @connection = Post.all
+    @post_one = Post.first#(:order => :created_at.asc)
+    @post_two = Post.last#(:order => :created_at.asc)
   end
   let(:helpers) { @helpers }
   let(:collection) { @collection }
@@ -18,12 +18,12 @@ describe HelpersTemplates do
       helpers.time_display(post_one).should match Regexp.new(Regexp.escape("<span class='header_time'>Updated "))
     end
     it "should show created" do
-      post = Ditty::Post.new(:title => "foo")
+      post = Post.new(:title => "foo")
       post.save!
       helpers.time_display(post).should match Regexp.new(Regexp.escape("<span class='header_time'>Created "))
     end
     it "should return blank when post is empty" do
-      helpers.time_display(Ditty::Post.new).should eq ""
+      helpers.time_display(Post.new).should eq ""
     end
   end
 
@@ -32,7 +32,7 @@ describe HelpersTemplates do
       helpers.post_contents(post_one).should match /^post body/
     end
     it "should return blank when post is empty" do
-      helpers.time_display(Ditty::Post.new).should eq ""
+      helpers.time_display(Post.new).should eq ""
     end
   end
 
@@ -41,7 +41,7 @@ describe HelpersTemplates do
       helpers.post_title(post_one).should match /^post title/
     end
     it "should return blank when post is empty" do
-      helpers.time_display(Ditty::Post.new).should eq ""
+      helpers.time_display(Post.new).should eq ""
     end
   end
 
@@ -74,7 +74,7 @@ describe HelpersTemplates do
     end
     it "third level should be items" do
       @archive[2012][6].should have(6).items
-      @archive[2012][6].first.should be_a Ditty::Post
+      @archive[2012][6].first.should be_a Post
     end
   end
 
@@ -150,7 +150,7 @@ describe HelpersTemplates do
       helpers.latest(10).should have(10).items
     end
     it "should return the most recent items" do
-      helpers.latest.first.should eq Ditty::Post.all(:order => :created_at.desc).first
+      helpers.latest.first.should eq Post.all(:order => :created_at.desc).first
     end
   end
 

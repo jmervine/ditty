@@ -10,6 +10,11 @@
   <div class="post_contents">
     <span class="post_title">Post:</span><br />
     <textarea name="post[body]" class="value"><%= post.body||"" %></textarea>
+    <div id="form_tags">
+      <br />
+      <br />
+      <span class="post_title">Tags:</span> <input class="value tags" type="text" name="post[tags]" value="<%=(post.tags.map { |t| t.name }).join(", ")%>" /> <br /> <small>comma seperated</small>
+    </div>
   </div>
   <script>
     function confirmDelete() {

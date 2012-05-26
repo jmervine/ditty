@@ -62,4 +62,5 @@ describe HelpersApplication do
       app.password.should eq "test"
     end
   end
+
 end

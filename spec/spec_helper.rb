@@ -13,28 +13,39 @@ require 'rspec'
 require 'pp'
 
 # load configuration
-conf = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))
-CONFIG = begin conf["default"].merge!(conf[ENV['RACK_ENV']]) rescue conf["default"] end
+CONFIG = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))[ENV['RACK_ENV']]
 
 # with mongo
 def build_clean_data
+  puts " BULDING CLEAN DATA"
   config = CONFIG['database']
   MongoMapper.database = config['name']
   if config['username'] && config['password']
     MongoMapper.database.authenticate(config['username'], config['password'])
   end
-  Ditty::Post.destroy_all
+  Post.destroy_all
+  puts " - Post.count is now: #{Post.count}"
+  Tag.destroy_all
+  puts " - Tag.count is now: #{Tag.count}"
+  tags = %w( tag_one tag_two tag_three tag_four tag_five foo bar baz boo blah )
   (2011..2012).each do |year|
     (5..10).each do |month|
       (5..10).each do |day|
         time = Time.new(year, month, day, 12)
-        Ditty::Post.new( :created_at  => time, 
+        post = Post.create( :created_at  => time, 
                          :updated_at  => time, 
                          :title       => "post title - #{year}.#{month}.#{day}",
-                         :body        => "post body - #{year}.#{month}.#{day}" ).save!
+                         :body        => "post body - #{year}.#{month}.#{day}" )
+        post.add_tag( tags[Random.rand(10)] )
+        post.add_tag( tags[Random.rand(10)] )
+        post.add_tag( tags[Random.rand(10)] )
+        post.add_tag( tags[Random.rand(10)] )
+        post.add_tag( tags[Random.rand(10)] )
       end
     end
   end
+  puts " - Post.count is now: #{Post.count}"
+  puts " - Tag.count is now: #{Tag.count}"
 end
 
 class TestHelpersTemplates
@@ -79,7 +90,7 @@ end
 set :environment, :test
 set :config, CONFIG
 set :views,  File.join(File.dirname(__FILE__), "..", "views")
-#set :store, Ditty::MongoStore.new(CONFIG['database'])
+#set :store, MongoStore.new(CONFIG['database'])
 
 include Rack::Test::Methods
 def app 

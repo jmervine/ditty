@@ -11,7 +11,7 @@ require 'ditty'
 require 'helpers'
 
 class DittyApp < Sinatra::Application
-  include Ditty
+  #include Ditty
 
   configure do
     enable :logging, :raise_errors#, :dump_errors
@@ -27,22 +27,11 @@ class DittyApp < Sinatra::Application
   helpers do
     include HelpersTemplates
     include HelpersApplication
-    #def get_layout
-      #@layout_default = ( request.env['X_MOBILE_DEVICE'] ? :layout_mobile : :layout )
-      #if ( request.path_info =~ /force=mobile/ )
-        #@layout_default = :layout_mobile
-      #end
-      #logger.info "layout: #{@layout_default}"
-    #end
   end
-
-  #before do
-    #get_layout()
-  #end
 
   get "/login" do
     protected!
-    erb :index#, :layout => @layout_default
+    erb :index
   end
 
   get "/post/?" do
@@ -61,16 +50,35 @@ class DittyApp < Sinatra::Application
 
   post "/post/?" do
     protected!
-    erb :post, :locals => { :post => Post.create(params[:post]), :state => :show }
+    if params[:post]["tags"]
+      tags = params[:post]["tags"].split(",").map { |t| t.strip.downcase } unless params[:post]["tags"].blank?
+      params[:post].delete("tags")
+    end
+    post = Post.create(params[:post])
+    post.add_tags(tags) if tags
+    erb :post, :locals => { :post => post, :state => :show }
   end
 
   post "/post/:id" do
     protected!
-    post = Post.find params[:id] #params[:post]
+    # TODO: move to helper or model
+    if params[:post]["tags"]
+      tags = params[:post]["tags"].split(", ").map { |t| t.strip.downcase } unless params[:post]["tags"].blank?
+      params[:post].delete("tags")
+    end
+
+    post = Post.find params[:id]
+    post.tag_ids.reject! { |t| !tags.include? t }
+
     params[:post].each do |key, val|
       post[key.to_sym] = val
     end
-    post.save!
+
+    if tags
+      post.add_tags(tags)
+    else
+      post.save!
+    end
     erb :post, :locals => { :post => post, :state => :show }
   end
 
@@ -78,6 +86,15 @@ class DittyApp < Sinatra::Application
     protected!
     Post.destroy params[:id]
     erb :index
+  end
+
+  get "/tag" do
+    erb :tags, :locals => { :tags => (Tag.all.sort_by { |t| t.posts.count }).reverse }
+  end
+
+  get "/tag/:tag" do
+    posts = Tag.where(:name => params[:tag]).first.posts
+    erb :tag, :locals => { :latest => posts, :tag => params[:tag] }
   end
 
   get "/archive/?" do
@@ -97,7 +114,7 @@ class DittyApp < Sinatra::Application
 
   get "/" do 
     logger.info authorized?
-    erb :index#, :layout => @layout_default
+    erb :index
   end
 
   not_found do

@@ -13,5 +13,9 @@
   </div>
   <div class="post_contents">
     <%= post_contents(post) %>
+    <% unless post.tags.nil? or post.tags.empty? %>
+      <br /><br />
+      Tags: <% post.tags.each do |tag| %> <span class="tag_link"><a href="/tag/<%=tag.name%>"><%=tag.name%></a></span><% end %>
+    <% end %>
   </div>
 </div>
