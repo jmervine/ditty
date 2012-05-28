@@ -17,16 +17,17 @@ CONFIG = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))[ENV['RA
 
 # with mongo
 def build_clean_data
-  puts " BULDING CLEAN DATA"
+  #puts " "
+  #puts " BULDING CLEAN DATA"
   config = CONFIG['database']
   MongoMapper.database = config['name']
   if config['username'] && config['password']
     MongoMapper.database.authenticate(config['username'], config['password'])
   end
   Post.destroy_all
-  puts " - Post.count is now: #{Post.count}"
+  #puts " - Post.count is now: #{Post.count}"
   Tag.destroy_all
-  puts " - Tag.count is now: #{Tag.count}"
+  #puts " - Tag.count is now: #{Tag.count}"
   tags = %w( tag_one tag_two tag_three tag_four tag_five foo bar baz boo blah )
   (2011..2012).each do |year|
     (5..10).each do |month|
@@ -44,8 +45,8 @@ def build_clean_data
       end
     end
   end
-  puts " - Post.count is now: #{Post.count}"
-  puts " - Tag.count is now: #{Tag.count}"
+  #puts " - Post.count is now: #{Post.count}"
+  #puts " - Tag.count is now: #{Tag.count}"
 end
 
 class TestHelpersTemplates
@@ -63,6 +64,16 @@ class TestHelpersTemplates
   # monkey patch to ignore 'markdown' calls
   def markdown p
     p
+  end
+
+  # monkey patch for settings calls
+  def settings
+    SettingsStub.new
+  end
+  class SettingsStub
+    def timezone
+      "America/Los_Angeles"
+    end
   end
 end
 
