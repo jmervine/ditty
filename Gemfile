@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'rake'
 gem 'redcarpet'
 #gem 'rack-mobile-detect'
+gem 'tzinfo'
 
 group :mongo do
   gem 'mongo'

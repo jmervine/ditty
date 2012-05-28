@@ -51,6 +51,7 @@ GEM
     tilt (1.3.3)
     travis-lint (1.4.0)
       hashr (>= 0.0.19)
+    tzinfo (0.3.33)
     unicorn (4.3.1)
       kgio (~> 2.6)
       rack
@@ -76,6 +77,7 @@ DEPENDENCIES
   rspec
   sinatra
   travis-lint
+  tzinfo
   unicorn
   vlad
   vlad-git
