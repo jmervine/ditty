@@ -21,6 +21,10 @@ class DittyApp < Sinatra::Application
     set :config,      HelpersApplication.configure!( settings.environment )
     set :title,       HelpersApplication.app_title( settings.config )
 
+    default_tz = "America/Los_Angeles"
+    set :timezone, settings.config['timezone']||default_tz
+    # for available zones see http://tzinfo.rubyforge.org/doc/
+
     HelpersApplication.database!( settings.config['database'] )
   end
 
@@ -39,13 +43,15 @@ class DittyApp < Sinatra::Application
     erb :_post, :locals => { :navigation => :nav_help, :post => Post.new, :state => :new }
   end
 
-  get "/post/:id/?" do
-    erb :post, :locals => { :post => Post.find(params[:id]), :state => :show }
+  get "/:year/:month/:day/:title_path/?" do
+    title_path = "/" + File.join(params['captures'])
+    logger.info title_path
+    erb :post, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
   end
 
   get "/post/:id/edit/?" do
     protected!
-    erb :_post, :locals => { :post => Post.find( params[:id] ), :navigation => :nav_help, :state => :edit }
+    erb :_post, :locals => { :post => Post.find(params[:id]), :navigation => :nav_help, :state => :edit }
   end
 
   post "/post/?" do
@@ -56,7 +62,7 @@ class DittyApp < Sinatra::Application
     end
     post = Post.create(params[:post])
     post.add_tags(tags) if tags
-    erb :post, :locals => { :post => post, :state => :show }
+    redirect post.title_path
   end
 
   post "/post/:id" do
@@ -79,13 +85,13 @@ class DittyApp < Sinatra::Application
     else
       post.save!
     end
-    erb :post, :locals => { :post => post, :state => :show }
+    redirect post.title_path
   end
 
   get "/post/:id/delete" do
     protected!
     Post.destroy params[:id]
-    erb :index
+    redirect "/"
   end
 
   get "/tag" do
@@ -94,21 +100,39 @@ class DittyApp < Sinatra::Application
 
   get "/tag/:tag" do
     posts = Tag.where(:name => params[:tag]).first.posts.reverse
+    redirect "/tag" if posts.empty?
     erb :tag, :locals => { :latest => posts, :tag => params[:tag] }
   end
 
-  get "/archive/?" do
+  get "/archive/?*" do
     items = archive_items
     erb :archive
   end
 
-  get "/archive/:year/?" do
-    items = { params[:year].to_i => archive_items[params[:year].to_i] }
-    erb :archive, :locals => { :archives => items }
+  get "/:year/?" do
+    pass unless params[:year] =~ /[0-9]{4}/
+
+    posts = { params[:year].to_i => archive_items[params[:year].to_i] }
+    pass if posts.empty?
+    erb :archive, :locals => { :archives => posts }
   end
 
-  get "/archive/:year/:month/?" do
+  get "/:year/:month/?" do
+    pass unless params[:year] =~ /[0-9]{4}/
+    pass unless params[:month] =~ /[0-9]{2}/
+
     posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
+    pass if posts.empty?
+    erb :index, :locals => { :latest => posts }
+  end
+
+  get "/:year/:month/:day/?" do
+    pass unless params[:year] =~ /[0-9]{4}/
+    pass unless params[:month] =~ /[0-9]{2}/
+    pass unless params[:day] =~ /[0-9]{2}/
+
+    posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i and p.created_at.day.to_i == params[:day].to_i }
+    pass if posts.empty?
     erb :index, :locals => { :latest => posts }
   end
 
@@ -118,11 +142,7 @@ class DittyApp < Sinatra::Application
   end
 
   not_found do
-    begin 
-      erb :index
-    rescue 
-      erb "Action couldn't be completed!"
-    end
+    redirect "/"
   end
 
   error do
