@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'tzinfo'
 
 describe HelpersTemplates do
   before(:all) do
@@ -14,13 +15,16 @@ describe HelpersTemplates do
   let(:post_two) { @post_two }
 
   describe :time_display do
-    it "should show updated" do
-      helpers.time_display(post_one).should match Regexp.new(Regexp.escape("<span class='header_time'>Updated "))
-    end
     it "should show created" do
       post = Post.new(:title => "foo")
       post.save!
       helpers.time_display(post).should match Regexp.new(Regexp.escape("<span class='header_time'>Created "))
+    end
+    it "should show correct timezone per 'settings.timezone'" do
+      post = Post.new(:title => "bar")
+      post.save!
+      expected_time = TZInfo::Timezone.get("America/Los_Angeles").utc_to_local(post.created_at.utc).strftime("%r")
+      helpers.time_display(post).should match Regexp.new(expected_time)
     end
     it "should return blank when post is empty" do
       helpers.time_display(Post.new).should eq ""
@@ -48,10 +52,10 @@ describe HelpersTemplates do
   describe :archive_link do
     it "should return a link to an archive page" do
       helpers.archive_link(2012, 01).should match /January/
-      helpers.archive_link(2012, 01).should match /a href='\/archive\/2012\/01/
-      helpers.archive_link(2012, 1).should match /a href='\/archive\/2012\/01/
-      helpers.archive_link("2012", "1").should match /a href='\/archive\/2012\/01/
-      helpers.archive_link("2012", "01").should match /a href='\/archive\/2012\/01/
+      helpers.archive_link(2012, 01).should match /a href='\/2012\/01/
+      helpers.archive_link(2012, 1).should match /a href='\/2012\/01/
+      helpers.archive_link("2012", "1").should match /a href='\/2012\/01/
+      helpers.archive_link("2012", "01").should match /a href='\/2012\/01/
     end
   end
 
@@ -87,7 +91,7 @@ describe HelpersTemplates do
       it "with months as links" do
         (2011..2012).each do |y|
           (5..10).each do |m| 
-            str = "/archive/" + y.to_s + "/" + ("%02d" % m )
+            str = "/" + y.to_s + "/" + ("%02d" % m )
             helpers.archive_nav_list.should match Regexp.new(Regexp.escape(str))
           end
         end
@@ -110,7 +114,7 @@ describe HelpersTemplates do
       it "with months as links" do
         (2011..2012).each do |y|
           (5..10).each do |m| 
-            str = "/archive/" + y.to_s + "/" + ("%02d" % m )
+            str = "/" + y.to_s + "/" + ("%02d" % m )
             helpers.archive_list.should match Regexp.new(Regexp.escape(str))
           end
         end
@@ -118,7 +122,7 @@ describe HelpersTemplates do
       it "with items as links" do
         (2011..2012).each do |y|
           (5..10).each do |m| 
-            helpers.archive_list.should match Regexp.new("\/post\/([a-z0-9]+)\'\>post title")
+            helpers.archive_list.should match Regexp.new("<a href\=\'\/([0-9]{4})\/([0-9]{2})\/([0-9]{2})\/([a-z0-9\_\-]+)\'\>post title")
           end
         end
       end
@@ -127,13 +131,8 @@ describe HelpersTemplates do
   describe :post_link do
     it "should return a link to a post" do
       helpers.post_link(post_one).should match Regexp.new("a href=")
-      helpers.post_link(post_one).should match Regexp.new(@post_one["_id"].to_s)
+      helpers.post_link(post_one).should match Regexp.new(@post_one['title_path'])
       helpers.post_link(post_one).should match Regexp.new("post title")
-    end
-    it "should return a link to a post by title upon request" do
-      helpers.post_link(post_one, true).should match Regexp.new("a href=")
-      helpers.post_link(post_one, true).should match Regexp.new("post%20title")
-      helpers.post_link(post_one, true).should match Regexp.new("post title")
     end
   end
   describe :months do

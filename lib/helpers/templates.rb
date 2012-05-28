@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'tzinfo'
 require 'helpers'
 module HelpersTemplates
   #include Ditty
@@ -10,13 +11,18 @@ module HelpersTemplates
 
   def time_display post
     return "" if post.nil? or post.created_at.nil?
-    action = (post.created_at == post.updated_at ? "Created" : "Updated")
-    mt = post.updated_at
-    nt = Time.now
-    if nt.to_i > mt.to_i+(60*60*24)
-      "<span class='header_time'>#{action} on #{mt.strftime("%B %d, %Y")}</span>"
+    post_time = post.created_at.utc
+    begin
+      time_zone = TZInfo::Timezone.get(settings.timezone) 
+      zone_time = time_zone.utc_to_local(post_time)
+    rescue
+      logger.info "Timezone Error (#{settings.timezone})!"
+      zone_time = post_time
+    end
+    if Time.now.utc.to_i > post_time.to_i+(60*60*24)
+      "<span class='header_time'>Created on #{zone_time.strftime("%B %d, %Y")}</span>"
     else
-      "<span class='header_time'>#{action} at #{mt.strftime("%r")}</span>"
+      "<span class='header_time'>Created at #{zone_time.strftime("%r")}</span>"
     end
   end
 
@@ -38,7 +44,7 @@ module HelpersTemplates
       name  = months[month.to_i-1].capitalize
     end
     return name if request.path_info =~ Regexp.new(Regexp.escape(path)+"(\/?)$")
-    return "<a href='/archive/#{path}'>#{name}</a>" 
+    return "<a href='/#{path}'>#{name}</a>" 
   end
 
   def archive_items
@@ -96,14 +102,9 @@ module HelpersTemplates
     markup
   end
 
-  def post_link post, use_title=false
+  def post_link post
     return "" if post.nil? or post.id.blank?
-    link = if use_title
-             linkify_title(post_title(post)) 
-           else
-             post.id.to_s
-           end
-    "<a href='/post/#{link}'>#{post_title(post)}</a>"
+    "<a href='#{post.title_path}'>#{post.title}</a>"
   end
     
   def months
