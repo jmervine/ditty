@@ -21,7 +21,7 @@ describe Tag do
   describe :posts do
     it "should list all posts that are associated with the tag" do
       @t1.posts.count.should eq 2
-      @t1.posts.first.should eq @p1
+      @t1.posts.include?(@p1).should be_true
       Post.where(:tag_ids => @t1.id).count.should eq 2
     end
   end
