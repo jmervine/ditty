@@ -1,24 +1,31 @@
-default:
-  title: "My little Ditty's!"
-development:
-  auth:
-    username: dev
-    password: dev
+# VALID OPTIONS
+#
+# <RACK_ENV>:
+#   title: <blog title>
+#   database:
+#     name: <database name>
+#     username: <database username>
+#     password: <database password>
+#   auth:
+#     username: <http auth username>
+#     password: <http auth password>
+#   timezone: <defaults to "America/Los_Angeles">
+            #see http://tzinfo.rubyforge.org/ for details
+
 test: 
   title: "My TEST Ditty's!"
   database: 
     name: ditty_test
-    table: ditty_test
     username: test
     password: test
   auth:
     username: test
     password: test
+  #timezone: "America/Los_Angeles"
 travis:
   title: "My TEST Ditty's!"
   database: 
     name: ditty_travis
-    table: ditty_travis
   auth:
     username: test
     password: test
@@ -26,17 +33,19 @@ stage:
   title: "blog.mervine.net"
   database: 
     name: ditty_stage
-    table: blog
     username: stage
     password: stage
   auth:
     username: test
     password: test
 #production:
-  #database: ditty_production
-  #table: ditty
-  #title: Your title!
+  #title: SET ME
+  #database: 
+    #name: production
+    #username: setme
+    #password: setme
   #auth:
     #username: setme
     #password: setme
+  #timezone: "America/Los_Angeles" # default setting
   
