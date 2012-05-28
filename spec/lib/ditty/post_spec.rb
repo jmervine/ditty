@@ -71,5 +71,21 @@ describe Post do
     end
   end
 
+  describe "before_create -> create_title_path" do
+    it "should create title path" do
+      post = Post.create(:title => "some% funk! tit@le", :body => "body")
+      post.title_path.should match /[0-9]{4}\/[0-9]{2}\/[0-9]{2}\/some_funk_title$/
+    end
+  end
+
+  describe "before_update -> update_title_path" do
+    it "should update title path" do
+      post = Post.first
+      post.title = "another' some% funk! tit@le"
+      post.save!
+      post.title_path.should match /[0-9]{4}\/[0-9]{2}\/[0-9]{2}\/another_some_funk_title$/
+    end
+  end
+
 end
 
