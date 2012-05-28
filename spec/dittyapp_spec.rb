@@ -9,13 +9,10 @@ describe DittyApp, "< Sinatra::Application" do
     pages = {
       "get" => {
         "/post" => "/post",
-        "/post/:id/edit" => "/post/#{Post.first.id}/edit",
-        "/post/:id/delete" => "/post/#{Post.first.id}/delete",
         "/login" => "/login"
       },
       "post" => {
-        "/post" => "/post",
-        "/post/:id" => "/post/#{Post.first.id}"
+        "/post" => "/post"
       }
     }
 
@@ -85,7 +82,17 @@ describe DittyApp, "< Sinatra::Application" do
       end
     end
 
-    describe "GET /post/:id/edit", "with auth" do
+    describe "GET /post/:id/edit [without auth]" do
+      before(:all) do
+        HelpersApplication.stub(:authorized?).and_return false
+        get "/post/#{Post.first.id.to_s}/edit" # find a real post via it's id
+      end
+      it "should reject" do
+        last_response.status.should eq 401
+      end
+    end
+
+    describe "GET /post/:id/edit [with auth]" do
       before(:all) do
         authorize 'test', 'test'
         HelpersApplication.stub(:authorized?).and_return true
@@ -168,7 +175,17 @@ describe DittyApp, "< Sinatra::Application" do
       end
     end
 
-    describe "GET /post/:id/delete" do
+    describe "GET /post/:id/delete [without auth]" do
+      before(:all) do
+        @del_id = Post.first.id.to_s
+        get "/post/#{@del_id}/delete"
+      end
+      it "should reject" do
+        last_response.status.should eq 401
+      end
+    end
+
+    describe "GET /post/:id/delete [with auth]" do
       before(:all) do
         authorize "test", "test"
         HelpersApplication.stub(:authorized?).and_return true
