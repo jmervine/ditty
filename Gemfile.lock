@@ -14,6 +14,7 @@ GEM
     diff-lcs (1.1.3)
     hashr (0.0.21)
     i18n (0.6.0)
+    json (1.7.3)
     kgio (2.7.4)
     mongo (1.6.2)
       bson (~> 1.6.2)
@@ -35,6 +36,8 @@ GEM
     rake-remote_task (2.0.6)
       open4 (~> 1.0)
       rake (~> 0.8)
+    rdoc (3.12)
+      json (~> 1.4)
     redcarpet (2.1.1)
     rspec (2.10.0)
       rspec-core (~> 2.10.0)
@@ -73,6 +76,7 @@ DEPENDENCIES
   mongo_mapper
   rack-test
   rake
+  rdoc
   redcarpet
   rspec
   sinatra

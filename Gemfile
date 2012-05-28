@@ -5,6 +5,7 @@ gem 'rake'
 gem 'redcarpet'
 #gem 'rack-mobile-detect'
 gem 'tzinfo'
+gem 'rdoc'
 
 group :mongo do
   gem 'mongo'
