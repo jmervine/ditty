@@ -4,10 +4,13 @@
   <div id="nav_tag_list">
     <% 
       (Tag.all.sort_by { |t| t.posts.count }).reverse.each_with_index do |tag,index| 
-        break if index > 19 # top 10 only
+        break if index > 9 # top 10 only
+        unless tag.posts.empty?
     %> 
     <span class="tag_link"><a href="/tag/<%=tag.name%>"><%=tag.name%></a></span>
-    <% end %>
+    <% end
+      end 
+    %>
   </div>
 </div>
 <% end %>
