@@ -6,7 +6,7 @@
   <div class="post_contents">
     <% tags.each do |tag| %>
       <% unless tag.posts.empty? %>
-      <span class="tag_link tag_page_link" style="font-size: <%=(14+(tag.posts.count/5)).round(0)%>px"><a href="/tag/<%=tag.name%>"><%=tag.name%></a> <small>(<%=tag.posts.count%>)</small></span>
+      <span class="tag_link tag_page_link" style="font-size: <%=(14+(tag.posts.count/5)).round%>px"><a href="/tag/<%=tag.name%>"><%=tag.name%></a> <small>(<%=tag.posts.count%>)</small></span>
       <% end %>
     <% end %>
   </div>
