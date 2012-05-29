@@ -225,15 +225,18 @@ input.value {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
-code {
-  display:block;
-  /*padding: 10px 5px 10px 5px;*/
-  padding: 5px;
-  margin: 10px 0;
-  word-wrap: break-word; 
-  background-color: lightgray;
-  /*border: lightgray solid 1px;*/
-}       
+code {  
+  display:block;  
+  margin: 10px;  
+  padding: 10px;  
+  background-color: #333333;  
+  word-wrap: break-word;  
+  width: 95%;  
+  color: #00ff00;  
+  font-family: Monaco;  
+  font-size: 11px; 
+  border-radius: 5px 
+}
 
 #nav_tag_list {
   padding: 10px 5px 5px 10px;
