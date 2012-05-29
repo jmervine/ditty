@@ -5,7 +5,9 @@ gem 'rake'
 gem 'redcarpet'
 #gem 'rack-mobile-detect'
 gem 'tzinfo'
-gem 'rdoc'
+
+gem 'sinatra-authentication'
+gem 'rack-flash'
 
 group :mongo do
   gem 'mongo'
@@ -17,6 +19,7 @@ group :test, :development do
   gem 'rspec'
   gem 'rack-test'
   gem 'travis-lint'
+  gem 'rdoc'
 end
 
 group :unicorn do
