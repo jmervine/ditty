@@ -3,7 +3,9 @@
   navigation ||= :nav_archive
   post ||= nil
   state ||= :index
-  title = if post.nil? or post.title.blank?
+  title = if state == :preview 
+            post["title"]
+          elsif post.nil? or post.title.blank?
             settings.title
           else
             post_title(post)

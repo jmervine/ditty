@@ -43,6 +43,11 @@ class DittyApp < Sinatra::Application
     erb :_post, :locals => { :navigation => :nav_help, :post => Post.new, :state => :new }
   end
 
+  post "/post/preview" do
+    protected!
+    erb :preview, :locals => { :post => params[:post], :state => :preview }
+  end
+
   get "/:year/:month/:day/:title_path/?" do
     title_path = "/" + File.join(params['captures'])
     logger.info title_path
@@ -63,6 +68,11 @@ class DittyApp < Sinatra::Application
     post = Post.create(params[:post])
     post.add_tags(tags) if tags
     redirect post.title_path
+  end
+
+  post "/post/:id/preview" do
+    protected!
+    erb :preview, :locals => { :post => params[:post], :post_id => params[:id], :state => :preview }
   end
 
   post "/post/:id" do

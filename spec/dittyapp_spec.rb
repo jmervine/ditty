@@ -12,7 +12,8 @@ describe DittyApp, "< Sinatra::Application" do
         "/login" => "/login"
       },
       "post" => {
-        "/post" => "/post"
+        "/post" => "/post",
+        "/post/preview" => "/post/preview"
       }
     }
 
@@ -99,6 +100,27 @@ describe DittyApp, "< Sinatra::Application" do
         get "/post/#{Post.first.id.to_s}/edit" # find a real post via it's id
       end
       it "should load post edit form" do
+        last_response.should be_ok
+      end
+    end
+
+    describe "POST /post/:id/preview [without auth]" do
+      before(:all) do
+        HelpersApplication.stub(:authorized?).and_return false
+        post "/post/#{Post.first.id.to_s}/preview", :post => { "title" => "foo", "body" => "bar", "tags" => "boo" }
+      end
+      it "should reject" do
+        last_response.status.should eq 401
+      end
+    end
+
+    describe "POST /post/:id/preview [with auth]" do
+      before(:all) do
+        authorize 'test', 'test'
+        HelpersApplication.stub(:authorized?).and_return true
+        post "/post/#{Post.first.id.to_s}/preview", :post => { "title" => "foo", "body" => "bar", "tags" => "boo" }
+      end
+      it "should load post preivew page" do
         last_response.should be_ok
       end
     end
