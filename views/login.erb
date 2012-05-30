@@ -1,0 +1,17 @@
+<div class="post post_show">
+  <% if Rack.const_defined?("Flash") && flash[:notice] %>
+    <div id="form_flash"><%= flash[:notice]%></div>
+  <% end %>
+  <form method="post" name="post" action="/login">
+  <div class="post_header login_form">
+    <span class="post_title">Email: <br /> <input class="value" type="text" name="email" /></span>
+  </div>
+  <div class="post_header login_form">
+    <span class="post_title">Password: <br /><input class="value" type="password" name="password" /></span>
+  </div>
+  <div id="form_buttons login_buttons">
+    <input class="button" type="button" value="Cancel!" onClick="javascript:window.history.back()" /> &nbsp;
+    <input class="button" type="submit" value="Login!" />
+  </div>
+</div>
+

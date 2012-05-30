@@ -10,8 +10,10 @@ require 'pp'
 require 'ditty'
 require 'helpers'
 
+# auth
+require "sinatra-authentication"
+
 class DittyApp < Sinatra::Application
-  #include Ditty
 
   configure do
     enable :logging, :raise_errors#, :dump_errors
@@ -25,6 +27,9 @@ class DittyApp < Sinatra::Application
     set :timezone, settings.config['timezone']||default_tz
     # for available zones see http://tzinfo.rubyforge.org/doc/
 
+    set :template_engine, :erb
+    set :sinatra_authentication_view_path, Pathname(__FILE__).dirname.expand_path + "views/"
+
     HelpersApplication.database!( settings.config['database'] )
   end
 
@@ -33,13 +38,13 @@ class DittyApp < Sinatra::Application
     include HelpersApplication
   end
 
-  get "/login" do
-    protected!
-    erb :index
-  end
+  #get "/login" do
+    #login_required
+    #erb :index
+  #end
 
   get "/post/?" do
-    protected!
+    login_required
     erb :_post, :locals => { :navigation => :nav_help, :post => Post.new, :state => :new }
   end
 
@@ -50,12 +55,12 @@ class DittyApp < Sinatra::Application
   end
 
   get "/post/:id/edit/?" do
-    protected!
+    login_required
     erb :_post, :locals => { :post => Post.find(params[:id]), :navigation => :nav_help, :state => :edit }
   end
 
   post "/post/?" do
-    protected!
+    login_required
     if params[:post]["tags"]
       tags = params[:post]["tags"].split(",").map { |t| t.strip.downcase } unless params[:post]["tags"].blank?
       params[:post].delete("tags")
@@ -66,7 +71,7 @@ class DittyApp < Sinatra::Application
   end
 
   post "/post/:id" do
-    protected!
+    login_required
     # TODO: move to helper or model
     if params[:post]["tags"]
       tags = params[:post]["tags"].split(", ").map { |t| t.strip.downcase } unless params[:post]["tags"].blank?
@@ -89,7 +94,7 @@ class DittyApp < Sinatra::Application
   end
 
   get "/post/:id/delete" do
-    protected!
+    login_required
     Post.destroy params[:id]
     redirect "/"
   end
@@ -137,7 +142,6 @@ class DittyApp < Sinatra::Application
   end
 
   get "/" do 
-    logger.info authorized?
     erb :index
   end
 

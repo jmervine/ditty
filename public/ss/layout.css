@@ -9,6 +9,12 @@ small {
   color: gray;
 }
 
+small a {
+  font-size: 12px;
+  color: gray;
+  text-decoration: none;
+}
+
 #page {
   margin: 10px auto;
   padding: 10px;
@@ -291,4 +297,17 @@ code {
 
 #footer a {
   color: #333;
+}
+
+.login_form {
+  margin: 25px 0;
+}
+
+.login_form input {
+  margin-left: 10px;
+}
+
+.login_buttons {
+  margin-left: 10px;
+  text-align: left;
 }

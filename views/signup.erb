@@ -1,0 +1,21 @@
+<% login_required %>
+<div class="post post_show">
+  <% if Rack.const_defined?("Flash") && flash[:notice] %>
+    <div id="form_flash"><%= flash[:notice]%></div>
+  <% end %>
+  <form method="post" name="post" action="/signup">
+  <div class="post_header login_form">
+    <span class="post_title">Email: <br /> <input class="value" type="text" name="user[email]" /></span>
+  </div>
+  <div class="post_header login_form">
+    <span class="post_title">Password: <br /><input class="value" type="password" name="user[password]" /></span>
+  </div>
+  <div class="post_header login_form">
+    <span class="post_title">Password Confirmation: <br /><input class="value" type="password" name="user[password_confirmation]" /></span>
+  </div>
+  <div id="form_buttons login_buttons">
+    <input class="button" type="button" value="Cancel!" onClick="javascript:window.history.back()" /> &nbsp;
+    <input class="button" type="submit" value="Signup!" />
+  </div>
+</div>
+

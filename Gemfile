@@ -6,8 +6,9 @@ gem 'redcarpet'
 #gem 'rack-mobile-detect'
 gem 'tzinfo'
 
-gem 'sinatra-authentication'
-gem 'rack-flash'
+gem 'sinatra-authentication', :git => "git@github.com:jmervine/sinatra-authentication.git", :branch => "template_engine"
+gem 'haml' # for sinatra-auth
+#gem 'rack-flash'
 
 group :mongo do
   gem 'mongo'
