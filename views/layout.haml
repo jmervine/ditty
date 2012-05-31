@@ -1,0 +1,56 @@
+!!! HTML
+- navigation ||= :nav_archive
+- post ||= nil
+- state ||= :index
+- title = set_title_from_status(state, post)
+
+%html{ :lang => "en-US" }
+  %head
+    %title
+      = title
+    %meta{ 'http-equiv' => "Content-Type", :content => "text/html; charset=ISO-8859-1" }
+    %link{ :rel => "stylesheet", :type => "text/css", :href => "/ss/layout.css" }
+    - if state == :show or state == :index
+      :javascript
+        var switchTo5x=true;
+      %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
+      :javascript
+        stLight.options({publisher: "d70ec18a-3455-4f95-9c4c-43eb2d969408"});
+    -#- end
+  %body
+    #page
+      #header
+        %span.main_title
+          = settings.title
+        #top_links
+          - unless authorized?
+            %a{ :href => "/login" }login
+          - else
+            - unless state == :edit or state == :new
+              - if state == :show
+                %a{ :href => "/post/#{post.id}/edit" }edit post
+                &nbsp;&nbsp;
+              %a{ :herf => "/post" }new post
+              &nbsp;&nbsp;
+          %a{ :herf => "/" }home
+
+      #page_body
+        #content
+          .posts
+            = yield
+        #nav
+          - if state == :show or state == :index
+            #share_this
+              %span.st_facebook_large{ :displayText => 'Facebook' }
+              %span.st_twitter_large{ :displayText => 'Tweet' }
+              %span.st_linkedin_large{ :displayText => 'LinkedIn' }
+              %span.st_email_large{ :displayText => 'Email' }
+          - begin
+            = haml :nav_tags, :layout => false
+          - begin
+            = haml navigation, :layout => false
+        %br.clear_both
+
+      #footer
+        = haml :footer, :layout => false
+

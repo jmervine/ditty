@@ -123,6 +123,24 @@ module HelpersTemplates
     URI::decode title
   end
 
+  def set_title_from_status state, post
+    if state == :preview 
+      return post["title"]
+    elsif post.nil? or post.title.blank?
+      return settings.title
+    else
+      return post_title(post)
+    end
+  end
+
+  def set_state_class_from_state state
+    if state == :index
+      return "post_index"
+    else
+      return "post_show"
+    end
+  end
+
   protected
   # TODO: there has to be a better way
   def collection_sort collection, date_key="created_at"

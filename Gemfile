@@ -7,6 +7,8 @@ gem 'redcarpet'
 gem 'tzinfo'
 gem 'rdoc'
 
+gem 'haml'
+
 group :mongo do
   gem 'mongo'
   gem 'mongo_mapper'

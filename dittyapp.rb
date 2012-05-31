@@ -6,6 +6,8 @@ require 'ditty'
 require 'yaml'
 require 'pp'
 
+require 'haml'
+
 # load app libs
 require 'ditty'
 require 'helpers'
@@ -35,7 +37,8 @@ class DittyApp < Sinatra::Application
 
   get "/login" do
     protected!
-    erb :index
+    #erb :index
+    redirect "/"
   end
 
   get "/post/?" do
@@ -51,7 +54,8 @@ class DittyApp < Sinatra::Application
   get "/:year/:month/:day/:title_path/?" do
     title_path = "/" + File.join(params['captures'])
     logger.info title_path
-    erb :post, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
+    #erb :post, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
+    haml :post, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
   end
 
   get "/post/:id/edit/?" do
@@ -116,7 +120,8 @@ class DittyApp < Sinatra::Application
 
   get "/archive/?*" do
     items = archive_items
-    erb :archive
+    #erb :archive
+    haml :archive
   end
 
   get "/:year/?" do
@@ -124,7 +129,8 @@ class DittyApp < Sinatra::Application
 
     posts = { params[:year].to_i => archive_items[params[:year].to_i] }
     pass if posts.empty?
-    erb :archive, :locals => { :archives => posts }
+    #erb :archive, :locals => { :archives => posts }
+    haml :archive, :locals => { :archives => posts }
   end
 
   get "/:year/:month/?" do
@@ -133,7 +139,8 @@ class DittyApp < Sinatra::Application
 
     posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
     pass if posts.empty?
-    erb :index, :locals => { :latest => posts }
+    #erb :index, :locals => { :latest => posts }
+    haml :index, :locals => { :latest => posts }
   end
 
   get "/:year/:month/:day/?" do
@@ -143,12 +150,14 @@ class DittyApp < Sinatra::Application
 
     posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i and p.created_at.day.to_i == params[:day].to_i }
     pass if posts.empty?
-    erb :index, :locals => { :latest => posts }
+    #erb :index, :locals => { :latest => posts }
+    haml :index, :locals => { :latest => posts }
   end
 
   get "/" do 
     logger.info authorized?
-    erb :index
+    #erb :index
+    haml :index
   end
 
   not_found do
@@ -161,10 +170,12 @@ class DittyApp < Sinatra::Application
     emesg = env['sinatra.error'].message
     begin 
       path = File.join(settings.root, "store", "internals", "getting_started.md")
-      erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
+      #erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
+      haml :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
     rescue 
       path = File.join(settings.root, "store", "internals", "error.md")
-      erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
+      #erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
+      haml :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
     end
   end
 

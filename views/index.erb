@@ -1,9 +1,0 @@
-<% 
-unless latest.count == 0
-  latest.each do |post| %>
-  <%= erb :post, :layout => false, :locals => { :post => post } %>
-<%end 
-else%>
-<h3>You have no posts! What are waiting for...</h3>
-<%end%>
-
