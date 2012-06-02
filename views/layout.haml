@@ -9,7 +9,7 @@
     %title
       = title
     %meta{ 'http-equiv' => "Content-Type", :content => "text/html; charset=ISO-8859-1" }
-    - if state == :index
+    - if state == :index or state == :tag or state == :archive
       %meta{ :name => "keywords", :content => (Tag.all.map { |t| t.name }).join(",") }
     - if state == :show
       %meta{ :name => "description", :content => post.title }

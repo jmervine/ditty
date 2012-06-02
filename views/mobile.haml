@@ -1,0 +1,37 @@
+!!! HTML
+- post ||= nil
+- state ||= :index
+- title = set_title_from_status(state, post)
+
+%html{ :lang => "en-US" }
+  %head
+    %title
+      = title
+    %meta{ 'http-equiv' => "Content-Type", :content => "text/html; charset=ISO-8859-1" }
+    %link{ :rel => "stylesheet", :type => "text/css", :href => "/ss/mobile.css" }
+  %body
+    #page_wrap
+      #header
+        %span.title<= settings.title
+      #nav
+        %span.nav_link
+          - if state == :index 
+            Home
+          - else
+            %a{ :href => "/" }Home
+          - if defined?(tags)
+            Tags
+          - else
+            %a{ :href => "/tag" }Tags
+          - if state == :archive
+            Archive
+          - else
+            %a{ :href => "/archive" }Archive
+      #content
+        = yield
+      #footer
+        %span.footer_text
+          Powered by
+          %a{ :href => "http://ditty.rubyops.net/" }Ditty
+
+

@@ -4,6 +4,6 @@
 
 - unless latest.count == 0
   - latest.each do |post|
-    = haml :post, :layout => false, :locals => { :post => post }
+    = haml choose_template(:post), :layout => false, :locals => { :post => post }
   %h3 There are no posts for this tag!
 

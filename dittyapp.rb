@@ -41,10 +41,35 @@ class DittyApp < Sinatra::Application
   helpers do
     include HelpersTemplates
     include HelpersApplication
+
+    def choose_layout
+      return :mobile if is_mobile?
+      return :layout
+    end
+
+    def choose_template template
+      return "mobile_#{template.to_s}".to_sym if is_mobile?
+      return template
+    end
+
+    def is_mobile?
+      return true if request.env['X_MOBILE_DEVICE']
+      return false
+    end
   end
 
   get "/sitemap.xml" do
     haml :sitemap, :layout => false
+  end
+
+  get "/m" do
+    haml :mobile_index, :layout => :mobile
+  end
+
+  get "/m/:year/:month/:day/:title_path/?" do
+    title_path = "/" + File.join(params['captures'])
+    logger.info title_path
+    haml :mobile_post, :layout => :mobile, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
   end
 
   get "/login" do
@@ -60,7 +85,7 @@ class DittyApp < Sinatra::Application
   get "/:year/:month/:day/:title_path/?" do
     title_path = "/" + File.join(params['captures'])
     logger.info title_path
-    haml :post, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
+    haml choose_template(:post), :layout => choose_layout, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
   end
 
   get "/post/:id/edit/?" do
@@ -119,18 +144,18 @@ class DittyApp < Sinatra::Application
   end
 
   get "/tag" do
-    haml :tags, :locals => { :tags => (Tag.all.sort_by { |t| t.posts.count }).reverse }
+    haml choose_template(:tags), :layout => choose_layout, :locals => { :tags => (Tag.all.sort_by { |t| t.posts.count }).reverse, :state => ( is_mobile? ? :show : :index ) }
   end
 
   get "/tag/:tag" do
     posts = Tag.where(:name => params[:tag]).first.posts.reverse
     redirect "/tag" if posts.empty?
-    haml :tag, :locals => { :latest => posts, :tag => params[:tag] }
+    haml :tag, :layout => choose_layout, :locals => { :latest => posts, :tag => params[:tag], :state => :tag }
   end
 
   get "/archive/?*" do
     items = archive_items
-    haml :archive
+    haml :archive, :layout => choose_layout, :locals => { :state => :archive }
   end
 
   get "/:year/?" do
@@ -138,7 +163,7 @@ class DittyApp < Sinatra::Application
 
     posts = { params[:year].to_i => archive_items[params[:year].to_i] }
     pass if posts.empty?
-    haml :archive, :locals => { :archives => posts }
+    haml :archive, :layout => choose_layout, :locals => { :archives => posts }
   end
 
   get "/:year/:month/?" do
@@ -147,7 +172,7 @@ class DittyApp < Sinatra::Application
 
     posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
     pass if posts.empty?
-    haml :index, :locals => { :latest => posts }
+    haml choose_template(:index), :layout => choose_layout, :locals => { :latest => posts }
   end
 
   get "/:year/:month/:day/?" do
@@ -157,31 +182,17 @@ class DittyApp < Sinatra::Application
 
     posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i and p.created_at.day.to_i == params[:day].to_i }
     pass if posts.empty?
-    haml :index, :locals => { :latest => posts }
+    haml choose_template(:index), :layout => choose_layout, :locals => { :latest => posts }
   end
 
   get "/" do 
     logger.info authorized?
-    haml :index
+    haml choose_template(:index), :layout => choose_layout
   end
 
   not_found do
     redirect "/"
   end
 
-  error do
-    logger.info "entering error block"
-    ename = env['sinatra.error'].name
-    emesg = env['sinatra.error'].message
-    begin 
-      path = File.join(settings.root, "store", "internals", "getting_started.md")
-      haml :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
-    rescue 
-      path = File.join(settings.root, "store", "internals", "error.md")
-      haml :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
-    end
-  end
-
-  # catch all others
 end
 
