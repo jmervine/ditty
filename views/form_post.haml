@@ -3,7 +3,7 @@
   :javascript
     function confirmDelete() {
       if (confirm("Are you sure you want to delete?")) {
-        window.location.href='/post/<%=post.id%>/delete';
+        window.location.href='/post/#{post.id}/delete';
       }
     }
 
