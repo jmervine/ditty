@@ -8,8 +8,7 @@ describe DittyApp, "< Sinatra::Application" do
   describe "General Tests [without auth]" do
     pages = {
       "get" => {
-        "/post" => "/post",
-        "/login" => "/login"
+        "/post" => "/post"
       },
       "post" => {
         "/post" => "/post",
@@ -45,7 +44,6 @@ describe DittyApp, "< Sinatra::Application" do
         "/:year" => "/2012",
         "/:year/:month" => "/2012/05",
         "/:year/:month/:day" => "/2012/05/05",
-        "/login" => "/login",
         "/tag" => "/tag",
         "/tag/:tag" => "/tag/tag_one"
       }    
@@ -72,6 +70,18 @@ describe DittyApp, "< Sinatra::Application" do
   end
 
   describe "Less General Tests" do
+
+    describe "GET /login" do
+      before(:all) do
+        authorize 'test', 'test'
+        get "/login"
+      end
+      it "should redirect to the home page" do
+        last_response.should be_redirect
+        follow_redirect!
+        last_request.url.should == "http://example.org/"
+      end
+    end
 
     describe "GET /:title_path" do
       before(:all) do

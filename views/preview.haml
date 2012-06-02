@@ -1,0 +1,12 @@
+- form_action = ( !defined?(post_id) ? "/post" : "/post/#{post_id}" )
+= haml :_post_preview, :layout => false, :locals => { :post => post }
+.post
+  %form{ :method => "post", :name => "post" }
+    %input{ :type => "hidden", :name => "post[title]", :value => post["title"] }
+    %input{ :type => "hidden", :name => "post[body]", :value => post["body"] }
+    %input{ :type => "hidden", :name => "post[tags]", :value => post["tags"] }
+    #form_buttons
+      %input.button{ :type => "button", :value => "Cacnel!", :onclick => "javascript:window.history.back();" }
+      &nbsp;
+      %input.button{ :type => "submit", :value => "Save!", :onclick => "javascript:this.form.action='#{form_action}';" }
+

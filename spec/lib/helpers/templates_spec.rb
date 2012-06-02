@@ -77,40 +77,13 @@ describe HelpersTemplates do
       @archive[2012].keys.should eq [10,9,8,7,6,5]
     end
     it "third level should be items" do
-      @archive[2012][6].should have(6).items
-      @archive[2012][6].first.should be_a Post
+      @archive[2012][5].should have(6).items
+      @archive[2012][5].first.should be_a Post
     end
   end
 
-  describe :archive_nav_list do
-    describe "should build an archive list" do
-      it "with years as links" do
-        helpers.archive_nav_list.should match /2011<\/a>/
-        helpers.archive_nav_list.should match /2012<\/a>/
-      end
-      it "with months as links" do
-        (2011..2012).each do |y|
-          (5..10).each do |m| 
-            str = "/" + y.to_s + "/" + ("%02d" % m )
-            helpers.archive_nav_list.should match Regexp.new(Regexp.escape(str))
-          end
-        end
-      end
-      it "without items" do
-        (2011..2012).each do |y|
-          (5..10).each do |m| 
-            helpers.archive_nav_list.should_not match Regexp.new("\/post\/([a-z0-9]+)\'\>post title")
-          end
-        end
-      end
-    end
-  end
   describe :archive_list do
     describe "should build an archive list" do
-      it "with years as links" do
-        helpers.archive_nav_list.should match /2011<\/a>/
-        helpers.archive_nav_list.should match /2012<\/a>/
-      end
       it "with months as links" do
         (2011..2012).each do |y|
           (5..10).each do |m| 

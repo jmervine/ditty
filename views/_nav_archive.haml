@@ -1,0 +1,12 @@
+- archive = archive_items
+.nav_section
+  %span.nav_title
+    %a{ :href => "/archive" } Archive
+  %ul.nav_list
+    - archive.each_key do |year|
+      %li.nav_item
+        %b<= archive_link(year)
+        %ul.nav_sub_list
+          - archive[year].each_key do |month|
+            %li.nav_item<= archive_link(year, month)
+

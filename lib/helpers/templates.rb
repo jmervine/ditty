@@ -47,6 +47,10 @@ module HelpersTemplates
     return "<a href='/#{path}'>#{name}</a>" 
   end
 
+  def post_tag_string tags
+    (tags.map { |t| t.name }).join(", ")
+  end
+
   def archive_items
     collection = Post.all(:order => :created_at.desc)
     archive = {}
@@ -58,23 +62,6 @@ module HelpersTemplates
       archive[date.year][date.month].push item
     end
     archive
-  end
-
-  def archive_nav_list 
-    archive = archive_items
-    markup = ""
-    markup << %{ <ul class="nav_list"> }
-    archive.each_key do |year|
-      markup << %{ <li class="nav_item"><b>#{archive_link(year)}</b></li> }
-      markup << %{ <ul class="nav_sub_list"> }
-      archive[year].each_key do |month|
-        markup << %{ <li class="nav_item">#{ archive_link(year, month) }</li> }
-      end
-      markup << %{ </ul> }
-      markup << %{ </li> }
-    end
-    markup << %{ </ul> }
-    markup
   end
 
   def archive_list archive=nil

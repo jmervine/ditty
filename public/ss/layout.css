@@ -82,6 +82,7 @@ small {
   min-height: 560px;
 }
 
+
 #nav {
   width: 250px;
   float: right;
@@ -239,28 +240,23 @@ code {
 }
 
 #nav_tag_list {
-  padding: 10px 0;
+  padding: 10px;
 }
 
 .tag_link { 
   padding: 5px 3px 5px 0;
   line-height: 25px;
-  white-space: nowrap;
 }
 
 .tag_page_link { 
   padding: 5px;
   margin: 4px;
   line-height: 45px;
+  white-space: nowrap;
 }
 
 .tag_page_link small {
-  margin-left: -5px;
   font-size: 9px;
-}
-
-.tag_link a { 
-  /*text-decoration: none;*/
 }
 
 #form_tags {

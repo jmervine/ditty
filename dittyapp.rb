@@ -5,7 +5,6 @@ require 'sinatra'
 require 'ditty'
 require 'yaml'
 require 'pp'
-
 require 'haml'
 
 # load app libs
@@ -23,11 +22,14 @@ class DittyApp < Sinatra::Application
     set :config,      HelpersApplication.configure!( settings.environment )
     set :title,       HelpersApplication.app_title( settings.config )
 
-    default_tz = "America/Los_Angeles"
-    set :timezone, settings.config['timezone']||default_tz
+    set :timezone, settings.config['timezone']||"America/Los_Angeles"
     # for available zones see http://tzinfo.rubyforge.org/doc/
 
     HelpersApplication.database!( settings.config['database'] )
+  end
+
+  configure :production do
+    set :haml, :ugly => true
   end
 
   helpers do
@@ -37,30 +39,23 @@ class DittyApp < Sinatra::Application
 
   get "/login" do
     protected!
-    #erb :index
     redirect "/"
   end
 
   get "/post/?" do
     protected!
-    erb :_post, :locals => { :navigation => :nav_help, :post => Post.new, :state => :new }
-  end
-
-  post "/post/preview" do
-    protected!
-    erb :preview, :locals => { :post => params[:post], :state => :preview }
+    haml :form_post, :locals => { :navigation => :_nav_help, :post => Post.new, :state => :new }
   end
 
   get "/:year/:month/:day/:title_path/?" do
     title_path = "/" + File.join(params['captures'])
     logger.info title_path
-    #erb :post, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
     haml :post, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
   end
 
   get "/post/:id/edit/?" do
     protected!
-    erb :_post, :locals => { :post => Post.find(params[:id]), :navigation => :nav_help, :state => :edit }
+    haml :form_post, :locals => { :post => Post.find(params[:id]), :navigation => :_nav_help, :state => :edit }
   end
 
   post "/post/?" do
@@ -74,9 +69,14 @@ class DittyApp < Sinatra::Application
     redirect post.title_path
   end
 
+  post "/post/preview" do
+    protected!
+    haml :preview, :locals => { :post => params[:post], :navigation => :_nav_help, :state => :preview }
+  end
+
   post "/post/:id/preview" do
     protected!
-    erb :preview, :locals => { :post => params[:post], :post_id => params[:id], :state => :preview }
+    haml :preview, :locals => { :post => params[:post], :navigation => :_nav_help, :post_id => params[:id], :state => :preview }
   end
 
   post "/post/:id" do
@@ -109,18 +109,17 @@ class DittyApp < Sinatra::Application
   end
 
   get "/tag" do
-    erb :tags, :locals => { :tags => (Tag.all.sort_by { |t| t.posts.count }).reverse }
+    haml :tags, :locals => { :tags => (Tag.all.sort_by { |t| t.posts.count }).reverse }
   end
 
   get "/tag/:tag" do
     posts = Tag.where(:name => params[:tag]).first.posts.reverse
     redirect "/tag" if posts.empty?
-    erb :tag, :locals => { :latest => posts, :tag => params[:tag] }
+    haml :tag, :locals => { :latest => posts, :tag => params[:tag] }
   end
 
   get "/archive/?*" do
     items = archive_items
-    #erb :archive
     haml :archive
   end
 
@@ -129,7 +128,6 @@ class DittyApp < Sinatra::Application
 
     posts = { params[:year].to_i => archive_items[params[:year].to_i] }
     pass if posts.empty?
-    #erb :archive, :locals => { :archives => posts }
     haml :archive, :locals => { :archives => posts }
   end
 
@@ -139,7 +137,6 @@ class DittyApp < Sinatra::Application
 
     posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
     pass if posts.empty?
-    #erb :index, :locals => { :latest => posts }
     haml :index, :locals => { :latest => posts }
   end
 
@@ -150,13 +147,11 @@ class DittyApp < Sinatra::Application
 
     posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i and p.created_at.day.to_i == params[:day].to_i }
     pass if posts.empty?
-    #erb :index, :locals => { :latest => posts }
     haml :index, :locals => { :latest => posts }
   end
 
   get "/" do 
     logger.info authorized?
-    #erb :index
     haml :index
   end
 
@@ -170,11 +165,9 @@ class DittyApp < Sinatra::Application
     emesg = env['sinatra.error'].message
     begin 
       path = File.join(settings.root, "store", "internals", "getting_started.md")
-      #erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
       haml :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
     rescue 
       path = File.join(settings.root, "store", "internals", "error.md")
-      #erb :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
       haml :post, :locals => { :path => path, :error_name => ename, :error_message => emesg }
     end
   end

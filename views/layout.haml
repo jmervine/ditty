@@ -1,5 +1,5 @@
 !!! HTML
-- navigation ||= :nav_archive
+- navigation ||= :_nav_archive
 - post ||= nil
 - state ||= :index
 - title = set_title_from_status(state, post)
@@ -16,7 +16,6 @@
       %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
       :javascript
         stLight.options({publisher: "d70ec18a-3455-4f95-9c4c-43eb2d969408"});
-    -#- end
   %body
     #page
       #header
@@ -30,9 +29,9 @@
               - if state == :show
                 %a{ :href => "/post/#{post.id}/edit" }edit post
                 &nbsp;&nbsp;
-              %a{ :herf => "/post" }new post
+              %a{ :href => "/post" }new post
               &nbsp;&nbsp;
-          %a{ :herf => "/" }home
+          %a{ :href => "/" }home
 
       #page_body
         #content
@@ -40,17 +39,13 @@
             = yield
         #nav
           - if state == :show or state == :index
-            #share_this
-              %span.st_facebook_large{ :displayText => 'Facebook' }
-              %span.st_twitter_large{ :displayText => 'Tweet' }
-              %span.st_linkedin_large{ :displayText => 'LinkedIn' }
-              %span.st_email_large{ :displayText => 'Email' }
+            = haml :_share_this, :layout => false
           - begin
-            = haml :nav_tags, :layout => false
+            = haml :_nav_tags, :layout => false
           - begin
             = haml navigation, :layout => false
         %br.clear_both
 
       #footer
-        = haml :footer, :layout => false
+        = haml :_footer, :layout => false
 
