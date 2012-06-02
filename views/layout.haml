@@ -16,6 +16,8 @@
       %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
       :javascript
         stLight.options({publisher: "d70ec18a-3455-4f95-9c4c-43eb2d969408"});
+    - unless settings.google_analytics.nil?
+      = haml :_google_analytics
   %body
     #page
       #header

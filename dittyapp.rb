@@ -25,6 +25,12 @@ class DittyApp < Sinatra::Application
     set :timezone, settings.config['timezone']||"America/Los_Angeles"
     # for available zones see http://tzinfo.rubyforge.org/doc/
 
+    # TODO: move to helper
+    hostname = settings.config['hostname']||'localhost'
+    hostname = "http://"<<hostname unless hostname =~ /^http:\/\//
+    set :hostname, hostname
+    set :google_analytics, settings.config['google_analytics']||nil
+
     HelpersApplication.database!( settings.config['database'] )
   end
 
@@ -35,6 +41,10 @@ class DittyApp < Sinatra::Application
   helpers do
     include HelpersTemplates
     include HelpersApplication
+  end
+
+  get "/sitemap.xml" do
+    haml :sitemap, :layout => false
   end
 
   get "/login" do

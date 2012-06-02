@@ -64,6 +64,21 @@ describe DittyApp, "< Sinatra::Application" do
           it "should accept" do
             last_response.should be_ok
           end
+          it "should have analytics" do
+            last_response.body.should match /google_analytics_track_id/
+          end
+          it "should have title" do
+            last_response.body.should match /My TEST Ditty's!/
+          end
+          it "should have tags" do
+            last_response.body.should match /Tags/
+          end
+          unless page_path == "/post" 
+            # this may be considered ugly, but I thought it was clever 
+            it "should have archives" do
+              last_response.body.should match /Archive/
+            end
+          end
         end
       end
     end
@@ -231,6 +246,15 @@ describe DittyApp, "< Sinatra::Application" do
         last_response.should be_redirect
         follow_redirect!
         last_request.url.should == "http://example.org/"
+      end
+    end
+
+    describe "GET /sitemap.xml" do
+      before(:all) do
+        get "/sitemap.xml"
+      end
+      it "should be" do
+        last_response.should be_ok
       end
     end
 

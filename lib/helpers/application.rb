@@ -13,9 +13,10 @@ module HelpersApplication
     @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [username, password]
   end
 
-  def configure! env
+  def configure! env, root=nil
+    root = settings.root if root.nil?
     begin
-      YAML.load_file(File.join(settings.root, "config", "ditty.yml"))[env]
+      YAML.load_file(File.join(root, "config", "ditty.yml"))[env]
     rescue
       raise "Missing configuration for #{env}."
     end

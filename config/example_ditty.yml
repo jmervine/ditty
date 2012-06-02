@@ -10,7 +10,8 @@
 #     username: <http auth username>
 #     password: <http auth password>
 #   timezone: <defaults to "America/Los_Angeles">
-            #see http://tzinfo.rubyforge.org/ for details
+#           #see http://tzinfo.rubyforge.org/ for details
+#   google_analytics: <track id>
 
 test: 
   title: "My TEST Ditty's!"
@@ -22,6 +23,7 @@ test:
     username: test
     password: test
   #timezone: "America/Los_Angeles"
+  google_analytics: google_analytics_track_id
 travis:
   title: "My TEST Ditty's!"
   database: 
@@ -48,4 +50,6 @@ stage:
     #username: setme
     #password: setme
   #timezone: "America/Los_Angeles" # default setting
+  #google_analytics: <track id>
+
   
