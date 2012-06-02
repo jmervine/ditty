@@ -62,10 +62,12 @@ class DittyApp < Sinatra::Application
     haml :sitemap, :layout => false
   end
 
+  # for debug
   get "/m" do
     haml :mobile_index, :layout => :mobile
   end
 
+  # for debug
   get "/m/:year/:month/:day/:title_path/?" do
     title_path = "/" + File.join(params['captures'])
     logger.info title_path
@@ -143,14 +145,14 @@ class DittyApp < Sinatra::Application
     redirect "/"
   end
 
-  get "/tag" do
-    haml choose_template(:tags), :layout => choose_layout, :locals => { :tags => (Tag.all.sort_by { |t| t.posts.count }).reverse, :state => ( is_mobile? ? :show : :index ) }
-  end
-
   get "/tag/:tag" do
-    posts = Tag.where(:name => params[:tag]).first.posts.reverse
+    posts = Tag.where(:name => params[:tag]).first.posts.reverse rescue [] 
     redirect "/tag" if posts.empty?
     haml :tag, :layout => choose_layout, :locals => { :latest => posts, :tag => params[:tag], :state => :tag }
+  end
+
+  get "/tag" do
+    haml choose_template(:tags), :layout => choose_layout, :locals => { :tags => (Tag.all.sort_by { |t| t.posts.count }).reverse, :state => ( is_mobile? ? :show : :index ) }
   end
 
   get "/archive/?*" do
