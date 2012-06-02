@@ -2,6 +2,7 @@
 #
 # <RACK_ENV>:
 #   title: <blog title>
+#   hostname: <hostname>
 #   database:
 #     name: <database name>
 #     username: <database username>
@@ -15,6 +16,7 @@
 
 test: 
   title: "My TEST Ditty's!"
+  hostname: example.org
   database: 
     name: ditty_test
     username: test
@@ -26,13 +28,16 @@ test:
   google_analytics: google_analytics_track_id
 travis:
   title: "My TEST Ditty's!"
+  hostname: example.org
   database: 
     name: ditty_travis
   auth:
     username: test
     password: test
+  google_analytics: google_analytics_track_id
 stage:
-  title: "blog.mervine.net"
+  title: "stage"
+  hostname: example.org
   database: 
     name: ditty_stage
     username: stage
@@ -42,6 +47,7 @@ stage:
     password: test
 #production:
   #title: SET ME
+  #hostname: SET ME # to make sitemap work
   #database: 
     #name: production
     #username: setme
@@ -50,6 +56,6 @@ stage:
     #username: setme
     #password: setme
   #timezone: "America/Los_Angeles" # default setting
-  #google_analytics: <track id>
+  #google_analytics: SET ME # optional
 
   
