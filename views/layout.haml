@@ -47,10 +47,9 @@
         #nav
           - if state == :show or state == :index
             = haml :_share_this, :layout => false
-          - begin
+          - unless state == :new or state == :edit or state == :preview
             = haml :_nav_tags, :layout => false
-          - begin
-            = haml navigation, :layout => false
+          = haml navigation, :layout => false
         %br.clear_both
 
       #footer
