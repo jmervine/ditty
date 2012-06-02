@@ -60,6 +60,20 @@
       
 
       
+      <!-- Method Quickref -->
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-i-choose_layout">#choose_layout</a></li>
+          
+          <li><a href="#method-i-choose_template">#choose_template</a></li>
+          
+          <li><a href="#method-i-is_mobile-3F">#is_mobile?</a></li>
+          
+        </ul>
+      </div>
+      
 
       
       <!-- Included Modules -->
@@ -151,6 +165,114 @@
 
       <!-- Methods -->
       
+      <div id="public-instance-method-details" class="method-section section">
+        <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="choose_layout-method" class="method-detail ">
+          <a name="method-i-choose_layout"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">choose_layout</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="choose_layout-source">
+<pre>
+<span class="ruby-comment"># File dittyapp.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">choose_layout</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-value">:mobile</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_mobile?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-value">:layout</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- choose_layout-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- choose_layout-method -->
+
+      
+        <div id="choose_template-method" class="method-detail ">
+          <a name="method-i-choose_template"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">choose_template</span><span
+              class="method-args">(template)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="choose_template-source">
+<pre>
+<span class="ruby-comment"># File dittyapp.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">choose_template</span> <span class="ruby-identifier">template</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;mobile_#{template.to_s}&quot;</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_mobile?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">template</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- choose_template-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- choose_template-method -->
+
+      
+        <div id="is_mobile-3F-method" class="method-detail ">
+          <a name="method-i-is_mobile-3F"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">is_mobile?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="is_mobile-3F-source">
+<pre>
+<span class="ruby-comment"># File dittyapp.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_mobile?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-string">'X_MOBILE_DEVICE'</span>]
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- is_mobile-3F-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- is_mobile-3F-method -->
+
+      
+      </div><!-- public-instance-method-details -->
+    
     </div><!-- 5Buntitled-5D -->
   
 

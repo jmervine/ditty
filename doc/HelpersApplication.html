@@ -172,7 +172,7 @@
             
             <div class="method-source-code" id="app_title-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/application.rb, line 33</span>
+<span class="ruby-comment"># File lib/helpers/application.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">app_title</span> <span class="ruby-identifier">config</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;title&quot;</span>]
@@ -230,7 +230,7 @@
           
           <div class="method-heading">
             <span class="method-name">configure!</span><span
-              class="method-args">(env)</span>
+              class="method-args">(env, root=nil)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -244,9 +244,10 @@
             <div class="method-source-code" id="configure-21-source">
 <pre>
 <span class="ruby-comment"># File lib/helpers/application.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure!</span> <span class="ruby-identifier">env</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure!</span> <span class="ruby-identifier">env</span>, <span class="ruby-identifier">root</span>=<span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">root</span> = <span class="ruby-identifier">settings</span>.<span class="ruby-identifier">root</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">root</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">settings</span>.<span class="ruby-identifier">root</span>, <span class="ruby-string">&quot;config&quot;</span>, <span class="ruby-string">&quot;ditty.yml&quot;</span>))[<span class="ruby-identifier">env</span>]
+    <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">root</span>, <span class="ruby-string">&quot;config&quot;</span>, <span class="ruby-string">&quot;ditty.yml&quot;</span>))[<span class="ruby-identifier">env</span>]
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Missing configuration for #{env}.&quot;</span>
   <span class="ruby-keyword">end</span>
@@ -280,7 +281,7 @@
             
             <div class="method-source-code" id="database-21-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/application.rb, line 24</span>
+<span class="ruby-comment"># File lib/helpers/application.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">database!</span> <span class="ruby-identifier">config</span>
   <span class="ruby-constant">MongoMapper</span>.<span class="ruby-identifier">database</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">'name'</span>]
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">'username'</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">'password'</span>]
@@ -318,7 +319,7 @@
             
             <div class="method-source-code" id="password-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/application.rb, line 45</span>
+<span class="ruby-comment"># File lib/helpers/application.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">password</span>
   <span class="ruby-identifier">settings</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;auth&quot;</span>][<span class="ruby-string">&quot;password&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -387,7 +388,7 @@
             
             <div class="method-source-code" id="username-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/application.rb, line 41</span>
+<span class="ruby-comment"># File lib/helpers/application.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">username</span>
   <span class="ruby-identifier">settings</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;auth&quot;</span>][<span class="ruby-string">&quot;username&quot;</span>]
 <span class="ruby-keyword">end</span></pre>

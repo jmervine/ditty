@@ -63,8 +63,6 @@
           
           <li><a href="#method-i-archive_list">#archive_list</a></li>
           
-          <li><a href="#method-i-archive_nav_list">#archive_nav_list</a></li>
-          
           <li><a href="#method-i-collection_rsort">#collection_rsort</a></li>
           
           <li><a href="#method-i-collection_sort">#collection_sort</a></li>
@@ -81,9 +79,15 @@
           
           <li><a href="#method-i-post_link">#post_link</a></li>
           
+          <li><a href="#method-i-post_tag_string">#post_tag_string</a></li>
+          
           <li><a href="#method-i-post_tags">#post_tags</a></li>
           
           <li><a href="#method-i-post_title">#post_title</a></li>
+          
+          <li><a href="#method-i-set_state_class_from_state">#set_state_class_from_state</a></li>
+          
+          <li><a href="#method-i-set_title_from_status">#set_title_from_status</a></li>
           
           <li><a href="#method-i-time_display">#time_display</a></li>
           
@@ -188,7 +192,7 @@
             
             <div class="method-source-code" id="archive_items-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 50</span>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">archive_items</span>
   <span class="ruby-identifier">collection</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>(<span class="ruby-value">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created_at</span>.<span class="ruby-identifier">desc</span>)
   <span class="ruby-identifier">archive</span> = {}
@@ -271,7 +275,7 @@
             
             <div class="method-source-code" id="archive_list-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 80</span>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">archive_list</span> <span class="ruby-identifier">archive</span>=<span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">archive</span> = <span class="ruby-identifier">archive_items</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">archive</span>.<span class="ruby-identifier">nil?</span>
 
@@ -306,52 +310,6 @@
         </div><!-- archive_list-method -->
 
       
-        <div id="archive_nav_list-method" class="method-detail ">
-          <a name="method-i-archive_nav_list"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">archive_nav_list</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            
-            
-
-            
-            <div class="method-source-code" id="archive_nav_list-source">
-<pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">archive_nav_list</span> 
-  <span class="ruby-identifier">archive</span> = <span class="ruby-identifier">archive_items</span>
-  <span class="ruby-identifier">markup</span> = <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-identifier">markup</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">%{ &lt;ul class=&quot;nav_list&quot;&gt; }</span>
-  <span class="ruby-identifier">archive</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">year</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">markup</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%{ &lt;li class=&quot;nav_item&quot;&gt;&lt;b&gt;#{archive_link(year)}&lt;/b&gt;&lt;/li&gt; }</span>
-    <span class="ruby-identifier">markup</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">%{ &lt;ul class=&quot;nav_sub_list&quot;&gt; }</span>
-    <span class="ruby-identifier">archive</span>[<span class="ruby-identifier">year</span>].<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">month</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">markup</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%{ &lt;li class=&quot;nav_item&quot;&gt;#{ archive_link(year, month) }&lt;/li&gt; }</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">markup</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">%{ &lt;/ul&gt; }</span>
-    <span class="ruby-identifier">markup</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">%{ &lt;/li&gt; }</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">markup</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">%{ &lt;/ul&gt; }</span>
-  <span class="ruby-identifier">markup</span>
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- archive_nav_list-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- archive_nav_list-method -->
-
-      
         <div id="delinkify_title-method" class="method-detail ">
           <a name="method-i-delinkify_title"></a>
 
@@ -371,7 +329,7 @@
             
             <div class="method-source-code" id="delinkify_title-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 122</span>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delinkify_title</span> <span class="ruby-identifier">title</span>
   <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-identifier">decode</span> <span class="ruby-identifier">title</span>
 <span class="ruby-keyword">end</span></pre>
@@ -404,7 +362,7 @@
             
             <div class="method-source-code" id="latest-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 114</span>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">latest</span> <span class="ruby-identifier">n</span>=<span class="ruby-value">25</span>
   <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>(<span class="ruby-value">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created_at</span>.<span class="ruby-identifier">desc</span>)[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">n</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -437,7 +395,7 @@
             
             <div class="method-source-code" id="linkify_title-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 118</span>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">linkify_title</span> <span class="ruby-identifier">title</span>
   <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-identifier">encode</span> <span class="ruby-identifier">title</span>
 <span class="ruby-keyword">end</span></pre>
@@ -470,7 +428,7 @@
             
             <div class="method-source-code" id="months-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 110</span>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">months</span>
   <span class="ruby-node">%{ january february march april may june july august september october november december }</span>
 <span class="ruby-keyword">end</span></pre>
@@ -537,7 +495,7 @@
             
             <div class="method-source-code" id="post_link-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 105</span>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">post_link</span> <span class="ruby-identifier">post</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">post</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">post</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">blank?</span>
   <span class="ruby-node">&quot;&lt;a href='#{post.title_path}'&gt;#{post.title}&lt;/a&gt;&quot;</span>
@@ -550,6 +508,39 @@
 
           
         </div><!-- post_link-method -->
+
+      
+        <div id="post_tag_string-method" class="method-detail ">
+          <a name="method-i-post_tag_string"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">post_tag_string</span><span
+              class="method-args">(tags)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="post_tag_string-source">
+<pre>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">post_tag_string</span> <span class="ruby-identifier">tags</span>
+  (<span class="ruby-identifier">tags</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> }).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- post_tag_string-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- post_tag_string-method -->
 
       
         <div id="post_tags-method" class="method-detail ">
@@ -617,6 +608,82 @@
 
           
         </div><!-- post_title-method -->
+
+      
+        <div id="set_state_class_from_state-method" class="method-detail ">
+          <a name="method-i-set_state_class_from_state"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">set_state_class_from_state</span><span
+              class="method-args">(state)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="set_state_class_from_state-source">
+<pre>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_state_class_from_state</span> <span class="ruby-identifier">state</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">state</span> <span class="ruby-operator">==</span> <span class="ruby-value">:index</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;post_index&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;post_show&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- set_state_class_from_state-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- set_state_class_from_state-method -->
+
+      
+        <div id="set_title_from_status-method" class="method-detail ">
+          <a name="method-i-set_title_from_status"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">set_title_from_status</span><span
+              class="method-args">(state, post)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="set_title_from_status-source">
+<pre>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_title_from_status</span> <span class="ruby-identifier">state</span>, <span class="ruby-identifier">post</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">state</span> <span class="ruby-operator">==</span> <span class="ruby-value">:preview</span> 
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">post</span>[<span class="ruby-string">&quot;title&quot;</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">post</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">post</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">settings</span>.<span class="ruby-identifier">title</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">post_title</span>(<span class="ruby-identifier">post</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- set_title_from_status-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- set_title_from_status-method -->
 
       
         <div id="time_display-method" class="method-detail ">
@@ -690,7 +757,7 @@
             
             <div class="method-source-code" id="collection_rsort-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 131</span>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">collection_rsort</span> <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">date_key</span>=<span class="ruby-string">&quot;created_at&quot;</span>
   <span class="ruby-identifier">collection_sort</span>(<span class="ruby-identifier">collection</span>, <span class="ruby-identifier">date_key</span>).<span class="ruby-identifier">reverse</span>
 <span class="ruby-keyword">end</span></pre>
@@ -723,7 +790,7 @@
             
             <div class="method-source-code" id="collection_sort-source">
 <pre>
-<span class="ruby-comment"># File lib/helpers/templates.rb, line 128</span>
+<span class="ruby-comment"># File lib/helpers/templates.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">collection_sort</span> <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">date_key</span>=<span class="ruby-string">&quot;created_at&quot;</span>
   (<span class="ruby-identifier">collection</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>[<span class="ruby-identifier">date_key</span>] })
 <span class="ruby-keyword">end</span></pre>
