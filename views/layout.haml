@@ -9,6 +9,11 @@
     %title
       = title
     %meta{ 'http-equiv' => "Content-Type", :content => "text/html; charset=ISO-8859-1" }
+    - if state == :index
+      %meta{ :name => "keywords", :content => (Tag.all.map { |t| t.name }).join(",") }
+    - if state == :show
+      %meta{ :name => "description", :content => post.title }
+      %meta{ :name => "keywords", :content => (post.tags.map { |t| t.name }).join(",") }
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/ss/layout.css" }
     - if state == :show or state == :index
       :javascript

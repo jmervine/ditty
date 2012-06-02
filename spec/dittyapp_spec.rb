@@ -75,6 +75,9 @@ describe DittyApp, "< Sinatra::Application" do
           end
           unless page_path == "/post" 
             # this may be considered ugly, but I thought it was clever 
+            it "should have keywords" do
+              last_response.body.should match /<meta content='(.+)' name='keywords' \/>/
+            end
             it "should have archives" do
               last_response.body.should match /Archive/
             end
@@ -105,6 +108,9 @@ describe DittyApp, "< Sinatra::Application" do
       end
       it "should load post" do
         last_response.should be_ok
+      end
+      it "should have description" do
+        last_response.body.should match /<meta content='#{@post.title}' name='description' \/>/
       end
     end
 
