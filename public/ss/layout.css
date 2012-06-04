@@ -86,20 +86,12 @@ small {
 #nav {
   width: 250px;
   float: right;
-  /*border-top-right-radius: 5px;*/
-  /*border-bottom-right-radius: 5px;*/
-  /*border-bottom-left-radius: 5px;*/
-  /*-moz-border-radius-topright: 5px;*/
-  /*-moz-border-radius-bottomright: 5px;*/
-  /*-moz-border-radius-bottomleft: 5px;*/
 }
 
 #nav #share_this {
   margin-bottom: 3px;
   padding: 12px;
-  height: 35px;
-  /*vertical-align: bottom;*/
-  /*border-bottom: 1px solid #333;*/
+  height: 28px;
   background-color: whitesmoke;
   text-align: center;
 }

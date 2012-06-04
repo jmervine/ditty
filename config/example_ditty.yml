@@ -13,6 +13,7 @@
 #   timezone: <defaults to "America/Los_Angeles">
 #           #see http://tzinfo.rubyforge.org/ for details
 #   google_analytics: <track id>
+#   share_this: <publisher id>
 
 test: 
   title: "My TEST Ditty's!"
@@ -26,6 +27,7 @@ test:
     password: test
   #timezone: "America/Los_Angeles"
   google_analytics: google_analytics_track_id
+  share_this: publisher_id
 travis:
   title: "My TEST Ditty's!"
   hostname: example.org
@@ -35,6 +37,7 @@ travis:
     username: test
     password: test
   google_analytics: google_analytics_track_id
+  share_this: publisher_id
 stage:
   title: "stage"
   hostname: example.org
@@ -45,6 +48,7 @@ stage:
   auth:
     username: test
     password: test
+  share_this: publisher_id
 #production:
   #title: SET ME
   #hostname: SET ME # to make sitemap work

@@ -14,6 +14,7 @@ module Helper
       @hostname          = ensure_hostname_format(configuration['hostname'])||hostname
       @timezone          = configuration['timezone']||timezone
       @google_analytics  = configuration['google_analytics']||google_analytics
+      @share_this        = configuration['share_this']||share_this
       @database          = configuration['database']
 
       @username          = configuration['auth']['username']
@@ -37,15 +38,11 @@ module Helper
     def google_analytics
       @google_analytics||=nil
     end
+    def share_this
+      @share_this||=nil
+    end
     def title
       @title||="Ditty!"
-    end
-    def app_title config
-      begin
-        config["title"]
-      rescue
-        "Ditty!"
-      end
     end
     def username
       @username

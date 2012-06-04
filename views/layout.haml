@@ -15,10 +15,10 @@
       %meta{ :name => "description", :content => post.title }
       %meta{ :name => "keywords", :content => (post.tags.map { |t| t.name }).join(",") }
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/ss/layout.css" }
-    - if state == :show or state == :index
-      = haml :_share_this_js
+    - if not settings.share_this.nil? and (state == :show or state == :index)
+      = haml :_share_this_js, :layout => false
     - unless settings.google_analytics.nil?
-      = haml :_google_analytics
+      = haml :_google_analytics, :layout => false
   %body
     #page
       #header
@@ -41,7 +41,7 @@
           .posts
             = yield
         #nav
-          - if state == :show or state == :index
+          - if not settings.share_this.nil? and (state == :show or state == :index)
             = haml :_share_this, :layout => false
           - unless state == :new or state == :edit or state == :preview
             = haml :_nav_tags, :layout => false

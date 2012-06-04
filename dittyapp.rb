@@ -23,6 +23,7 @@ class DittyApp < Sinatra::Application
     set :timezone,         @configuration.timezone
     set :hostname,         @configuration.hostname
     set :google_analytics, @configuration.google_analytics
+    set :share_this,       @configuration.share_this
 
     set :username,         @configuration.username
     set :password,         @configuration.password
