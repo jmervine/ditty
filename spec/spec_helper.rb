@@ -50,7 +50,7 @@ def build_clean_data
 end
 
 class TestHelpersTemplates
-  include HelpersTemplates
+  include Helper::Templates
   #include DittyUtils
   # monkey patch for request.path_info sinatra helper
   class RequestStub
@@ -78,7 +78,7 @@ class TestHelpersTemplates
 end
 
 class TestHelpersApplication
-  include HelpersApplication
+  include Helper::Application
   def settings; SettingsStub.new; end
   def response; {}; end
   def request; RequestStub.new; end

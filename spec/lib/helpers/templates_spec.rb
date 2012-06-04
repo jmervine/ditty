@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'tzinfo'
 
-describe HelpersTemplates do
+describe Helper::Templates do
   before(:all) do
     build_clean_data
     @helpers = TestHelpersTemplates.new

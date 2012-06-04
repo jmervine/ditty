@@ -27,7 +27,7 @@ describe DittyApp, "< Sinatra::Application" do
             end
           end
           it "should reject" do
-            HelpersApplication.stub(:authorized?).and_return false
+            Helper::Application.stub(:authorized?).and_return false
             last_response.status.should eq 401
           end
         end
@@ -116,7 +116,7 @@ describe DittyApp, "< Sinatra::Application" do
 
     describe "GET /post/:id/edit [without auth]" do
       before(:all) do
-        HelpersApplication.stub(:authorized?).and_return false
+        Helper::Application.stub(:authorized?).and_return false
         get "/post/#{Post.first.id.to_s}/edit" # find a real post via it's id
       end
       it "should reject" do
@@ -127,7 +127,7 @@ describe DittyApp, "< Sinatra::Application" do
     describe "GET /post/:id/edit [with auth]" do
       before(:all) do
         authorize 'test', 'test'
-        HelpersApplication.stub(:authorized?).and_return true
+        Helper::Application.stub(:authorized?).and_return true
         get "/post/#{Post.first.id.to_s}/edit" # find a real post via it's id
       end
       it "should load post edit form" do
@@ -137,7 +137,7 @@ describe DittyApp, "< Sinatra::Application" do
 
     describe "POST /post/:id/preview [without auth]" do
       before(:all) do
-        HelpersApplication.stub(:authorized?).and_return false
+        Helper::Application.stub(:authorized?).and_return false
         post "/post/#{Post.first.id.to_s}/preview", :post => { "title" => "foo", "body" => "bar", "tags" => "boo" }
       end
       it "should reject" do
@@ -148,7 +148,7 @@ describe DittyApp, "< Sinatra::Application" do
     describe "POST /post/:id/preview [with auth]" do
       before(:all) do
         authorize 'test', 'test'
-        HelpersApplication.stub(:authorized?).and_return true
+        Helper::Application.stub(:authorized?).and_return true
         post "/post/#{Post.first.id.to_s}/preview", :post => { "title" => "foo", "body" => "bar", "tags" => "boo" }
       end
       it "should load post preivew page" do
@@ -192,7 +192,7 @@ describe DittyApp, "< Sinatra::Application" do
     describe "POST /post" do
       before(:all) do
         authorize "test", "test"
-        HelpersApplication.stub(:authorized?).and_return true
+        Helper::Application.stub(:authorized?).and_return true
         post "/post", :post => { "title" => "create test title", "body" => "create test body", "tags" => "app_tag_one app_tag_two" }
       end
       it "should have added to the data store" do
@@ -208,7 +208,7 @@ describe DittyApp, "< Sinatra::Application" do
     describe "POST /post/:id" do
       before(:all) do
         authorize "test", "test"
-        HelpersApplication.stub(:authorized?).and_return true
+        Helper::Application.stub(:authorized?).and_return true
         @update_id = Post.last.id.to_s
         post "/post/#{@update_id}", :post => { 
             "title" => "updated test title", 
@@ -241,7 +241,7 @@ describe DittyApp, "< Sinatra::Application" do
     describe "GET /post/:id/delete [with auth]" do
       before(:all) do
         authorize "test", "test"
-        HelpersApplication.stub(:authorized?).and_return true
+        Helper::Application.stub(:authorized?).and_return true
         @del_id = Post.first.id.to_s
         get "/post/#{@del_id}/delete"
       end
