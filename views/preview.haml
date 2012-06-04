@@ -6,7 +6,7 @@
     %input{ :type => "hidden", :name => "post[body]", :value => post["body"] }
     %input{ :type => "hidden", :name => "post[tags]", :value => post["tags"] }
     #form_buttons
-      %input.button{ :type => "button", :value => "Cacnel!", :onclick => "javascript:window.history.back();" }
+      %input.button{ :type => "button", :value => "Cancel!", :onclick => "javascript:window.history.back();" }
       &nbsp;
       %input.button{ :type => "submit", :value => "Save!", :onclick => "javascript:this.form.action='#{form_action}';" }
 
