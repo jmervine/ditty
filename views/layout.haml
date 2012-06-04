@@ -16,11 +16,7 @@
       %meta{ :name => "keywords", :content => (post.tags.map { |t| t.name }).join(",") }
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/ss/layout.css" }
     - if state == :show or state == :index
-      :javascript
-        var switchTo5x=true;
-      %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
-      :javascript
-        stLight.options({publisher: "d70ec18a-3455-4f95-9c4c-43eb2d969408"});
+      = haml :_share_this_js
     - unless settings.google_analytics.nil?
       = haml :_google_analytics
   %body
