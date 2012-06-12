@@ -17,17 +17,15 @@ CONFIG = YAML.load_file(File.join(settings.root, "config", "ditty.yml"))[ENV['RA
 
 # with mongo
 def build_clean_data
-  #puts " "
-  #puts " BULDING CLEAN DATA"
-  config = CONFIG['database']
-  MongoMapper.database = config['name']
-  if config['username'] && config['password']
-    MongoMapper.database.authenticate(config['username'], config['password'])
+  database = CONFIG['database']
+  Mongoid.configure do |config|
+    config.master = Mongo::Connection.new.db(database['name'])
+    if database['username'] and database['password']
+      config.database.authenticate(database['username'], database['password'])
+    end
   end
   Post.destroy_all
-  #puts " - Post.count is now: #{Post.count}"
   Tag.destroy_all
-  #puts " - Tag.count is now: #{Tag.count}"
   tags = %w( tag_one tag_two tag_three tag_four tag_five foo bar baz boo blah )
   (2011..2012).each do |year|
     (5..10).each do |month|
@@ -37,16 +35,16 @@ def build_clean_data
                          :updated_at  => time, 
                          :title       => "post title - #{year}.#{month}.#{day}",
                          :body        => "post body - #{year}.#{month}.#{day}" )
-        post.add_tag( tags[Random.rand(10)] )
-        post.add_tag( tags[Random.rand(10)] )
-        post.add_tag( tags[Random.rand(10)] )
-        post.add_tag( tags[Random.rand(10)] )
-        post.add_tag( tags[Random.rand(10)] )
+        post.associate_or_create_tag(tags[Random.rand(10)])
+        post.associate_or_create_tag(tags[Random.rand(10)])
+        post.associate_or_create_tag(tags[Random.rand(10)])
+        post.associate_or_create_tag(tags[Random.rand(10)])
+        post.associate_or_create_tag(tags[Random.rand(10)])
       end
     end
   end
-  #puts " - Post.count is now: #{Post.count}"
-  #puts " - Tag.count is now: #{Tag.count}"
+  puts " - Post.count is now: #{Post.count}"
+  puts " - Tag.count is now: #{Tag.count}"
 end
 
 class TestHelpersTemplates

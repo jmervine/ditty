@@ -11,8 +11,9 @@ gem 'haml'
 
 group :mongo do
   gem 'mongo'
-  gem 'mongo_mapper'
   gem 'bson_ext'
+  #gem 'mongo_mapper'
+  gem 'mongoid'
 end
 
 group :test, :development do

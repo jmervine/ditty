@@ -7,4 +7,5 @@ ENV['RACK_ENV'] ||= "production"
 use Rack::ShowExceptions
 use Rack::Static
 use Rack::MobileDetect
+
 run DittyApp.new

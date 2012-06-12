@@ -13,6 +13,7 @@ if ENV['RACK_ENV'] == "production"
   pid "#{share}/log/unicorn.pid"
 else
   # non-prod conf
+  worker_processes 2
   APP_ROOT = File.expand_path(File.dirname(File.dirname(__FILE__)))
   stderr_path APP_ROOT+"/log/unicorn_stderr.log"
   stdout_path APP_ROOT+"/log/unicorn_stdout.log"

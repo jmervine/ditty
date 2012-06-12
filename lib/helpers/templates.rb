@@ -51,7 +51,7 @@ module Helper
     end
 
     def archive_items
-      collection = Post.all(:order => :created_at.desc)
+      collection = Post.all.desc(:created_at)
       archive = {}
       # TODO: there has to be a better way
       collection.each do |item| 
@@ -98,7 +98,7 @@ module Helper
     end
 
     def latest n=25
-      Post.all(:order => :created_at.desc)[0..n-1]
+      Post.all.desc(:created_at)[0..n-1]
     end
 
     def linkify_title title

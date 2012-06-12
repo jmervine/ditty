@@ -20,7 +20,7 @@ module Helper
       @username          = configuration['auth']['username']
       @password          = configuration['auth']['password']
 
-      database_connection!
+      #database_connection!
     end
 
     def database

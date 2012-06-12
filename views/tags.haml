@@ -4,8 +4,9 @@
       %span.post_title Tags
     .post_contents
       - tags.each do |tag|
-        - unless tag.posts.empty?
-          %span.tag_link.tag_page_link{ :style => "font-size: #{(14+(tag.posts.count/5)).round}px" }<
+        - post_count = tag.posts.count
+        - unless post_count == 0
+          %span.tag_link.tag_page_link{ :style => "font-size: #{(14+(post_count/5)).round}px" }<
             %a{ :href => "/tag/#{tag.name}" }<=tag.name
-            %small><= "(#{tag.posts.count})" 
+            %small><= "(#{post_count})" 
 

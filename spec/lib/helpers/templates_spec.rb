@@ -122,7 +122,7 @@ describe Helper::Templates do
       helpers.latest(10).should have(10).items
     end
     it "should return the most recent items" do
-      helpers.latest.first.should eq Post.all(:order => :created_at.desc).first
+      helpers.latest.first.should eq Post.all.desc(:created_at).first
     end
   end
 

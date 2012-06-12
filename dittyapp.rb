@@ -24,9 +24,17 @@ class DittyApp < Sinatra::Application
     set :hostname,         @configuration.hostname
     set :google_analytics, @configuration.google_analytics
     set :share_this,       @configuration.share_this
+    set :database,         @configuration.database
 
     set :username,         @configuration.username
     set :password,         @configuration.password
+
+    Mongoid.configure do |config|
+      config.master = Mongo::Connection.new.db(settings.database['name'])
+      if settings.database['username'] and settings.database['password']
+        config.database.authenticate(settings.database['username'], settings.database['password'])
+      end
+    end
   end
 
   configure :production do
@@ -54,7 +62,7 @@ class DittyApp < Sinatra::Application
 
   get "/:year/:month/:day/:title_path/?" do
     title_path = "/" + File.join(params['captures'])
-    haml choose_template(:post), :layout => choose_layout, :locals => { :post => Post.first(:title_path => title_path), :state => :show }
+    haml choose_template(:post), :layout => choose_layout, :locals => { :post => Post.where(:title_path => title_path).first, :state => :show }
   end
 
   get "/post/:id/edit/?" do
@@ -66,7 +74,10 @@ class DittyApp < Sinatra::Application
     protected!
     p, t = seperate_post_tags( params[:post] )
     post = Post.create(p)
-    post.add_tags(t) unless t.empty?
+    t.each do |tag|
+      post.associate_or_create_tag(tag)
+    end
+    post.save!
     redirect post.title_path
   end
 
@@ -85,21 +96,20 @@ class DittyApp < Sinatra::Application
     p_post, p_tags = seperate_post_tags( params[:post] )
     post = Post.find( params[:id] )
 
-    post.tag_ids.reject! { |t| !p_tags.include? t }
-
-    p_post.each { |key, val| post[key.to_sym] = val }
-
-    if p_tags.empty?
-      post.save!
-    else
-      post.add_tags(p_tags)
+    post.tags = []
+    unless p_tags.empty?
+      p_tags.each do |tag|
+        post.associate_or_create_tag(tag)
+      end
     end
+    p_post.each { |key, val| post[key.to_sym] = val }
+    post.save!
     redirect post.title_path
   end
 
   get "/post/:id/delete" do
     protected!
-    Post.destroy params[:id]
+    Post.find( params[:id] ).destroy
     redirect "/"
   end
 
@@ -134,7 +144,7 @@ class DittyApp < Sinatra::Application
     pass unless params[:year] =~ /[0-9]{4}/
     pass unless params[:month] =~ /[0-9]{2}/
 
-    posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
+    posts = Post.all.desc(:created_at).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
 
     pass if posts.empty?
     haml choose_template(:index), :layout => choose_layout, :locals => { :latest => posts }
@@ -145,7 +155,7 @@ class DittyApp < Sinatra::Application
     pass unless params[:month] =~ /[0-9]{2}/
     pass unless params[:day] =~ /[0-9]{2}/
 
-    posts = Post.all(:order => :created_at.desc).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i and p.created_at.day.to_i == params[:day].to_i }
+    posts = Post.all.desc(:created_at).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i and p.created_at.day.to_i == params[:day].to_i }
     pass if posts.empty?
     haml choose_template(:index), :layout => choose_layout, :locals => { :latest => posts }
   end
