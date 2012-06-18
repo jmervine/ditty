@@ -162,7 +162,7 @@ class DittyApp < Sinatra::Application
   end
 
   get "/" do 
-    haml :index
+    haml :index, :layout => choose_layout
   end
 
   not_found do
