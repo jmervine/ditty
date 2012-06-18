@@ -29,6 +29,7 @@ test:
   #timezone: "America/Los_Angeles"
   google_analytics: google_analytics_track_id
   share_this: publisher_id
+  contact: "mailto:example@example.org"
 travis:
   title: "My TEST Ditty's!"
   hostname: example.org
@@ -39,6 +40,7 @@ travis:
     password: test
   google_analytics: google_analytics_track_id
   share_this: publisher_id
+  contact: "mailto:example@example.org"
 stage:
   title: "stage"
   hostname: example.org
@@ -50,6 +52,7 @@ stage:
     username: test
     password: test
   share_this: publisher_id
+  contact: "mailto:example@example.org"
 #production:
   #title: SET ME
   #hostname: SET ME # to make sitemap work
