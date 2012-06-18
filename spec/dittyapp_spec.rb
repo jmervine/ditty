@@ -73,6 +73,9 @@ describe DittyApp, "< Sinatra::Application" do
           it "should have tags" do
             last_response.body.should match /Tags/
           end
+          it "should have contact link" do
+            last_response.body.should match /Contact/
+          end
           unless page_path == "/post" 
             # this may be considered ugly, but I thought it was clever 
             it "should have keywords" do

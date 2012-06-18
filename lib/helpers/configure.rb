@@ -10,15 +10,17 @@ module Helper
       end
 
       @environment       = env
-      @title             = configuration['title']||title
-      @hostname          = ensure_hostname_format(configuration['hostname'])||hostname
-      @timezone          = configuration['timezone']||timezone
-      @google_analytics  = configuration['google_analytics']||google_analytics
-      @share_this        = configuration['share_this']||share_this
-      @database          = configuration['database']
+      @title             = configuration['title'] rescue title
+      @hostname          = ensure_hostname_format(configuration['hostname']) rescue hostname
+      @timezone          = configuration['timezone'] rescue timezone
+      @google_analytics  = configuration['google_analytics'] rescue google_analytics
+      @share_this        = configuration['share_this'] rescue share_this
+      @contact           = configuration['contact'] rescue contact
 
-      @username          = configuration['auth']['username']
-      @password          = configuration['auth']['password']
+      @database          = configuration['database'] rescue nil
+
+      @username          = configuration['auth']['username'] rescue nil
+      @password          = configuration['auth']['password'] rescue nil
 
       #database_connection!
     end
@@ -40,6 +42,9 @@ module Helper
     end
     def share_this
       @share_this||=nil
+    end
+    def contact
+      @contact||=nil
     end
     def title
       @title||="Ditty!"
