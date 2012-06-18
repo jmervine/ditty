@@ -1,0 +1,6 @@
+- unless latest.count == 0
+  - latest.each do |post| 
+    = haml :post, :layout => false, :locals => { :post => post }
+- else
+  %h3 You have no posts! What are you waiting for?
+

@@ -25,49 +25,27 @@ describe Post do
     end
   end
 
-  describe :add_tag do
-    it "should add a tag" do
-      @p1.add_tag("post_spec_one").should be
-      @p1.tags.count.should eq 1
-      Tag.where(:name => "post_spec_one").count.should eq 1
+  describe :associate_or_create_tag do
+    it "should create a tag that doesn't exist" do
+      @p1.associate_or_create_tag("non_existant_tag").should be
+      Tag.where(:name => "non_existant_tag").count.should eq 1
     end
-    it "should not re-add a tag" do
-      @p1.add_tag("post_spec_one").should be
-      @p1.tags.count.should eq 1
-      Tag.where(:name => "post_spec_one").count.should eq 1
+    it "should associate the new tag with the post that created it" do
+      tag = Tag.where(:name => "non_existant_tag").first
+      @p1.tags.include?(tag).should be_true
     end
-    it "should add another tag" do
-      @p1.add_tag("post_spec_two").should be
-      @p1.tags.count.should eq 2
-      Tag.where(:name => "post_spec_two").count.should eq 1
+    it "should associate the post with the new tag" do
+      Tag.where(:name => "non_existant_tag").first.posts.include?(@p1).should be_true
     end
-    it "should not create a new tag when adding a tag to a different post" do
-      @p2.add_tag("post_spec_one").should be
-      @p2.tags.count.should eq 1
-      Tag.where(:name => "post_spec_one").count.should eq 1
-      Post.find(@p2.id).tag_ids.include?(Tag.where(:name => "post_spec_one").first.id).should be_true
+    it "should not create a tag that does exist" do
+      @p2.associate_or_create_tag("non_existant_tag").should be
+      Tag.where(:name => "non_existant_tag").count.should eq 1
     end
-  end
-
-  describe :add_tags do
-    it "should add multiple tags" do
-      @p1.add_tags( [ "post_spec_three", "post_spec_four", "post_spec_five" ] ).should be
-      @p1.tags.count.should eq 5
-      Tag.where(:name => "post_spec_three").count.should eq 1
-      Tag.where(:name => "post_spec_four").count.should eq 1
-      Tag.where(:name => "post_spec_five").count.should eq 1
+    it "should associate the existing tag with the post that tried to created it" do
+      @p2.tags.include?(Tag.where(:name => "non_existant_tag").first).should be_true
     end
-    it "should only add new tags" do
-      @p1.add_tags( [ "post_spec_three", "post_spec_four", "post_spec_five", "post_spec_six" ] ).should be
-      @p1.tags.count.should eq 6
-      Tag.where(:name => "post_spec_six").count.should eq 1
-    end
-    it "should not create new tags when adding tags to a different post" do
-      @p2.add_tags( [ "post_spec_three", "post_spec_four", "post_spec_five" ] ).should be
-      @p2.tags.count.should eq 4
-      Tag.where(:name => "post_spec_three").count.should eq 1
-      Tag.where(:name => "post_spec_four").count.should eq 1
-      Tag.where(:name => "post_spec_five").count.should eq 1
+    it "should associate the post with the existing tag" do
+      Tag.where(:name => "non_existant_tag").first.posts.include?(@p2).should be_true
     end
   end
 

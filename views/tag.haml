@@ -1,0 +1,10 @@
+.post.post_index
+  .post_header
+    %span.post_title<= "Filtered by Tag:: #{tag}"
+
+- unless latest.count == 0
+  - latest.each do |post|
+    = haml choose_template(:post), :layout => false, :locals => { :post => post }
+- else
+  %h3 There are no posts for this tag!
+

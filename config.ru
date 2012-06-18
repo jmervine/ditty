@@ -1,9 +1,8 @@
 # This file is used by Rack-based servers to start the application.
-require './dittyapp'
-#require 'rack-flash'
-
-
 ENV['RACK_ENV'] ||= "production"
+
+require './dittyapp'
+require 'rack/mobile-detect'
 
 # TODO: import from config file?
 secret_string = if File.exists?(File.join(File.dirname(__FILE__),"config","session_secret.txt"))
@@ -16,5 +15,7 @@ puts secret_string
 use Rack::Session::Cookie, :secret => secret_string
 use Rack::ShowExceptions
 use Rack::Static
-#use Rack::Flash
+use Rack::Flash
+use Rack::MobileDetect
+
 run DittyApp.new

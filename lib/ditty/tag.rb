@@ -1,14 +1,11 @@
 class Tag
-  include MongoMapper::Document
-  key :name,     String, :unique => true
-  def posts
-    Post.where(:tag_ids => self.id).sort(:update_at.desc).to_a
-  end
-  def destroy
-    Post.where(:tag_ids => self.id).each do |post|
-      post.tag_ids.delete(self.id)
-      post.save!
-    end
-    super
-  end
+  include Mongoid::Document
+  validates_presence_of :name
+  validates_uniqueness_of :name
+
+  field :name, type: String
+
+  has_and_belongs_to_many :posts, index: true
+  index({ name: 1 }, { unique: true })
+
 end

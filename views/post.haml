@@ -1,0 +1,20 @@
+- state ||= :index 
+- state_class = set_state_class_from_state state
+
+%div{ :class => "post #{state_class}" }
+  .post_header
+    %span.post_title 
+      = post_link(post)
+    .post_data 
+      = time_display(post)
+  .post_contents
+    = post_contents(post)
+    - unless post.tags.nil? or post.tags.empty?
+      %br
+      %br
+      Tags: 
+      - post.tags.each do |tag|
+        %span.tag_link
+          %a{ :href => "/tag/#{tag.name}" }
+            =tag.name
+

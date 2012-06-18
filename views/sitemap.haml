@@ -1,0 +1,17 @@
+!!! XML
+- require 'open-uri'
+%urlset{ :xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9" }
+  %url
+    %loc<= "#{settings.hostname}/"
+  %url
+    %loc<= "#{settings.hostname}/tag"
+  - Tag.all.each do |tag|
+    %url
+      %loc<= "#{settings.hostname}/tag/#{URI::encode(tag.name)}"
+  - Post.all.each do |post|
+    %url
+      %loc<= "#{settings.hostname}#{post.title_path}"
+  %url
+    %loc<= "#{settings.hostname}/archive"
+
+

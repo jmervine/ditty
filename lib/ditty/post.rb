@@ -1,39 +1,23 @@
 class Post 
-  include MongoMapper::Document
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  validates_presence_of :title
+  validates_uniqueness_of :title_path
   before_create :create_title_path
   before_update :update_title_path
-  key :title,         String
-  key :title_path,    String#, :unique => true
-  key :body,          String
-  key :tag_ids,       Array
-  timestamps!
-  many :tags, :in => :tag_ids
 
-  def add_tags tags
-    tags.each do |tag| 
-      tag_obj = Tag.where(:name => tag).first
-      if tag_obj.nil?
-        self.tags.create(:name => tag)
-      else
-        unless self.tag_ids.include? tag_obj.id
-          self.tag_ids.push tag_obj.id 
-        end
-      end
-    end
+  field :title, type: String
+  field :title_path, type: String
+  field :body, type: String
+
+  has_and_belongs_to_many :tags, index: true
+  index({ title_path: 1 }, { unique: true })
+
+  def associate_or_create_tag name
+    tag = Tag.where(:name => name).first 
+    self.tags.create(:name => name) if tag.nil?
+    self.tags.push(tag) unless self.tags.include?(tag)
     self.save!
-    self
-  end
-  def add_tag tag
-    tag_obj = Tag.where(:name => tag).first
-    if tag_obj.nil?
-      self.tags.create(:name => tag)
-    else
-      unless self.tag_ids.include? tag_obj.id
-        self.tag_ids.push tag_obj.id 
-        self.save!
-      end
-    end
-    self
   end
 
   private

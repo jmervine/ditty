@@ -8,11 +8,11 @@ describe DittyApp, "< Sinatra::Application" do
   describe "General Tests [without auth]" do
     pages = {
       "get" => {
-        "/post" => "/post",
-        "/login" => "/login"
+        "/post" => "/post"
       },
       "post" => {
-        "/post" => "/post"
+        "/post" => "/post",
+        "/post/preview" => "/post/preview"
       }
     }
 
@@ -27,8 +27,42 @@ describe DittyApp, "< Sinatra::Application" do
             end
           end
           it "should reject" do
-            HelpersApplication.stub(:authorized?).and_return false
+            Helper::Application.stub(:authorized?).and_return false
             last_response.status.should eq 401
+          end
+        end
+      end
+    end
+  end
+
+  describe "General Tests [without auth]" do
+    pages = {
+      "get" => {
+        "/" => "/",
+        "/archive" => "/archive",
+        "/:year" => "/2012",
+        "/:year/:month" => "/2012/05",
+        "/:year/:month/:day" => "/2012/05/05",
+        "/tag" => "/tag",
+        "/tag/:tag" => "/tag/tag_one"
+      }    
+    }
+
+    pages.each do |method_name, method_pages|
+      method_pages.each do |page_name, page_path|
+        describe "#{method_name.upcase} #{page_name}" do
+          before(:all) do
+            if method_name == "post"
+              post page_path
+            elsif method_name == "get"
+              get page_path
+            end
+          end
+          it "should accept" do
+            last_response.should be_ok
+          end
+          it "should have analytics" do
+            last_response.body.should match /google_analytics_track_id/
           end
         end
       end
@@ -44,7 +78,6 @@ describe DittyApp, "< Sinatra::Application" do
         "/:year" => "/2012",
         "/:year/:month" => "/2012/05",
         "/:year/:month/:day" => "/2012/05/05",
-        "/login" => "/login",
         "/tag" => "/tag",
         "/tag/:tag" => "/tag/tag_one"
       }    
@@ -53,7 +86,6 @@ describe DittyApp, "< Sinatra::Application" do
     pages.each do |method_name, method_pages|
       method_pages.each do |page_name, page_path|
         describe "#{method_name.upcase} #{page_name}" do
-          authorize "test", "test"
           before(:all) do
             authorize 'test', 'test'
             if method_name == "post"
@@ -65,12 +97,45 @@ describe DittyApp, "< Sinatra::Application" do
           it "should accept" do
             last_response.should be_ok
           end
+          it "should not have analytics" do
+            last_response.body.should_not match /google_analytics_track_id/
+          end
+          it "should have title" do
+            last_response.body.should match /My TEST Ditty's!/
+          end
+          it "should have tags" do
+            last_response.body.should match /Tags/
+          end
+          it "should have contact link" do
+            last_response.body.should match /Contact/
+          end
+          unless page_path == "/post" 
+            # this may be considered ugly, but I thought it was clever 
+            it "should have keywords" do
+              last_response.body.should match /<meta content='(.+)' name='keywords' \/>/
+            end
+            it "should have archives" do
+              last_response.body.should match /Archive/
+            end
+          end
         end
       end
     end
   end
 
   describe "Less General Tests" do
+
+    describe "GET /login" do
+      before(:all) do
+        authorize 'test', 'test'
+        get "/login"
+      end
+      it "should redirect to the home page" do
+        last_response.should be_redirect
+        follow_redirect!
+        last_request.url.should == "http://example.org/"
+      end
+    end
 
     describe "GET /:title_path" do
       before(:all) do
@@ -80,11 +145,14 @@ describe DittyApp, "< Sinatra::Application" do
       it "should load post" do
         last_response.should be_ok
       end
+      it "should have description" do
+        last_response.body.should match /<meta content='#{@post.title}' name='description' \/>/
+      end
     end
 
     describe "GET /post/:id/edit [without auth]" do
       before(:all) do
-        HelpersApplication.stub(:authorized?).and_return false
+        Helper::Application.stub(:authorized?).and_return false
         get "/post/#{Post.first.id.to_s}/edit" # find a real post via it's id
       end
       it "should reject" do
@@ -95,10 +163,31 @@ describe DittyApp, "< Sinatra::Application" do
     describe "GET /post/:id/edit [with auth]" do
       before(:all) do
         authorize 'test', 'test'
-        HelpersApplication.stub(:authorized?).and_return true
+        Helper::Application.stub(:authorized?).and_return true
         get "/post/#{Post.first.id.to_s}/edit" # find a real post via it's id
       end
       it "should load post edit form" do
+        last_response.should be_ok
+      end
+    end
+
+    describe "POST /post/:id/preview [without auth]" do
+      before(:all) do
+        Helper::Application.stub(:authorized?).and_return false
+        post "/post/#{Post.first.id.to_s}/preview", :post => { "title" => "foo", "body" => "bar", "tags" => "boo" }
+      end
+      it "should reject" do
+        last_response.status.should eq 401
+      end
+    end
+
+    describe "POST /post/:id/preview [with auth]" do
+      before(:all) do
+        authorize 'test', 'test'
+        Helper::Application.stub(:authorized?).and_return true
+        post "/post/#{Post.first.id.to_s}/preview", :post => { "title" => "foo", "body" => "bar", "tags" => "boo" }
+      end
+      it "should load post preivew page" do
         last_response.should be_ok
       end
     end
@@ -139,7 +228,7 @@ describe DittyApp, "< Sinatra::Application" do
     describe "POST /post" do
       before(:all) do
         authorize "test", "test"
-        HelpersApplication.stub(:authorized?).and_return true
+        Helper::Application.stub(:authorized?).and_return true
         post "/post", :post => { "title" => "create test title", "body" => "create test body", "tags" => "app_tag_one app_tag_two" }
       end
       it "should have added to the data store" do
@@ -155,7 +244,7 @@ describe DittyApp, "< Sinatra::Application" do
     describe "POST /post/:id" do
       before(:all) do
         authorize "test", "test"
-        HelpersApplication.stub(:authorized?).and_return true
+        Helper::Application.stub(:authorized?).and_return true
         @update_id = Post.last.id.to_s
         post "/post/#{@update_id}", :post => { 
             "title" => "updated test title", 
@@ -188,7 +277,7 @@ describe DittyApp, "< Sinatra::Application" do
     describe "GET /post/:id/delete [with auth]" do
       before(:all) do
         authorize "test", "test"
-        HelpersApplication.stub(:authorized?).and_return true
+        Helper::Application.stub(:authorized?).and_return true
         @del_id = Post.first.id.to_s
         get "/post/#{@del_id}/delete"
       end
@@ -199,6 +288,15 @@ describe DittyApp, "< Sinatra::Application" do
         last_response.should be_redirect
         follow_redirect!
         last_request.url.should == "http://example.org/"
+      end
+    end
+
+    describe "GET /sitemap.xml" do
+      before(:all) do
+        get "/sitemap.xml"
+      end
+      it "should be" do
+        last_response.should be_ok
       end
     end
 

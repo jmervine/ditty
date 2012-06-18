@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'tzinfo'
 
-describe HelpersTemplates do
+describe Helper::Templates do
   before(:all) do
     build_clean_data
     @helpers = TestHelpersTemplates.new
@@ -77,40 +77,13 @@ describe HelpersTemplates do
       @archive[2012].keys.should eq [10,9,8,7,6,5]
     end
     it "third level should be items" do
-      @archive[2012][6].should have(6).items
-      @archive[2012][6].first.should be_a Post
+      @archive[2012][5].should have(6).items
+      @archive[2012][5].first.should be_a Post
     end
   end
 
-  describe :archive_nav_list do
-    describe "should build an archive list" do
-      it "with years as links" do
-        helpers.archive_nav_list.should match /2011<\/a>/
-        helpers.archive_nav_list.should match /2012<\/a>/
-      end
-      it "with months as links" do
-        (2011..2012).each do |y|
-          (5..10).each do |m| 
-            str = "/" + y.to_s + "/" + ("%02d" % m )
-            helpers.archive_nav_list.should match Regexp.new(Regexp.escape(str))
-          end
-        end
-      end
-      it "without items" do
-        (2011..2012).each do |y|
-          (5..10).each do |m| 
-            helpers.archive_nav_list.should_not match Regexp.new("\/post\/([a-z0-9]+)\'\>post title")
-          end
-        end
-      end
-    end
-  end
   describe :archive_list do
     describe "should build an archive list" do
-      it "with years as links" do
-        helpers.archive_nav_list.should match /2011<\/a>/
-        helpers.archive_nav_list.should match /2012<\/a>/
-      end
       it "with months as links" do
         (2011..2012).each do |y|
           (5..10).each do |m| 
@@ -149,7 +122,7 @@ describe HelpersTemplates do
       helpers.latest(10).should have(10).items
     end
     it "should return the most recent items" do
-      helpers.latest.first.should eq Post.all(:order => :created_at.desc).first
+      helpers.latest.first.should eq Post.all.desc(:created_at).first
     end
   end
 

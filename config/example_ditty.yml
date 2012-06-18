@@ -2,6 +2,7 @@
 #
 # <RACK_ENV>:
 #   title: <blog title>
+#   hostname: <hostname>
 #   database:
 #     name: <database name>
 #     username: <database username>
@@ -10,10 +11,14 @@
 #     username: <http auth username>
 #     password: <http auth password>
 #   timezone: <defaults to "America/Los_Angeles">
-            #see http://tzinfo.rubyforge.org/ for details
+#           #see http://tzinfo.rubyforge.org/ for details
+#   google_analytics: <track id>
+#   share_this: <publisher id>
+#   contact: "mailto:foo@example.com"
 
 test: 
   title: "My TEST Ditty's!"
+  hostname: example.org
   database: 
     name: ditty_test
     username: test
@@ -22,15 +27,23 @@ test:
     username: test
     password: test
   #timezone: "America/Los_Angeles"
+  google_analytics: google_analytics_track_id
+  share_this: publisher_id
+  contact: "mailto:example@example.org"
 travis:
   title: "My TEST Ditty's!"
+  hostname: example.org
   database: 
     name: ditty_travis
   auth:
     username: test
     password: test
+  google_analytics: google_analytics_track_id
+  share_this: publisher_id
+  contact: "mailto:example@example.org"
 stage:
-  title: "blog.mervine.net"
+  title: "stage"
+  hostname: example.org
   database: 
     name: ditty_stage
     username: stage
@@ -38,8 +51,11 @@ stage:
   auth:
     username: test
     password: test
+  share_this: publisher_id
+  contact: "mailto:example@example.org"
 #production:
   #title: SET ME
+  #hostname: SET ME # to make sitemap work
   #database: 
     #name: production
     #username: setme
@@ -48,4 +64,6 @@ stage:
     #username: setme
     #password: setme
   #timezone: "America/Los_Angeles" # default setting
+  #google_analytics: SET ME # optional
+
   

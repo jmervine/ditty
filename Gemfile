@@ -3,17 +3,20 @@ source :rubygems
 gem 'sinatra'
 gem 'rake'
 gem 'redcarpet'
-#gem 'rack-mobile-detect'
+gem 'rack-mobile-detect'
 gem 'tzinfo'
 
-gem 'sinatra-authentication', :git => "git@github.com:jmervine/sinatra-authentication.git", :branch => "template_engine"
+gem 'sinatra-authentication'
 gem 'haml' # for sinatra-auth
-#gem 'rack-flash'
+gem 'rack-flash'
+
+gem 'haml'
 
 group :mongo do
   gem 'mongo'
-  gem 'mongo_mapper'
   gem 'bson_ext'
+  #gem 'mongo_mapper'
+  gem 'mongoid'
 end
 
 group :test, :development do

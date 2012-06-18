@@ -1,0 +1,10 @@
+.post.post_show
+  .post_header
+    %span.post_title<= post["title"]
+  .post_contents
+    = markdown post["body"]
+    - unless post["tags"].blank?
+      %br
+      Tags:
+      = post["tags"].split(",").join("&nbsp;")
+

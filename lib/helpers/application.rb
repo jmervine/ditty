@@ -1,49 +1,50 @@
-module HelpersApplication
-  extend self
-  #def protected!
-    #unless authorized? 
-      #response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
-      #throw(:halt, [401, "Not authorized\n"])
-    #end
-  #end
-
-  ##TODO: replace with session based auth for logout
-  #def authorized?
-    #@auth ||= Rack::Auth::Basic::Request.new(request.env)
-    #@auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [username, password]
-  #end
-
-  def configure! env
-    begin
-      YAML.load_file(File.join(settings.root, "config", "ditty.yml"))[env]
-    rescue
-      raise "Missing configuration for #{env}."
+module Helper
+  module Application
+    extend self
+    def protected!
+      unless authorized? 
+        response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+        throw(:halt, [401, "Not authorized\n"])
+      end
     end
-  end
 
-  def database! config
-    MongoMapper.database = config['name']
-    if config['username'] && config['password']
-      MongoMapper.database.authenticate(config['username'], config['password'])
-    else
-      true
+    #TODO: replace with session based auth for logout
+    def authorized?
+      @auth ||= Rack::Auth::Basic::Request.new(request.env)
+      @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [settings.username, settings.password]
     end
-  end
 
-  def app_title config
-    begin
-      config["title"]
-    rescue
-      "Ditty!"
+    def choose_layout
+      return :mobile if is_mobile?
+      return :layout
     end
-  end
 
-  def username
-    settings.config["auth"]["username"]
-  end
+    def choose_template template
+      return "mobile_#{template.to_s}".to_sym if is_mobile?
+      return template
+    end
 
-  def password
-    settings.config["auth"]["password"]
-  end
+    def is_mobile?
+      return true if request.env['X_MOBILE_DEVICE']
+      return false
+    end
 
+    def seperate_post_tags post
+      tags = []
+      if post['tags']
+        tags = post['tags'].split(',').map { |tag| tag.strip.downcase }
+        post.delete('tags')
+      end
+      return [post, tags]
+    end
+
+    def get_posts_from_tag tag
+      Tag.where(:name => tag).first.posts.reverse rescue []
+    end
+
+    def tags_sorted_by_count
+      (Tag.all.sort_by { |t| t.posts.count })
+    end
+
+  end
 end
