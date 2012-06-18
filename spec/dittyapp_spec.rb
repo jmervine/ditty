@@ -35,6 +35,40 @@ describe DittyApp, "< Sinatra::Application" do
     end
   end
 
+  describe "General Tests [without auth]" do
+    pages = {
+      "get" => {
+        "/" => "/",
+        "/archive" => "/archive",
+        "/:year" => "/2012",
+        "/:year/:month" => "/2012/05",
+        "/:year/:month/:day" => "/2012/05/05",
+        "/tag" => "/tag",
+        "/tag/:tag" => "/tag/tag_one"
+      }    
+    }
+
+    pages.each do |method_name, method_pages|
+      method_pages.each do |page_name, page_path|
+        describe "#{method_name.upcase} #{page_name}" do
+          before(:all) do
+            if method_name == "post"
+              post page_path
+            elsif method_name == "get"
+              get page_path
+            end
+          end
+          it "should accept" do
+            last_response.should be_ok
+          end
+          it "should have analytics" do
+            last_response.body.should match /google_analytics_track_id/
+          end
+        end
+      end
+    end
+  end
+
   describe "General Tests [with auth]" do
     pages = {
       "get" => {
@@ -52,7 +86,6 @@ describe DittyApp, "< Sinatra::Application" do
     pages.each do |method_name, method_pages|
       method_pages.each do |page_name, page_path|
         describe "#{method_name.upcase} #{page_name}" do
-          authorize "test", "test"
           before(:all) do
             authorize 'test', 'test'
             if method_name == "post"
@@ -64,8 +97,8 @@ describe DittyApp, "< Sinatra::Application" do
           it "should accept" do
             last_response.should be_ok
           end
-          it "should have analytics" do
-            last_response.body.should match /google_analytics_track_id/
+          it "should not have analytics" do
+            last_response.body.should_not match /google_analytics_track_id/
           end
           it "should have title" do
             last_response.body.should match /My TEST Ditty's!/

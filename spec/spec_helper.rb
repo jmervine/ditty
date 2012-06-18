@@ -43,8 +43,8 @@ def build_clean_data
       end
     end
   end
-  puts " - Post.count is now: #{Post.count}"
-  puts " - Tag.count is now: #{Tag.count}"
+  #puts " - Post.count is now: #{Post.count}"
+  #puts " - Tag.count is now: #{Tag.count}"
 end
 
 class TestHelpersTemplates

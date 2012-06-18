@@ -17,7 +17,7 @@
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/ss/layout.css" }
     - if not settings.share_this.nil? and (state == :show or state == :index)
       = haml :_share_this_js, :layout => false
-    - unless settings.google_analytics.nil? or authorized?
+    - unless settings.google_analytics.nil? || authorized?
       = haml :_google_analytics, :layout => false
   %body
     #page
