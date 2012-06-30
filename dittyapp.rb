@@ -10,6 +10,7 @@ require 'ditty'
 require 'helpers'
 
 # auth
+require 'sinbook'
 require "sinatra-authentication"
 
 class DittyApp < Sinatra::Application
@@ -28,6 +29,17 @@ class DittyApp < Sinatra::Application
     set :google_analytics, @configuration.google_analytics
     set :share_this,       @configuration.share_this
     set :contact,          @configuration.contact
+
+    set :facebook_id,      @configuration.facebook_id
+    set :facebook_key,     @configuration.facebook_key
+
+    unless settings.facebook_id.nil? || settings.facebook_key.nil?
+      facebook do
+        secret settings.facebook_key
+        app_id settings.facebook_id
+      end
+    end
+
     set :database,         @configuration.database
 
     set :username,         @configuration.username
@@ -54,10 +66,10 @@ class DittyApp < Sinatra::Application
     haml :sitemap, :layout => false
   end
 
-  get "/login" do
-    protected!
-    redirect "/"
-  end
+  #get "/login" do
+    #protected!
+    #redirect "/"
+  #end
 
   get "/post/?" do
     protected!

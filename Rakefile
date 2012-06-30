@@ -32,6 +32,11 @@ task :console do
   exec "irb -r 'pp' -r './dittyapp.rb'"
 end
 
+desc "start server"
+task :server do
+  exec 'unicorn'
+end
+
 namespace :unicorn do
   desc "Start unicorn"
   task :start do
@@ -50,6 +55,7 @@ namespace :unicorn do
 
   task :stop_f do
     %x{ ps aux | grep unicorn | grep -v grep | awk '{print $1}' | xargs kill -9 }
+    %x{ [[ -e log/unicorn.pid ]] && rm log/unicorn.pid }
   end
 
   desc "Restart unicorn deamonized" 

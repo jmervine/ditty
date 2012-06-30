@@ -15,6 +15,8 @@
 #   google_analytics: <track id>
 #   share_this: <publisher id>
 #   contact: "mailto:foo@example.com"
+#   facebook_key: <facebook>
+#
 
 test: 
   title: "My TEST Ditty's!"
@@ -30,6 +32,7 @@ test:
   google_analytics: google_analytics_track_id
   share_this: publisher_id
   contact: "mailto:example@example.org"
+  facebook_key: facebook_api_key
 travis:
   title: "My TEST Ditty's!"
   hostname: example.org
@@ -41,6 +44,7 @@ travis:
   google_analytics: google_analytics_track_id
   share_this: publisher_id
   contact: "mailto:example@example.org"
+  facebook_key: facebook_api_key
 stage:
   title: "stage"
   hostname: example.org
@@ -53,6 +57,7 @@ stage:
     password: test
   share_this: publisher_id
   contact: "mailto:example@example.org"
+  facebook_key: facebook_api_key
 #production:
   #title: SET ME
   #hostname: SET ME # to make sitemap work
@@ -65,5 +70,7 @@ stage:
     #password: setme
   #timezone: "America/Los_Angeles" # default setting
   #google_analytics: SET ME # optional
-
+  #share_this: SET ME # optional
+  #contact: SET ME # optional
+  #facebook_key: SET ME # optional
   

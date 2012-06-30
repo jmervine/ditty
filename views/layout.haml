@@ -19,6 +19,8 @@
       = haml :_share_this_js, :layout => false
     - unless settings.google_analytics.nil? || authorized?
       = haml :_google_analytics, :layout => false
+    - unless settings.facebook_key.nil?
+      %script{:type => 'text/javascript', :src => 'http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/en_US'}
   %body
     #page
       #header
@@ -51,4 +53,8 @@
 
       #footer
         = haml :_footer, :layout => false
+
+      - unless settings.facebook_key.nil?
+        :javascript
+          FB.init("#{settings.facebook_key}", "/receiver")
 

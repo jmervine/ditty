@@ -16,6 +16,8 @@ module Helper
       @google_analytics  = configuration['google_analytics'] rescue google_analytics
       @share_this        = configuration['share_this'] rescue share_this
       @contact           = configuration['contact'] rescue contact
+      @facebook_key      = configuration['facebook_key'] rescue facebook_key
+      @facebook_id       = configuration['facebook_id'] rescue facebook_id
 
       @database          = configuration['database'] rescue nil
 
@@ -45,6 +47,12 @@ module Helper
     end
     def contact
       @contact||=nil
+    end
+    def facebook_key
+      @facebook_key||=nil
+    end
+    def facebook_id
+      @facebook_id||=nil
     end
     def title
       @title||="Ditty!"

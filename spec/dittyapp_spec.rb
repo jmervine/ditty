@@ -125,17 +125,17 @@ describe DittyApp, "< Sinatra::Application" do
 
   describe "Less General Tests" do
 
-    describe "GET /login" do
-      before(:all) do
-        authorize 'test', 'test'
-        get "/login"
-      end
-      it "should redirect to the home page" do
-        last_response.should be_redirect
-        follow_redirect!
-        last_request.url.should == "http://example.org/"
-      end
-    end
+    #describe "GET /login" do
+      #before(:all) do
+        #authorize 'test', 'test'
+        #get "/login"
+      #end
+      #it "should redirect to the home page" do
+        #last_response.should be_redirect
+        #follow_redirect!
+        #last_request.url.should == "http://example.org/"
+      #end
+    #end
 
     describe "GET /:title_path" do
       before(:all) do
