@@ -34,7 +34,7 @@ end
 
 desc "start server"
 task :server do
-  exec 'unicorn'
+  exec 'unicorn --port 9001'
 end
 
 namespace :unicorn do
