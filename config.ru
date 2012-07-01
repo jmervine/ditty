@@ -5,6 +5,9 @@ require './dittyapp'
 require 'rack/mobile-detect'
 #require 'rack-flash'
 
+require 'newrelic_rpm'
+NewRelic::Agent.after_fork(:force_reconnect => true)
+
 use Rack::Session::Cookie
 use Rack::ShowExceptions
 use Rack::Static
@@ -12,3 +15,4 @@ use Rack::Static
 use Rack::MobileDetect
 
 run DittyApp.new
+

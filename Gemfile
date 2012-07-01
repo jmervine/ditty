@@ -12,6 +12,8 @@ gem 'rack-flash'
 
 gem 'haml'
 
+gem 'newrelic_rpm'
+
 group :mongo do
   gem 'mongo'
   gem 'bson_ext'

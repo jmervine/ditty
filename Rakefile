@@ -34,7 +34,10 @@ end
 
 desc "start server"
 task :server do
-  exec 'unicorn --port 9001'
+  abort "RACK_ENV required!" unless ENV['RACK_ENV']
+  puts "starting with #{ENV['RACK_ENV']} at http://localhost:9001/"
+  exec 'unicorn --port 9001 ./config.ru'
+  #exec 'shotgun --port 9001 ./config.ru'
 end
 
 namespace :unicorn do
