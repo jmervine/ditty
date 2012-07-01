@@ -1,5 +1,5 @@
 language: ruby
-bundler_args: --without deployment import unicorn
+bundler_args: --without deployment import unicorn newrelic
 env: RACK_ENV=travis
 before_script: cp ./config/example_ditty.yml ./config/ditty.yml
 script: bundle exec rspec -c -fd

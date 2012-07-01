@@ -4,9 +4,14 @@ require 'rack/mobile-detect'
 
 ENV['RACK_ENV'] ||= "production"
 
-require 'newrelic_rpm'
-NewRelic::Agent.after_fork(:force_reconnect => true)
-
+begin
+  if File.exists? "./config/newrelic.yml"
+    require 'newrelic_rpm'
+    NewRelic::Agent.after_fork(:force_reconnect => true)
+  end
+rescue LoadError
+  # proceed without NewRelic
+end
 
 use Rack::ShowExceptions
 use Rack::Static
