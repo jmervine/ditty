@@ -15,6 +15,10 @@ require "sinatra-authentication"
 
 class DittyApp < Sinatra::Application
 
+  configure :development do
+    enable :logging, :dump_errors, :raise_errors, :show_exceptions
+  end
+
   configure do
 
     enable :logging, :raise_errors#, :dump_errors
@@ -33,12 +37,12 @@ class DittyApp < Sinatra::Application
     set :facebook_id,      @configuration.facebook_id
     set :facebook_key,     @configuration.facebook_key
 
-    unless settings.facebook_id.nil? || settings.facebook_key.nil?
-      facebook do
-        secret settings.facebook_key
-        app_id settings.facebook_id
-      end
-    end
+    #unless settings.facebook_id.nil? || settings.facebook_key.nil?
+      #facebook do
+        #secret settings.facebook_key
+        #app_id settings.facebook_id
+      #end
+    #end
 
     set :database,         @configuration.database
 
