@@ -12,6 +12,7 @@ begin
     remote_task :link_config, :roles => :app do
       break unless target_host == Rake::RemoteTask.hosts_for(:app).first
       run "ln -s #{deploy_to}/shared/ditty.yml #{deploy_to}/current/config/ditty.yml"
+      run "ln -s #{deploy_to}/shared/newrelic.yml #{deploy_to}/current/config/newrelic.yml"
     end
   end
 rescue LoadError
@@ -34,10 +35,9 @@ end
 
 desc "start server"
 task :server do
-  abort "RACK_ENV required!" unless ENV['RACK_ENV']
+  ENV['RACK_ENV'] ||= 'development'
   puts "starting with #{ENV['RACK_ENV']} at http://localhost:9001/"
   exec 'unicorn --port 9001 ./config.ru'
-  #exec 'shotgun --port 9001 ./config.ru'
 end
 
 namespace :unicorn do

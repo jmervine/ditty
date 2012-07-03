@@ -9,10 +9,10 @@ module Helper
     end
 
     #TODO: replace with session based auth for logout
-    def authorized?
-      @auth ||= Rack::Auth::Basic::Request.new(request.env)
-      @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [settings.username, settings.password]
-    end
+    #def authorized?
+      #@auth ||= Rack::Auth::Basic::Request.new(request.env)
+      #@auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [settings.username, settings.password]
+    #end
 
     def choose_layout
       return :mobile if is_mobile?

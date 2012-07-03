@@ -11,6 +11,9 @@ class Post
   field :body, type: String
 
   has_and_belongs_to_many :tags, index: true
+  has_many :comments
+  belongs_to :mongoid_user
+
   index({ title_path: 1 }, { unique: true })
 
   def associate_or_create_tag name

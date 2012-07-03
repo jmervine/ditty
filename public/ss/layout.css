@@ -233,6 +233,11 @@ textarea.value {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
+textarea.comment_value {
+  height: 100px;
+  width: 98%;
+}
+
 input.value {
   color: gray;
   font-face: monospace;

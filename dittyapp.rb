@@ -16,12 +16,12 @@ require "sinatra-authentication"
 class DittyApp < Sinatra::Application
 
   configure :development do
-    enable :logging, :dump_errors, :raise_errors, :show_exceptions
+    enable :dump_errors, :show_exceptions
   end
 
   configure do
 
-    enable :logging, :raise_errors#, :dump_errors
+    enable :logging, :raise_errors
     set :pass_errors, false
 
     set :environment, ENV['RACK_ENV']||"production"
@@ -66,17 +66,33 @@ class DittyApp < Sinatra::Application
     include Helper::Application
   end
 
+  before do
+    unless request.path_info == "/login" || request.path_info == "/logout"
+      session[:return_to] = request.path_info
+    end
+  end
+
   get "/sitemap.xml" do
     haml :sitemap, :layout => false
   end
 
   #get "/login" do
-    #protected!
+    #login_required
     #redirect "/"
   #end
 
+  # sinatra-authentication monkey patch
+  get '/logout' do
+    session[:user] = nil
+    if Rack.const_defined?('Flash')
+      flash[:notice] = "Logout successful."
+    end
+    return_to = ( session[:return_to] ? session[:return_to] : "/" )
+    redirect return_to
+  end
+
   get "/post/?" do
-    protected!
+    login_required
     haml :form_post, :locals => { :navigation => :_nav_help, :post => Post.new, :state => :new }
   end
 
@@ -86,12 +102,21 @@ class DittyApp < Sinatra::Application
   end
 
   get "/post/:id/edit/?" do
-    protected!
+    login_required
     haml :form_post, :locals => { :post => Post.find(params[:id]), :navigation => :_nav_help, :state => :edit }
   end
 
+  post "/comment/?" do
+    login_required
+    post = Post.find( params[:comment]['post_id'] )
+    post.comments.create( :comment => params[:comment]['comment'], :mongoid_user_id => current_user.id )
+    post.save!
+    pp post
+    redirect post.title_path
+  end
+
   post "/post/?" do
-    protected!
+    login_required
     p, t = seperate_post_tags( params[:post] )
     post = Post.create(p)
     t.each do |tag|
@@ -102,17 +127,17 @@ class DittyApp < Sinatra::Application
   end
 
   post "/post/preview" do
-    protected!
+    login_required
     haml :preview, :locals => { :post => params[:post], :navigation => :_nav_help, :state => :preview }
   end
 
   post "/post/:id/preview" do
-    protected!
+    login_required
     haml :preview, :locals => { :post => params[:post], :navigation => :_nav_help, :post_id => params[:id], :state => :preview }
   end
 
   post "/post/:id" do
-    protected!
+    login_required
     p_post, p_tags = seperate_post_tags( params[:post] )
     post = Post.find( params[:id] )
 
@@ -128,14 +153,14 @@ class DittyApp < Sinatra::Application
   end
 
   get "/post/:id/delete" do
-    protected!
+    login_required
     Post.find( params[:id] ).destroy
     redirect "/"
   end
 
   get "/tag/:tag" do
     posts = get_posts_from_tag( params[:tag] )
-    redirect "/tag" if posts.empty?
+    #redirect "/tag" if posts.empty?
     haml :tag, :layout => choose_layout, :locals => { :latest => posts, :tag => params[:tag], :state => :tag }
   end
 

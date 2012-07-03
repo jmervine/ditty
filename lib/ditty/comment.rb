@@ -1,10 +1,11 @@
-  #class Comment 
-    #include MongoMapper::Document
-    #key :title,         String
-    #key :body,          String
-    #key :post_id,       BSON::ObjectId
-    #key :created_by,    String
-    #timestamps!
-    ##belongs_to :post
-  #end
+class Comment
+  include Mongoid::Document
+
+  field :comment, type: String
+
+  belongs_to :post#, index: true
+  belongs_to :mongoid_user#, index: true
+  index({ name: 1 }, { unique: true })
+
+end
 

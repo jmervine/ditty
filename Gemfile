@@ -12,7 +12,9 @@ gem 'rack-flash'
 
 gem 'haml'
 
-gem 'newrelic_rpm'
+group :newrelic do
+  gem 'newrelic_rpm'
+end
 
 group :mongo do
   gem 'mongo'

@@ -11,10 +11,31 @@
     = post_contents(post)
     - unless post.tags.nil? or post.tags.empty?
       %br
-      %br
       Tags: 
       - post.tags.each do |tag|
         %span.tag_link
           %a{ :href => "/tag/#{tag.name}" }
-            =tag.name
+            = tag.name
+    - if state == :show
+      %hr
+      %br
+      %span#comments Comments: 
+      - unless post.comments.nil? or post.comments.empty?
+        %br
+        - post.comments.each do |comment|
+          -#- user = (comment.mongoid_user.email ? comment.mongoid_user.email : 'anon' ) 
+          -#= '['+user+'] '+comment.comment
+          = comment.comment
+          -#= comment.mongoid_userjk
+          %hr
+      %br
+      %br
+      - if logged_in?
+        = haml :_form_comment, :layout => false, :locals => { :post_id => post.id }
+      - else
+        %a{ :href => "/login"}login to add comments
+    - else
+      %br
+      %br
+      %a{ :href => post.title_path+"#comments" }View Comments
 

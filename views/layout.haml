@@ -17,7 +17,7 @@
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/ss/layout.css" }
     - if not settings.share_this.nil? and (state == :show or state == :index)
       = haml :_share_this_js, :layout => false
-    - unless settings.google_analytics.nil? || authorized?
+    - unless settings.google_analytics.nil? || (logged_in? && current_user.admin?)
       = haml :_google_analytics, :layout => false
     - unless settings.facebook_key.nil?
       %script{:type => 'text/javascript', :src => 'http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/en_US'}
@@ -30,13 +30,19 @@
           -#- unless authorized?
             -#%a{ :href => "/login" }login
           -#- else
-          - if authorized?
-            - unless state == :edit or state == :new
-              - if state == :show
-                %a{ :href => "/post/#{post.id}/edit" }edit post
+          - if logged_in?
+            - if current_user.admin?
+              - unless state == :edit or state == :new
+                - if state == :show
+                  %a{ :href => "/post/#{post.id}/edit" }edit post
+                  &nbsp;&nbsp;
+                %a{ :href => "/post" }new post
                 &nbsp;&nbsp;
-              %a{ :href => "/post" }new post
-              &nbsp;&nbsp;
+            %a{ :href => "/logout" }logout
+            &nbsp;&nbsp;
+          - else
+            %a{ :href => "/login" }login
+            &nbsp;&nbsp;
           %a{ :href => "/" }home
 
       #page_body

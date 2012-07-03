@@ -1,0 +1,7 @@
+%form{ :method => "post", :name => "comment", :action => "/comment" }
+  %input{ :name => 'comment[post_id]', :type => 'hidden', :value => post_id }
+  .post_contents
+    %textarea{ :name => "comment[comment]", :class => "value comment_value" }
+  #form_buttons
+    %input.button{ :type => "submit", "value" => "Comment!" }
+
