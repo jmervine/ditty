@@ -33,6 +33,17 @@ task :console do
   exec "irb -r 'pp' -r './dittyapp.rb'"
 end
 
+desc "start mongo console"
+task :dbconsole do
+  ENV['RACK_ENV'] ||= 'test'
+  begin
+    dbc = YAML.load_file("./config/ditty.yml")[ENV['RACK_ENV']]['database']
+    exec "mongo -u #{dbc['username']} -p #{dbc['password']} #{dbc['name']}"
+  rescue 
+    abort "config/ditty.yml must be present"
+  end
+end
+
 desc "start server"
 task :server do
   ENV['RACK_ENV'] ||= 'development'

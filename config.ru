@@ -19,7 +19,6 @@ rescue LoadError
   # proceed without NewRelic
 end
 
->>>>>>> master
 use Rack::ShowExceptions
 use Rack::Static
 #use Rack::Flash
