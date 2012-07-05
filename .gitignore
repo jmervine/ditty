@@ -7,4 +7,4 @@ public/tumblr_files
 _posts
 config/ditty.yml
 config/newrelic.yml
-
+cache/*
