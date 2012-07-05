@@ -26,7 +26,14 @@ module Helper
     end
 
     def post_tags post
-      (Tag.where( :post_id => post.id ).map { |t| t.tag }).compact.sort.join(" ")
+      unless $tags and $tags[:expires].to_i > Time.now.to_i-(5*60*1000)
+        logger.info "tags: miss" 
+        $tags = { :tags => (Tag.where( :post_id => post.id ).cache.map { |t| t.tag }).compact.sort.join(" "),
+                  :expires => Time.now }
+      else
+        logger.debug "tags: hit"
+      end
+      return $tags[:tags]
     end
 
     def post_title post
@@ -51,41 +58,53 @@ module Helper
     end
 
     def archive_items
-      collection = Post.all.desc(:created_at)
-      archive = {}
-      # TODO: there has to be a better way
-      collection.each do |item| 
-        date = item.created_at
-        archive[date.year] = {} unless archive.has_key? date.year
-        archive[date.year][date.month] = [] unless archive[date.year].has_key? date.month
-        archive[date.year][date.month].push item
+      unless $archive and $archive[:expires].to_i > Time.now.to_i-(5*60*1000) 
+        logger.info "archive: miss"
+        collection = Post.all.desc(:created_at).cache
+        archive = {}
+        # TODO: there has to be a better way
+        collection.each do |item| 
+          date = item.created_at
+          archive[date.year] = {} unless archive.has_key? date.year
+          archive[date.year][date.month] = [] unless archive[date.year].has_key? date.month
+          archive[date.year][date.month].push item
+        end
+        $archive = { :archive => archive, :expires => Time.now }
+      else
+        logger.debug "archive: hit"
       end
-      archive
+      return $archive[:archive]
     end
 
     def archive_list archive=nil
-      archive = archive_items if archive.nil?
+      unless $markup and $markup[:expires].to_i > Time.now.to_i-(5*60*1000)
+        logger.info "markup: miss"
+        archive = archive_items if archive.nil?
 
-      markup = ""
-      markup << %{ <ul class="nav_list"> }
+        markup = ""
+        markup << %{ <ul class="nav_list"> }
 
-      archive.each_key do |year|
-        markup << %{ <li class="nav_item"><b>#{archive_link(year)}</b></li> }
-        markup << %{ <ul class="nav_sub_list"> }
-        archive[year].each_key do |month|
-          markup << %{ <li class="nav_item">#{ archive_link(year, month) }</li> }
+        archive.each_key do |year|
+          markup << %{ <li class="nav_item"><b>#{archive_link(year)}</b></li> }
           markup << %{ <ul class="nav_sub_list"> }
-          archive[year][month].each do |item|
-            markup << %{ <li class="nav_item">#{ post_link(item) }</li> }
+          archive[year].each_key do |month|
+            markup << %{ <li class="nav_item">#{ archive_link(year, month) }</li> }
+            markup << %{ <ul class="nav_sub_list"> }
+            archive[year][month].each do |item|
+              markup << %{ <li class="nav_item">#{ post_link(item) }</li> }
+            end
+            markup << %{ </ul> }
+            markup << %{ </li> }
           end
           markup << %{ </ul> }
           markup << %{ </li> }
         end
         markup << %{ </ul> }
-        markup << %{ </li> }
+        $markup = { :markup => markup, :expires => Time.now }
+      else
+        logger.debug "markup: hit"
       end
-      markup << %{ </ul> }
-      markup
+      return $markup[:markup]
     end
 
     def post_link post
@@ -98,7 +117,14 @@ module Helper
     end
 
     def latest n=25
-      Post.all.desc(:created_at)[0..n-1]
+      unless $latest and $latest[:expires].to_i > Time.now.to_i-(5*60*1000) and $latest[:count] == n
+        logger.info "latest: miss"
+        #TODO: might be buggy when changing 'n'
+        $latest = { :posts => Post.all.desc(:created_at).cache[0..n-1], :expires => Time.now, :count => n }
+      else
+        logger.debug "latest: hit"
+      end
+      return $latest[:posts]
     end
 
     def linkify_title title

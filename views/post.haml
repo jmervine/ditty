@@ -19,15 +19,15 @@
     - if state == :show
       %hr
       %br
-      %span#comments Comments: 
-      - unless post.comments.nil? or post.comments.empty?
-        %br
-        - post.comments.each do |comment|
-          -#- user = (comment.mongoid_user.email ? comment.mongoid_user.email : 'anon' ) 
-          -#= '['+user+'] '+comment.comment
-          = comment.comment
-          -#= comment.mongoid_userjk
-          %hr
+      #comments
+        .header Comments: 
+        - unless post.comments.nil? or post.comments.empty?
+          - post.comments.each do |comment|
+            %span.username<= "[#{comment.mongoid_user.email.split("@").first}] "
+            %span.comment<= comment.comment
+            - if current_user and current_user.admin?
+              %a{ :href => "/comment/#{comment.id}/delete" }delete
+            %hr
       %br
       %br
       - if logged_in?

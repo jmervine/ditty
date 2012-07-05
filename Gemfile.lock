@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/jmervine/simple_disk_cache.git
+  revision: a0316a2076db7959a4dd331246fdef65c42c94cb
+  specs:
+    simple_disk_cache (1.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -109,6 +115,7 @@ DEPENDENCIES
   rdoc
   redcarpet
   rspec
+  simple_disk_cache!
   sinatra
   sinatra-authentication
   travis-lint

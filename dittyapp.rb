@@ -17,6 +17,7 @@ class DittyApp < Sinatra::Application
 
   configure :development do
     enable :dump_errors, :show_exceptions
+    set :logging, Logger::DEBUG
   end
 
   configure do
@@ -26,6 +27,7 @@ class DittyApp < Sinatra::Application
 
     set :environment, ENV['RACK_ENV']||"production"
     @configuration = Helper::Configure.new(settings.environment, settings.root)
+    #set :config, Helper::Configure.new(settings.environment, settings.root)
 
     set :title,            @configuration.title
     set :timezone,         @configuration.timezone
@@ -36,6 +38,10 @@ class DittyApp < Sinatra::Application
 
     set :facebook_id,      @configuration.facebook_id
     set :facebook_key,     @configuration.facebook_key
+
+    #set :config, @configuration
+
+    #settings.config.title
 
     #unless settings.facebook_id.nil? || settings.facebook_key.nil?
       #facebook do
@@ -64,12 +70,29 @@ class DittyApp < Sinatra::Application
   helpers do
     include Helper::Templates
     include Helper::Application
+    def kill_cache
+      $markup = nil
+      $tags = nil
+      $archive = nil
+      $latest = nil
+    end
   end
 
   before do
     unless request.path_info == "/login" || request.path_info == "/logout"
       session[:return_to] = request.path_info
     end
+
+    unless request.path_info =~ /edit/ or request.path_info =~ /delete/ or request.path_info =~ /preview/ or request.post?
+      cache_control :public, :must_revalidate, :max_age => 60
+    end
+
+    if request.post?
+      kill_cache
+    end
+  end
+
+  before :method => "post" do
   end
 
   get "/sitemap.xml" do
@@ -110,9 +133,13 @@ class DittyApp < Sinatra::Application
     login_required
     post = Post.find( params[:comment]['post_id'] )
     post.comments.create( :comment => params[:comment]['comment'], :mongoid_user_id => current_user.id )
-    post.save!
-    pp post
     redirect post.title_path
+  end
+
+  get "/comment/:comment_id/delete" do
+    login_required
+    Comment.find( params[:comment_id] ).first.destroy 
+    redirect session[:return_to]
   end
 
   post "/post/?" do

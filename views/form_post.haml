@@ -18,7 +18,8 @@
         Post:
         %br
         %textarea{ :name => "post[body]", :class => "value" }
-          = post.body||""
+          :preserve 
+            #{post.body||""}
         #form_tags
           %br
           %span.post_title Tags:

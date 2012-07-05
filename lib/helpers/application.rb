@@ -39,11 +39,13 @@ module Helper
     end
 
     def get_posts_from_tag tag
-      Tag.where(:name => tag).first.posts.reverse rescue []
+      # TODO: better cacheing on this
+      Tag.where(:name => tag).first.posts.cache.reverse rescue []
     end
 
     def tags_sorted_by_count
-      (Tag.all.sort_by { |t| t.posts.count })
+      # TODO: better cacheing on this
+      (Tag.all.cache.sort_by { |t| t.posts.count })
     end
 
   end
