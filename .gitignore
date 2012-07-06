@@ -7,4 +7,6 @@ public/tumblr_files
 _posts
 config/ditty.yml
 config/newrelic.yml
+config/unicorn.rb
+config/deploy.rb
 
