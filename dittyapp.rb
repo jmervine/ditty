@@ -8,6 +8,7 @@ require 'haml'
 # load app libs
 require 'ditty'
 require 'helpers'
+require 'diskcached'
 
 class DittyApp < Sinatra::Application
 
@@ -36,6 +37,9 @@ class DittyApp < Sinatra::Application
         config.database.authenticate(settings.database['username'], settings.database['password'])
       end
     end
+
+    $diskcache = Diskcached.new(File.join(settings.root, 'cache'))
+    $diskcache.flush # ensure caches are empty on startup
   end
 
   configure :production do
@@ -130,8 +134,10 @@ class DittyApp < Sinatra::Application
   end
 
   get "/archive/?*" do
-    items = archive_items
-    haml :archive, :layout => choose_layout, :locals => { :state => :archive }
+    $diskcache.cache('archive') do
+      items = archive_items
+      haml :archive, :layout => choose_layout, :locals => { :state => :archive }
+    end
   end
 
   get "/:year/?" do

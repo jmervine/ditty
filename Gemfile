@@ -6,7 +6,7 @@ gem 'redcarpet'
 gem 'rack-mobile-detect'
 gem 'tzinfo'
 gem 'rdoc'
-gem 'simple_disk_cache', :git => 'https://github.com/jmervine/simple_disk_cache.git'
+gem 'diskcached'
 
 gem 'haml'
 
