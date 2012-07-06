@@ -15,10 +15,12 @@
       %meta{ :name => "description", :content => post.title }
       %meta{ :name => "keywords", :content => (post.tags.map { |t| t.name }).join(",") }
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/ss/layout.css" }
-    - if not settings.share_this.nil? and (state == :show or state == :index)
+    - if not settings.share_this.nil? and (state == :show or state == :index or state == :archive)
       = haml :_share_this_js, :layout => false
     - unless settings.google_analytics.nil? || authorized?
       = haml :_google_analytics, :layout => false
+    - if not settings.disqus.nil? and (state == :show or state == :index)
+      = haml :_comments_js, :layout => false
   %body
     #page
       #header

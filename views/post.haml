@@ -5,7 +5,7 @@
   .post_header
     %span.post_title 
       = post_link(post)
-    .post_data 
+    .post_date
       = time_display(post)
   .post_contents
     = post_contents(post)
@@ -17,4 +17,11 @@
         %span.tag_link
           %a{ :href => "/tag/#{tag.name}" }
             =tag.name
+    - unless settings.disqus.nil? 
+      %br
+      %br
+      - if state == :index
+        = haml :_comment_count, :layout => false, :locals => { :post_path => post.title_path }
+      - else
+        = haml :_comments, :layout => false, :locals => { :post_path => post.title_path }
 
