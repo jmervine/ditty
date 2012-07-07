@@ -15,6 +15,8 @@ class DittyApp < Sinatra::Application
   configure do
 
     enable :logging, :raise_errors#, :dump_errors
+    set :logging, Logger::DEBUG
+
     set :pass_errors, false
 
     set :environment, ENV['RACK_ENV']||"production"
@@ -45,6 +47,7 @@ class DittyApp < Sinatra::Application
 
   configure :production do
     set :haml, :ugly => true
+    set :logging, Logger::INFO
   end
 
   helpers do
@@ -52,8 +55,16 @@ class DittyApp < Sinatra::Application
     include Helper::Application
   end
 
+  before do
+    logger.debug "DEBUG MODE"
+    logger.debug "authorized? = #{authorized?.to_s}"
+    @cache_key = cache_sha(request.path_info)
+  end
+
   get "/sitemap.xml" do
-    haml :sitemap, :layout => false
+    $diskcache.cache('sitemap') do
+      haml :sitemap, :layout => false
+    end
   end
 
   get "/login" do
@@ -68,16 +79,23 @@ class DittyApp < Sinatra::Application
 
   get "/:year/:month/:day/:title_path/?" do
     title_path = "/" + File.join(params['captures'])
-    haml choose_template(:post), :layout => choose_layout, :locals => { :post => Post.where(:title_path => title_path).first, :state => :show }
+    begin
+      raise Diskcached::NotFound if authorized?
+      content = $diskcache.get(@cache_key) 
+    rescue Diskcached::NotFound
+      content = haml( choose_template(:post), :layout => choose_layout, :locals => { :post => Post.where(:title_path => title_path).first, :state => :show } )
+      $diskcache.set(@cache_key, content) unless authorized?
+    end
+    content
   end
 
   get "/post/:id/edit/?" do
     protected!
     haml :form_post, :locals => { :post => Post.find(params[:id]), :navigation => :_nav_help, :state => :edit }
   end
-
   post "/post/?" do
     protected!
+    $diskcache.flush
     p, t = seperate_post_tags( params[:post] )
     post = Post.create(p)
     t.each do |tag|
@@ -99,6 +117,7 @@ class DittyApp < Sinatra::Application
 
   post "/post/:id" do
     protected!
+    $diskcache.flush
     p_post, p_tags = seperate_post_tags( params[:post] )
     post = Post.find( params[:id] )
 
@@ -120,42 +139,76 @@ class DittyApp < Sinatra::Application
   end
 
   get "/tag/:tag" do
-    posts = get_posts_from_tag( params[:tag] )
-    redirect "/tag" if posts.empty?
-    haml :tag, :layout => choose_layout, :locals => { :latest => posts, :tag => params[:tag], :state => :tag }
+    begin
+      raise Diskcached::NotFound if authorized?
+      content = $diskcache.get(@cache_key) 
+    rescue Diskcached::NotFound
+      posts = get_posts_from_tag( params[:tag] )
+      redirect "/tag" if posts.empty?
+      content = haml(:tag, :layout => choose_layout, :locals => { :latest => posts, :tag => params[:tag], :state => :tag })
+      $diskcache.set(@cache_key, content) unless authorized?
+    end
+    content
   end
 
   get "/tag" do
-    haml choose_template(:tags), 
-          :layout => choose_layout, 
-          :locals => { 
-            :tags => tags_sorted_by_count.reverse, 
-            :state => ( is_mobile? ? :show : :index )
-          }
+    begin
+      raise Diskcached::NotFound if authorized?
+      content = $diskcache.get(@cache_key) 
+    rescue Diskcached::NotFound
+      content = haml choose_template(:tags), 
+                    :layout => choose_layout, 
+                    :locals => { 
+                      :tags => tags_sorted_by_count.reverse, 
+                      :state => ( is_mobile? ? :show : :index )
+                    }
+      $diskcache.set(@cache_key, content) unless authorized?
+    end
+    content
   end
 
   get "/archive/?*" do
-    $diskcache.cache('archive') do
-      items = archive_items
-      haml :archive, :layout => choose_layout, :locals => { :state => :archive }
+    begin
+      raise Diskcached::NotFound if authorized?
+      content = $diskcache.get(@cache_key) 
+    rescue Diskcached::NotFound
+      content = haml( :archive, :layout => choose_layout, :locals => { :state => :archive } )
+      $diskcache.set(@cache_key, content) unless authorized?
     end
+    content
   end
 
   get "/:year/?" do
     pass unless params[:year] =~ /[0-9]{4}/
     pass unless !archive_items[params[:year].to_i].empty?
 
-    haml :archive, :layout => choose_layout, :locals => { :archives => { params[:year].to_i => archive_items[params[:year].to_i] } }
+    begin
+      raise Diskcached::NotFound if authorized?
+      content = $diskcache.get(@cache_key) 
+    rescue Diskcached::NotFound
+      content = haml(:archive, :layout => choose_layout, 
+                     :locals => { :archives => { params[:year].to_i => archive_items[params[:year].to_i] } })
+      $diskcache.set(@cache_key, content) unless authorized?
+    end
+    content
   end
 
   get "/:year/:month/?" do
     pass unless params[:year] =~ /[0-9]{4}/
     pass unless params[:month] =~ /[0-9]{2}/
 
-    posts = Post.all.desc(:created_at).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
+    begin
+      raise Diskcached::NotFound if authorized?
+      content = $diskcache.get(@cache_key) 
+    rescue Diskcached::NotFound
+      posts = Post.all.desc(:created_at).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
 
-    pass if posts.empty?
-    haml choose_template(:index), :layout => choose_layout, :locals => { :latest => posts }
+      pass if posts.empty?
+
+      content = haml( choose_template(:index), :layout => choose_layout, :locals => { :latest => posts } )
+      $diskcache.set(@cache_key, content) unless authorized?
+    end
+    content
   end
 
   get "/:year/:month/:day/?" do
@@ -163,13 +216,29 @@ class DittyApp < Sinatra::Application
     pass unless params[:month] =~ /[0-9]{2}/
     pass unless params[:day] =~ /[0-9]{2}/
 
-    posts = Post.all.desc(:created_at).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i and p.created_at.day.to_i == params[:day].to_i }
-    pass if posts.empty?
-    haml choose_template(:index), :layout => choose_layout, :locals => { :latest => posts }
+    begin
+      raise Diskcached::NotFound if authorized?
+      content = $diskcache.get(@cache_key) 
+    rescue Diskcached::NotFound
+      posts = Post.all.desc(:created_at).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i and p.created_at.day.to_i == params[:day].to_i }
+      pass if posts.empty?
+      content = haml(choose_template(:index), :layout => choose_layout, :locals => { :latest => posts })
+      $diskcache.set(@cache_key, content) unless authorized?
+    end
+    content
   end
 
   get "/" do 
-    haml :index, :layout => choose_layout
+    begin
+      raise Diskcached::NotFound if authorized?
+      content = $diskcache.get(@cache_key) 
+      logger.debug("reading index from cache") unless authorized?
+    rescue Diskcached::NotFound
+      logger.debug("storing index to cache") unless authorized?
+      content = haml(:index, :layout => choose_layout)
+      $diskcache.set(@cache_key, content) unless authorized?
+    end
+    content
   end
 
   not_found do

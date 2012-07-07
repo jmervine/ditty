@@ -1,3 +1,4 @@
+require 'digest/sha1'
 module Helper
   module Application
     extend self
@@ -44,6 +45,10 @@ module Helper
 
     def tags_sorted_by_count
       (Tag.all.sort_by { |t| t.posts.count })
+    end
+
+    def cache_sha key
+      Digest::SHA1.hexdigest((is_mobile? ? 'm' : 'd') + key)
     end
 
   end
