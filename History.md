@@ -1,3 +1,8 @@
+## feature/cache
+
+* implemented Diskcached on routes
+* added will_paginate to index, tag pages and archive pages
+
 ## release_0_0_7
 
 * [Tickets](https://github.com/jmervine/ditty/issues?milestone=3&state=closed)
