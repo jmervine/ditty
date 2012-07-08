@@ -1,0 +1,4133 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>Code coverage for Ditty</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script src='./assets/0.5.3/jquery-1.6.2.min.js' type='text/javascript'></script>
+    <script src='./assets/0.5.3/jquery.dataTables.min.js' type='text/javascript'></script>   
+    <script src='./assets/0.5.3/fancybox/jquery.fancybox-1.3.1.pack.js' type='text/javascript'></script>   
+    <script src='./assets/0.5.3/jquery.timeago.js' type='text/javascript'></script>   
+    <script src='./assets/0.5.3/jquery.url.js' type='text/javascript'></script>   
+    <script src='./assets/0.5.3/highlight.pack.js' type='text/javascript'></script>  
+    <script src='./assets/0.5.3/app.js' type='text/javascript'></script>    
+    <link href='./assets/0.5.3/stylesheet.css' media='screen, projection, print' rel='stylesheet' type='text/css'>
+    <link href='./assets/0.5.3/highlight.css' media='screen, projection, print' rel='stylesheet' type='text/css'>
+    <link href='./assets/0.5.3/fancybox/jquery.fancybox-1.3.1.css' media='screen, projection, print' rel='stylesheet' type='text/css'>
+    <link href='./assets/0.5.3/smoothness/jquery-ui-1.8.4.custom.css' media='screen, projection, print' rel='stylesheet' type='text/css'>    
+    <link rel="shortcut icon" type="image/png" href="./assets/0.5.3/favicon_green.png" />
+    <link rel="icon" type="image/png" href="./assets/0.5.3/favicon.png" />
+  </head>
+  
+  <body>
+    <div id="loading">
+      <img src="./assets/0.5.3/loading.gif" alt="loading"/>
+    </div>
+    <div id="wrapper" style="display:none;">
+      <div class="timestamp">Generated <abbr class="timeago" title="2012-07-08T10:03:20-07:00">2012-07-08T10:03:20-07:00</abbr></div>
+      <ul class="group_tabs"></ul>
+
+      <div id="content">
+        <div class="file_list_container" id="AllFiles">
+  <h2>
+    <span class="group_name">All Files</span>
+    (<span class="covered_percent"><span class="green">96.6%</span></span>
+     covered at
+     <span class="covered_strength">
+       <span class="green">
+         293.13
+       </span>
+    </span> hits/line)
+  </h2>
+  <a name="AllFiles"></a>
+  <div>
+    <b>8</b> files in total.
+    <b>382</b> relevant lines. 
+    <span class="green"><b>369</b> lines covered</span> and
+    <span class="red"><b>13</b> lines missed </span>
+  </div>
+  <table class="file_list">
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>% covered</th>
+        <th>Lines</th>
+        <th>Relevant Lines</th>
+        <th>Lines covered</th>
+        <th>Lines missed</th>
+        <th>Avg. Hits / Line</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td class="strong"><a href="#5a2c57db8eb927da05f0b702c7989e93d57cd31f" class="src_link" title="dittyapp.rb">dittyapp.rb</a></td>
+        <td class="green strong">97.21 %</td>
+        <td>276</td>
+        <td>179</td>
+        <td>174</td>
+        <td>5</td>
+        <td>3.9</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#a0e342e8e39abb397006dc5593bf1f2fa82f0604" class="src_link" title="lib/ditty.rb">lib/ditty.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>6</td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>1.3</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#5aa7540d51fa49d6ff46b0d556fd291836bcacd9" class="src_link" title="lib/ditty/post.rb">lib/ditty/post.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>46</td>
+        <td>32</td>
+        <td>32</td>
+        <td>0</td>
+        <td>1977.5</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#f4319c726cb40a3caf7e10dadb2e5bc39915e579" class="src_link" title="lib/ditty/tag.rb">lib/ditty/tag.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>11</td>
+        <td>7</td>
+        <td>7</td>
+        <td>0</td>
+        <td>1.0</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#5342e16736809a4b54db4bfe90a79fe30dae4ba9" class="src_link" title="lib/helpers.rb">lib/helpers.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>7</td>
+        <td>4</td>
+        <td>4</td>
+        <td>0</td>
+        <td>1.5</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#48294e426265f478988ae7701d9e86e6ba24680f" class="src_link" title="lib/helpers/application.rb">lib/helpers/application.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>55</td>
+        <td>32</td>
+        <td>32</td>
+        <td>0</td>
+        <td>21.2</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#92ed3d4f7519faa5967606aa528f5b3b9996ceaa" class="src_link" title="lib/helpers/configure.rb">lib/helpers/configure.rb</a></td>
+        <td class="green strong">93.18 %</td>
+        <td>78</td>
+        <td>44</td>
+        <td>41</td>
+        <td>3</td>
+        <td>0.9</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#d10a303af873639dfd0c34104745f752cfc42f51" class="src_link" title="lib/helpers/templates.rb">lib/helpers/templates.rb</a></td>
+        <td class="green strong">93.83 %</td>
+        <td>159</td>
+        <td>81</td>
+        <td>76</td>
+        <td>5</td>
+        <td>337.7</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+        
+      </div>
+    
+      <div id="footer">
+        Generated by <a href="http://github.com/colszowka/simplecov">simplecov</a> v0.6.4 
+        and simplecov-html v0.5.3<br/>
+        using RSpec
+      </div>
+    
+      <div class="source_files">
+      
+        <div class="source_table" id="5a2c57db8eb927da05f0b702c7989e93d57cd31f">
+  <div class="header">
+    <h3>dittyapp.rb</h3>
+    <h4><span class="green">97.21 %</span> covered</h4>
+    <div>
+      <b>179</b> relevant lines. 
+      <span class="green"><b>174</b> lines covered</span> and
+      <span class="red"><b>5</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), &quot;lib&quot;))</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby"># load gems</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'rubygems'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="4">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'sinatra'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'yaml'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'pp'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="7">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'haml'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="8">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'diskcached'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="9">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'mongoid'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="10">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'will_paginate'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="11">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'will_paginate/array'</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="13">
+          
+          
+          <code class="ruby"># load app libs</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="14">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'ditty'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="15">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'helpers'</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="16">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="17">
+          <span class="hits">1</span>
+          
+          <code class="ruby">class DittyApp &lt; Sinatra::Application</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="18">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="19">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  configure do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="20">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    enable :logging, :raise_errors#, :dump_errors</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="22">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :logging, Logger::DEBUG</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="24">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :pass_errors, false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="26">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :environment, ENV['RACK_ENV']||&quot;production&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="27">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @configuration = Helper::Configure.new(settings.environment, settings.root)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="28">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :title,            @configuration.title</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="30">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :timezone,         @configuration.timezone</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="31">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :hostname,         @configuration.hostname</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="32">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :google_analytics, @configuration.google_analytics</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="33">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :share_this,       @configuration.share_this</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="34">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :disqus,           @configuration.disqus</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="35">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :contact,          @configuration.contact</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="36">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :database,         @configuration.database</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="38">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :username,         @configuration.username</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    set :password,         @configuration.password</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="40">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="41">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Mongoid.configure do |config|</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="42">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      config.master = Mongo::Connection.new.db(settings.database['name'])</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="43">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      if settings.database['username'] and settings.database['password']</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="44">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        config.database.authenticate(settings.database['username'], settings.database['password'])</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="46">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="47">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Mongoid.identity_map_enabled = true</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="48">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="49">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    $diskcache = Diskcached.new(File.join(settings.root, 'cache'))</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="50">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    $diskcache.flush # ensure caches are empty on startup</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="52">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  configure :production do</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="54">
+          
+          
+          <code class="ruby">    set :haml, :ugly =&gt; true</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="55">
+          
+          
+          <code class="ruby">    set :logging, Logger::INFO</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="58">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  helpers do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="59">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    include Helper::Templates</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="60">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    include Helper::Application</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="63">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  before do</code>
+        </li>
+      
+        <li class="covered" data-hits="39" data-linenumber="64">
+          <span class="hits">39</span>
+          
+          <code class="ruby">    logger.debug &quot;DEBUG MODE&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="39" data-linenumber="65">
+          <span class="hits">39</span>
+          
+          <code class="ruby">    logger.debug &quot;authorized? = #{authorized?.to_s}&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="39" data-linenumber="66">
+          <span class="hits">39</span>
+          
+          <code class="ruby">    @cache_key = cache_sha(request.path_info)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="67">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/sitemap.xml&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="70">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    $diskcache.cache('sitemap') do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="71">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      haml :sitemap, :layout =&gt; false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="73">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="74">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/login&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    protected!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="77">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    redirect &quot;/&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="80">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/post/?&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="81">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    protected!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="82">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    haml :form_post, :locals =&gt; { :navigation =&gt; :_nav_help, :post =&gt; Post.new, :state =&gt; :new }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="84">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="85">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/:year/:month/:day/:title_path/?&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="86">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    title_path = &quot;/&quot; + File.join(params['captures'])</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="87">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    begin</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="88">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      raise Diskcached::NotFound if authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="89">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      content = $diskcache.get(@cache_key) </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="90">
+          
+          
+          <code class="ruby">    rescue Diskcached::NotFound</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="91">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      content = haml( choose_template(:post), :layout =&gt; choose_layout, :locals =&gt; { :post =&gt; Post.where(:title_path =&gt; title_path).first, :state =&gt; :show } )</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="92">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      $diskcache.set(@cache_key, content) unless authorized?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="93">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="94">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    content</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="95">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="96">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="97">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/post/:id/edit/?&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="98">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    protected!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="99">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    haml :form_post, :locals =&gt; { :post =&gt; Post.find(params[:id]), :navigation =&gt; :_nav_help, :state =&gt; :edit }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="100">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="101">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="102">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  post &quot;/post/?&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="103">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    protected!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="104">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    $diskcache.flush</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="105">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    p, t = seperate_post_tags( params[:post] )</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="106">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    post = Post.create(p)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="107">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    t.each do |tag|</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="108">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      post.associate_or_create_tag(tag)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="109">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="110">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    post.save!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="111">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    redirect post.title_path</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="112">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="113">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="114">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  post &quot;/post/preview&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="115">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    protected!</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="116">
+          
+          
+          <code class="ruby">    haml :preview, :locals =&gt; { :post =&gt; params[:post], :navigation =&gt; :_nav_help, :state =&gt; :preview }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="117">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="118">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="119">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  post &quot;/post/:id/preview&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="120">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    protected!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="121">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    haml :preview, :locals =&gt; { :post =&gt; params[:post], :navigation =&gt; :_nav_help, :post_id =&gt; params[:id], :state =&gt; :preview }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="122">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="123">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="124">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  post &quot;/post/:id&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="125">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    protected!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="126">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    $diskcache.flush</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="127">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    p_post, p_tags = seperate_post_tags( params[:post] )</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="128">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    post = Post.find( params[:id] )</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="129">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="130">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    post.tags = []</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="131">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    unless p_tags.empty?</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="132">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      p_tags.each do |tag|</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="133">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        post.associate_or_create_tag(tag)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="134">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="135">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="136">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    p_post.each { |key, val| post[key.to_sym] = val }</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="137">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    post.save!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="138">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    redirect post.title_path</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="139">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="140">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="141">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/post/:id/delete&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="142">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    protected!</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="143">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    $diskcache.flush</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="144">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Post.find( params[:id] ).destroy</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="145">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    redirect &quot;/&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="146">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="147">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="148">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/tag/:tag&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="149">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    params[:page] ||= '1'</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="150">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    @cache_key = cache_sha(request.path_info+params[:page])</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="151">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    begin</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="152">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      raise Diskcached::NotFound if authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="153">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      content = $diskcache.get(@cache_key) </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="154">
+          
+          
+          <code class="ruby">    rescue Diskcached::NotFound</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="155">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      posts = get_posts_from_tag( params[:tag] ).paginate( :page =&gt; params[:page], :per_page =&gt; 5)</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="156">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      redirect &quot;/tag&quot; if posts.empty?</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="157">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      content = haml(:tag, :layout =&gt; choose_layout, :locals =&gt; { :posts =&gt; posts, :tag =&gt; params[:tag], :state =&gt; :tag })</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="158">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      $diskcache.set(@cache_key, content) unless authorized?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="159">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="160">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    content</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="161">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="162">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="163">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/tag&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="164">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    begin</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="165">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      raise Diskcached::NotFound if authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="166">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      content = $diskcache.get(@cache_key) </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="167">
+          
+          
+          <code class="ruby">    rescue Diskcached::NotFound</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="168">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      content = haml choose_template(:tags), </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="169">
+          
+          
+          <code class="ruby">                    :layout =&gt; choose_layout, </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="170">
+          
+          
+          <code class="ruby">                    :locals =&gt; { </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="171">
+          
+          
+          <code class="ruby">                      :tags =&gt; tags_sorted_by_count.reverse, </code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="172">
+          <span class="hits">2</span>
+          
+          <code class="ruby">                      :state =&gt; ( is_mobile? ? :show : :index )</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="173">
+          
+          
+          <code class="ruby">                    }</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="174">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      $diskcache.set(@cache_key, content) unless authorized?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="175">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="176">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    content</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="177">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="178">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="179">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/archive/?*&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="180">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    begin</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="181">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      raise Diskcached::NotFound if authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="182">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      content = $diskcache.get(@cache_key) </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="183">
+          
+          
+          <code class="ruby">    rescue Diskcached::NotFound</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="184">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      content = haml( :archive, :layout =&gt; choose_layout, :locals =&gt; { :state =&gt; :archive } )</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="185">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      $diskcache.set(@cache_key, content) unless authorized?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="186">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="187">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    content</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="188">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="189">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="190">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/:year/?&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="191">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    pass unless params[:year] =~ /[0-9]{4}/</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="192">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    pass unless !archive_items[params[:year].to_i].empty?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="193">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="194">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    begin</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="195">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      raise Diskcached::NotFound if authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="196">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      content = $diskcache.get(@cache_key) </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="197">
+          
+          
+          <code class="ruby">    rescue Diskcached::NotFound</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="198">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      content = haml(:archive, :layout =&gt; choose_layout, </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="199">
+          
+          
+          <code class="ruby">                     :locals =&gt; { :archives =&gt; { params[:year].to_i =&gt; archive_items[params[:year].to_i] } })</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="200">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      $diskcache.set(@cache_key, content) unless authorized?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="201">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="202">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    content</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="203">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="204">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="205">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/:year/:month/:day/?&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="206">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    pass unless params[:year] =~ /[0-9]{4}/</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="207">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    pass unless params[:month] =~ /[0-9]{2}/</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="208">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    pass unless params[:day] =~ /[0-9]{2}/</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="209">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="210">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    params[:page] ||= '1'</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="211">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    @cache_key = cache_sha(request.path_info+params[:page])</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="212">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    begin</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="213">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      raise Diskcached::NotFound if authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="214">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      content = $diskcache.get(@cache_key) </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="215">
+          
+          
+          <code class="ruby">    rescue Diskcached::NotFound</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="216">
+          
+          
+          <code class="ruby">      # TODO: replace with a mongo map/reduce</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="217">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      posts = Post.all.desc(:created_at).select do |p| </code>
+        </li>
+      
+        <li class="covered" data-hits="144" data-linenumber="218">
+          <span class="hits">144</span>
+          
+          <code class="ruby">                (p.created_at.year.to_i == params[:year].to_i &amp;&amp; p.created_at.month.to_i == params[:month].to_i &amp;&amp; p.created_at.day.to_i == params[:day].to_i)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="219">
+          
+          
+          <code class="ruby">              end.paginate( :page =&gt; params[:page], :per_page =&gt; 5)</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="220">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      pass if posts.empty?</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="221">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      content = haml(choose_template(:index), :layout =&gt; choose_layout, :locals =&gt; { :posts =&gt; posts })</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="222">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      $diskcache.set(@cache_key, content) unless authorized?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="223">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="224">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    content</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="225">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="226">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="227">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/:year/:month/?&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="228">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    pass unless params[:year] =~ /[0-9]{4}/</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="229">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    pass unless params[:month] =~ /[0-9]{2}/</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="230">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="231">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    params[:page] ||= '1'</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="232">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    @cache_key = cache_sha(request.path_info+params[:page])</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="233">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    begin</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="234">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      raise Diskcached::NotFound if authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="235">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      content = $diskcache.get(@cache_key) </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="236">
+          
+          
+          <code class="ruby">    rescue Diskcached::NotFound</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="237">
+          
+          
+          <code class="ruby">      # TODO: replace with a mongo map/reduce</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="238">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      posts = Post.all.desc(:created_at).select do |p| </code>
+        </li>
+      
+        <li class="covered" data-hits="144" data-linenumber="239">
+          <span class="hits">144</span>
+          
+          <code class="ruby">                (p.created_at.year.to_i == params[:year].to_i &amp;&amp; p.created_at.month.to_i == params[:month].to_i )</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="240">
+          
+          
+          <code class="ruby">              end.paginate( :page =&gt; params[:page], :per_page =&gt; 5)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="241">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="242">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      pass if posts.empty?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="243">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="244">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      content = haml( choose_template(:index), :layout =&gt; choose_layout, :locals =&gt; { :posts =&gt; posts } )</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="245">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      $diskcache.set(@cache_key, content) unless authorized?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="246">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="247">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    content</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="248">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="249">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="250">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/&quot; do </code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="251">
+          <span class="hits">7</span>
+          
+          <code class="ruby">    params[:page] ||= '1'</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="252">
+          <span class="hits">7</span>
+          
+          <code class="ruby">    @cache_key = cache_sha('index-'+params[:page])</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="253">
+          <span class="hits">7</span>
+          
+          <code class="ruby">    begin</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="254">
+          <span class="hits">7</span>
+          
+          <code class="ruby">      raise Diskcached::NotFound if authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="255">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      content = $diskcache.get(@cache_key) </code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="256">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      logger.debug(&quot;reading index from cache -- 'index-#{params[:page]}'&quot;) unless authorized?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="257">
+          
+          
+          <code class="ruby">    rescue Diskcached::NotFound</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="258">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      logger.debug(&quot;storing index to cache -- 'index-#{params[:page]}'&quot;) unless authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="259">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      posts = Post.all.desc(:created_at).paginate( :page =&gt; params[:page], :per_page =&gt; 5)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="260">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      content = haml(:index, :layout =&gt; choose_layout, :locals =&gt; { :posts =&gt; posts })</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="261">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      $diskcache.set(@cache_key, content) unless authorized?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="262">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="263">
+          <span class="hits">7</span>
+          
+          <code class="ruby">    content</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="264">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="265">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="266">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &quot;/flush_cache&quot; do</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="267">
+          
+          
+          <code class="ruby">    protected!</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="268">
+          
+          
+          <code class="ruby">    &quot;&lt;pre&gt;&quot;+($diskcache.flush).join(&quot;\n&quot;)+&quot;&lt;/pre&gt;&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="269">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="270">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="271">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  not_found do</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="272">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    redirect &quot;/&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="273">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="274">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="275">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="276">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="a0e342e8e39abb397006dc5593bf1f2fa82f0604">
+  <div class="header">
+    <h3>lib/ditty.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>3</b> relevant lines. 
+      <span class="green"><b>3</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'bson'</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">%w( tag post ).each do |lib|</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="4">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  require &quot;ditty/#{lib}&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="5">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="6">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="5aa7540d51fa49d6ff46b0d556fd291836bcacd9">
+  <div class="header">
+    <h3>lib/ditty/post.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>32</b> relevant lines. 
+      <span class="green"><b>32</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">class Post </code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  include Mongoid::Document</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  include Mongoid::Timestamps</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="4">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  validates_presence_of :title</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  validates_uniqueness_of :title_path</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  before_create :create_title_path</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="7">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  before_update :update_title_path</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="8">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="9">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  field :title, type: String</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="10">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  field :title_path, type: String</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="11">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  field :body, type: String</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  has_and_belongs_to_many :tags, index: true</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="14">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  index({ title_path: 1 }, { unique: true })</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="16">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def associate_or_create_tag name</code>
+        </li>
+      
+        <li class="covered" data-hits="1444" data-linenumber="17">
+          <span class="hits">1444</span>
+          
+          <code class="ruby">    tag = Tag.where(:name =&gt; name).first </code>
+        </li>
+      
+        <li class="covered" data-hits="1444" data-linenumber="18">
+          <span class="hits">1444</span>
+          
+          <code class="ruby">    self.tags.create(:name =&gt; name) if tag.nil?</code>
+        </li>
+      
+        <li class="covered" data-hits="1444" data-linenumber="19">
+          <span class="hits">1444</span>
+          
+          <code class="ruby">    self.tags.push(tag) unless self.tags.include?(tag)</code>
+        </li>
+      
+        <li class="covered" data-hits="1444" data-linenumber="20">
+          <span class="hits">1444</span>
+          
+          <code class="ruby">    self.save!</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="21">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="23">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  private</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="24">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def set_title_path time</code>
+        </li>
+      
+        <li class="covered" data-hits="1742" data-linenumber="25">
+          <span class="hits">1742</span>
+          
+          <code class="ruby">    clean_title = self.title.clone</code>
+        </li>
+      
+        <li class="covered" data-hits="1742" data-linenumber="26">
+          <span class="hits">1742</span>
+          
+          <code class="ruby">    [&quot;|&quot;, &quot;%&quot;, &quot;/&quot;, &quot;:&quot;, &quot;=&quot;, &quot;&amp;&quot;, &quot;?&quot;, &quot;~&quot;, &quot;#&quot;, &quot;+&quot;, &quot;!&quot;, &quot;$&quot;, &quot;,&quot;, &quot;;&quot;, &quot;'&quot;, &quot;@&quot;, &quot;(&quot;, &quot;)&quot;, &quot;*&quot;, &quot;[&quot;, &quot;]&quot;, '&quot;'].each do |ugly|</code>
+        </li>
+      
+        <li class="covered" data-hits="38324" data-linenumber="27">
+          <span class="hits">38324</span>
+          
+          <code class="ruby">      clean_title.gsub!(ugly, &quot;&quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="28">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1742" data-linenumber="29">
+          <span class="hits">1742</span>
+          
+          <code class="ruby">    [&quot; &quot;, &quot;.&quot;, Regexp.new(&quot;[\_]{1,}&quot;)].each do |ugly|</code>
+        </li>
+      
+        <li class="covered" data-hits="5226" data-linenumber="30">
+          <span class="hits">5226</span>
+          
+          <code class="ruby">      clean_title.gsub!(ugly, &quot;_&quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1742" data-linenumber="32">
+          <span class="hits">1742</span>
+          
+          <code class="ruby">    clean_title.gsub!(/_$/, &quot;&quot;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1742" data-linenumber="33">
+          <span class="hits">1742</span>
+          
+          <code class="ruby">    new_title_path = time.strftime(&quot;/%Y/%m/%d/&quot;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1742" data-linenumber="34">
+          <span class="hits">1742</span>
+          
+          <code class="ruby">    new_title_path &lt;&lt; clean_title</code>
+        </li>
+      
+        <li class="covered" data-hits="1742" data-linenumber="35">
+          <span class="hits">1742</span>
+          
+          <code class="ruby">    self.title_path = new_title_path.downcase</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="36">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="38">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def create_title_path </code>
+        </li>
+      
+        <li class="covered" data-hits="295" data-linenumber="39">
+          <span class="hits">295</span>
+          
+          <code class="ruby">    set_title_path(Time.now)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="40">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="42">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def update_title_path</code>
+        </li>
+      
+        <li class="covered" data-hits="1447" data-linenumber="43">
+          <span class="hits">1447</span>
+          
+          <code class="ruby">    set_title_path(self.created_at)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="46">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="f4319c726cb40a3caf7e10dadb2e5bc39915e579">
+  <div class="header">
+    <h3>lib/ditty/tag.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>7</b> relevant lines. 
+      <span class="green"><b>7</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">class Tag</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  include Mongoid::Document</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  validates_presence_of :name</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="4">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  validates_uniqueness_of :name</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="5">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  field :name, type: String</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="8">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  has_and_belongs_to_many :posts, index: true</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="9">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  index({ name: 1 }, { unique: true })</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="5342e16736809a4b54db4bfe90a79fe30dae4ba9">
+  <div class="header">
+    <h3>lib/helpers.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>4</b> relevant lines. 
+      <span class="green"><b>4</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">$LOAD_PATH.unshift(File.dirname(__FILE__))</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
+          
+          <code class="ruby">%w( templates application configure ).each do |lib|</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="3">
+          <span class="hits">3</span>
+          
+          <code class="ruby">  require &quot;helpers/#{lib}&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="4">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">module Helper</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="6">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="48294e426265f478988ae7701d9e86e6ba24680f">
+  <div class="header">
+    <h3>lib/helpers/application.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>32</b> relevant lines. 
+      <span class="green"><b>32</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'digest/sha1'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
+          
+          <code class="ruby">module Helper</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  module Application</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="4">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    extend self</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def protected!</code>
+        </li>
+      
+        <li class="covered" data-hits="14" data-linenumber="6">
+          <span class="hits">14</span>
+          
+          <code class="ruby">      unless authorized? </code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="7">
+          <span class="hits">6</span>
+          
+          <code class="ruby">        response['WWW-Authenticate'] = %(Basic realm=&quot;Restricted Area&quot;)</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="8">
+          <span class="hits">6</span>
+          
+          <code class="ruby">        throw(:halt, [401, &quot;Not authorized\n&quot;])</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="9">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby">    #TODO: replace with session based auth for logout</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def authorized?</code>
+        </li>
+      
+        <li class="covered" data-hits="145" data-linenumber="14">
+          <span class="hits">145</span>
+          
+          <code class="ruby">      @auth ||= Rack::Auth::Basic::Request.new(request.env)</code>
+        </li>
+      
+        <li class="covered" data-hits="145" data-linenumber="15">
+          <span class="hits">145</span>
+          
+          <code class="ruby">      @auth.provided? &amp;&amp; @auth.basic? &amp;&amp; @auth.credentials &amp;&amp; @auth.credentials == [settings.username, settings.password]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="16">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="17">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="18">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def choose_layout</code>
+        </li>
+      
+        <li class="covered" data-hits="19" data-linenumber="19">
+          <span class="hits">19</span>
+          
+          <code class="ruby">      return :mobile if is_mobile?</code>
+        </li>
+      
+        <li class="covered" data-hits="19" data-linenumber="20">
+          <span class="hits">19</span>
+          
+          <code class="ruby">      return :layout</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="21">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="23">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def choose_template template</code>
+        </li>
+      
+        <li class="covered" data-hits="19" data-linenumber="24">
+          <span class="hits">19</span>
+          
+          <code class="ruby">      return &quot;mobile_#{template.to_s}&quot;.to_sym if is_mobile?</code>
+        </li>
+      
+        <li class="covered" data-hits="19" data-linenumber="25">
+          <span class="hits">19</span>
+          
+          <code class="ruby">      return template</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="26">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="28">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def is_mobile?</code>
+        </li>
+      
+        <li class="covered" data-hits="92" data-linenumber="29">
+          <span class="hits">92</span>
+          
+          <code class="ruby">      return true if request.env['X_MOBILE_DEVICE']</code>
+        </li>
+      
+        <li class="covered" data-hits="92" data-linenumber="30">
+          <span class="hits">92</span>
+          
+          <code class="ruby">      return false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="32">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="33">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def seperate_post_tags post</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="34">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      tags = []</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="35">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      if post['tags']</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="36">
+          <span class="hits">4</span>
+          
+          <code class="ruby">        tags = post['tags'].split(',').map { |tag| tag.strip.downcase }</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="37">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        post.delete('tags')</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="38">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="39">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      return [post, tags]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="40">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="42">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def get_posts_from_tag tag</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="43">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      Tag.where(:name =&gt; tag).first.posts.reverse rescue []</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="46">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def tags_sorted_by_count</code>
+        </li>
+      
+        <li class="covered" data-hits="22" data-linenumber="47">
+          <span class="hits">22</span>
+          
+          <code class="ruby">      (Tag.all.sort_by { |t| t.posts.count })</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="48">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="49">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="50">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def cache_sha key</code>
+        </li>
+      
+        <li class="covered" data-hits="52" data-linenumber="51">
+          <span class="hits">52</span>
+          
+          <code class="ruby">      Digest::SHA1.hexdigest((is_mobile? ? 'm' : 'd') + key)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="52">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="53">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="54">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="92ed3d4f7519faa5967606aa528f5b3b9996ceaa">
+  <div class="header">
+    <h3>lib/helpers/configure.rb</h3>
+    <h4><span class="green">93.18 %</span> covered</h4>
+    <div>
+      <b>44</b> relevant lines. 
+      <span class="green"><b>41</b> lines covered</span> and
+      <span class="red"><b>3</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">module Helper</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  class Configure</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    attr_accessor :configuration</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="4">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def initialize env, root, file=&quot;./config/ditty.yml&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      begin</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="7">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        configuration = YAML.load_file(File.join(root, file))[env]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="8">
+          
+          
+          <code class="ruby">      rescue</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="9">
+          
+          
+          <code class="ruby">        raise &quot;Missing configuration for '#{env}'.&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="12">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @environment       = env</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @title             = configuration['title'] rescue title</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="14">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @hostname          = ensure_hostname_format(configuration['hostname']) rescue hostname</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="15">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @timezone          = configuration['timezone'] rescue timezone</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="16">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @google_analytics  = configuration['google_analytics'] rescue google_analytics</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="17">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @share_this        = configuration['share_this'] rescue share_this</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="18">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @disqus            = configuration['disqus_shortname'] rescue disqus</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="19">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @contact           = configuration['contact'] rescue contact</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="20">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @database          = configuration['database'] rescue nil</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="23">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @username          = configuration['auth']['username'] rescue nil</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="24">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @password          = configuration['auth']['password'] rescue nil</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="26">
+          
+          
+          <code class="ruby">      #database_connection!</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="28">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def database</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="30">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @database||=nil</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="32">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def environment</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="33">
+          
+          
+          <code class="ruby">      @environment||=&quot;production&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="34">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="35">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def hostname</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="36">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @hostname||=&quot;http://localhost&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="38">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def timezone</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @timezone||=&quot;America/Los_Angeles&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="40">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="41">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def google_analytics</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="42">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @google_analytics||=nil</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="43">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="44">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def share_this</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="45">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @share_this||=nil</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="46">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="47">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def disqus</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="48">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @disqus||=nil</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="49">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="50">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def contact</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="51">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @contact||=nil</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="52">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def title</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="54">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @title||=&quot;Ditty!&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="56">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def username</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="57">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @username</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="58">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="59">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def password</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="60">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @password</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="63">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
+          
+          
+          <code class="ruby">    #def database_connection!</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="65">
+          
+          
+          <code class="ruby">      #MongoMapper.database = @database['name']</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="66">
+          
+          
+          <code class="ruby">      #if database['username'] &amp;&amp; @database['password']</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="67">
+          
+          
+          <code class="ruby">        #unless MongoMapper.database.authenticate(@database['username'], @database['password'])</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
+          
+          
+          <code class="ruby">          #raise &quot;Database Authentication Failed!&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="69">
+          
+          
+          <code class="ruby">        #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
+          
+          
+          <code class="ruby">      #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="71">
+          
+          
+          <code class="ruby">    #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="73">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def ensure_hostname_format host</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      return &quot;http://&quot;&lt;&lt;host unless host =~ /^http:\/\//</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="75">
+          
+          
+          <code class="ruby">      return host</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="77">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="d10a303af873639dfd0c34104745f752cfc42f51">
+  <div class="header">
+    <h3>lib/helpers/templates.rb</h3>
+    <h4><span class="green">93.83 %</span> covered</h4>
+    <div>
+      <b>81</b> relevant lines. 
+      <span class="green"><b>76</b> lines covered</span> and
+      <span class="red"><b>5</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'open-uri'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'tzinfo'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require 'helpers'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="4">
+          <span class="hits">1</span>
+          
+          <code class="ruby">module Helper</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  module Templates</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def post_contents post</code>
+        </li>
+      
+        <li class="covered" data-hits="46" data-linenumber="7">
+          <span class="hits">46</span>
+          
+          <code class="ruby">      return &quot;&quot; if post.nil? or post.body.nil?</code>
+        </li>
+      
+        <li class="covered" data-hits="46" data-linenumber="8">
+          <span class="hits">46</span>
+          
+          <code class="ruby">      markdown post.body</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="9">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="11">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def time_display post</code>
+        </li>
+      
+        <li class="covered" data-hits="50" data-linenumber="12">
+          <span class="hits">50</span>
+          
+          <code class="ruby">      return &quot;&quot; if post.nil? or post.created_at.nil?</code>
+        </li>
+      
+        <li class="covered" data-hits="47" data-linenumber="13">
+          <span class="hits">47</span>
+          
+          <code class="ruby">      post_time = post.created_at.utc</code>
+        </li>
+      
+        <li class="covered" data-hits="47" data-linenumber="14">
+          <span class="hits">47</span>
+          
+          <code class="ruby">      begin</code>
+        </li>
+      
+        <li class="covered" data-hits="47" data-linenumber="15">
+          <span class="hits">47</span>
+          
+          <code class="ruby">        time_zone = TZInfo::Timezone.get(settings.timezone) </code>
+        </li>
+      
+        <li class="covered" data-hits="47" data-linenumber="16">
+          <span class="hits">47</span>
+          
+          <code class="ruby">        zone_time = time_zone.utc_to_local(post_time)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="17">
+          
+          
+          <code class="ruby">      rescue</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="18">
+          
+          
+          <code class="ruby">        logger.info &quot;Timezone Error (#{settings.timezone})!&quot;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="19">
+          
+          
+          <code class="ruby">        zone_time = post_time</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="20">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="covered" data-hits="47" data-linenumber="21">
+          <span class="hits">47</span>
+          
+          <code class="ruby">      if Time.now.utc.to_i &gt; post_time.to_i+(60*60*24)</code>
+        </li>
+      
+        <li class="covered" data-hits="13" data-linenumber="22">
+          <span class="hits">13</span>
+          
+          <code class="ruby">        &quot;&lt;span class='header_time'&gt;Created on #{zone_time.strftime(&quot;%B %d, %Y&quot;)}&lt;/span&gt;&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby">      else</code>
+        </li>
+      
+        <li class="covered" data-hits="34" data-linenumber="24">
+          <span class="hits">34</span>
+          
+          <code class="ruby">        &quot;&lt;span class='header_time'&gt;Created at #{zone_time.strftime(&quot;%r&quot;)}&lt;/span&gt;&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="26">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="28">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def post_tags post</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="29">
+          
+          
+          <code class="ruby">      (Tag.where( :post_id =&gt; post.id ).map { |t| t.tag }).compact.sort.join(&quot; &quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="30">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="32">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def post_title post</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="33">
+          <span class="hits">7</span>
+          
+          <code class="ruby">      return &quot;&quot; if post.nil?</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="34">
+          <span class="hits">7</span>
+          
+          <code class="ruby">      post.title</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="35">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="36">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="37">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def archive_link year, month=nil</code>
+        </li>
+      
+        <li class="covered" data-hits="649" data-linenumber="38">
+          <span class="hits">649</span>
+          
+          <code class="ruby">      if month.nil?</code>
+        </li>
+      
+        <li class="covered" data-hits="92" data-linenumber="39">
+          <span class="hits">92</span>
+          
+          <code class="ruby">        path = year.to_s</code>
+        </li>
+      
+        <li class="covered" data-hits="92" data-linenumber="40">
+          <span class="hits">92</span>
+          
+          <code class="ruby">        name = path</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby">      else</code>
+        </li>
+      
+        <li class="covered" data-hits="557" data-linenumber="42">
+          <span class="hits">557</span>
+          
+          <code class="ruby">        path  = &quot;#{year}/#{&quot;%02d&quot; % month}&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="557" data-linenumber="43">
+          <span class="hits">557</span>
+          
+          <code class="ruby">        name  = months[month.to_i-1].capitalize</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="covered" data-hits="649" data-linenumber="45">
+          <span class="hits">649</span>
+          
+          <code class="ruby">      return name if request.path_info =~ Regexp.new(Regexp.escape(path)+&quot;(\/?)$&quot;)</code>
+        </li>
+      
+        <li class="covered" data-hits="643" data-linenumber="46">
+          <span class="hits">643</span>
+          
+          <code class="ruby">      return &quot;&lt;a href='/#{path}'&gt;#{name}&lt;/a&gt;&quot; </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="47">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="48">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="49">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def post_tag_string tags</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="50">
+          <span class="hits">5</span>
+          
+          <code class="ruby">      (tags.map { |t| t.name }).join(&quot;, &quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="52">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def archive_items</code>
+        </li>
+      
+        <li class="covered" data-hits="50" data-linenumber="54">
+          <span class="hits">50</span>
+          
+          <code class="ruby">      collection = Post.all.desc(:created_at)</code>
+        </li>
+      
+        <li class="covered" data-hits="50" data-linenumber="55">
+          <span class="hits">50</span>
+          
+          <code class="ruby">      archive = {}</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby">      # TODO: there has to be a better way</code>
+        </li>
+      
+        <li class="covered" data-hits="50" data-linenumber="57">
+          <span class="hits">50</span>
+          
+          <code class="ruby">      collection.each do |item| </code>
+        </li>
+      
+        <li class="covered" data-hits="3652" data-linenumber="58">
+          <span class="hits">3652</span>
+          
+          <code class="ruby">        date = item.created_at</code>
+        </li>
+      
+        <li class="covered" data-hits="3652" data-linenumber="59">
+          <span class="hits">3652</span>
+          
+          <code class="ruby">        archive[date.year] = {} unless archive.has_key? date.year</code>
+        </li>
+      
+        <li class="covered" data-hits="3652" data-linenumber="60">
+          <span class="hits">3652</span>
+          
+          <code class="ruby">        archive[date.year][date.month] = [] unless archive[date.year].has_key? date.month</code>
+        </li>
+      
+        <li class="covered" data-hits="3652" data-linenumber="61">
+          <span class="hits">3652</span>
+          
+          <code class="ruby">        archive[date.year][date.month].push item</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="covered" data-hits="50" data-linenumber="63">
+          <span class="hits">50</span>
+          
+          <code class="ruby">      archive</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="65">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def archive_list archive=nil</code>
+        </li>
+      
+        <li class="covered" data-hits="28" data-linenumber="67">
+          <span class="hits">28</span>
+          
+          <code class="ruby">      archive = archive_items if archive.nil?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="28" data-linenumber="69">
+          <span class="hits">28</span>
+          
+          <code class="ruby">      markup = &quot;&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="28" data-linenumber="70">
+          <span class="hits">28</span>
+          
+          <code class="ruby">      markup &lt;&lt; %{ &lt;ul class=&quot;nav_list&quot;&gt; }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="71">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="28" data-linenumber="72">
+          <span class="hits">28</span>
+          
+          <code class="ruby">      archive.each_key do |year|</code>
+        </li>
+      
+        <li class="covered" data-hits="54" data-linenumber="73">
+          <span class="hits">54</span>
+          
+          <code class="ruby">        markup &lt;&lt; %{ &lt;li class=&quot;nav_item&quot;&gt;&lt;b&gt;#{archive_link(year)}&lt;/b&gt;&lt;/li&gt; }</code>
+        </li>
+      
+        <li class="covered" data-hits="54" data-linenumber="74">
+          <span class="hits">54</span>
+          
+          <code class="ruby">        markup &lt;&lt; %{ &lt;ul class=&quot;nav_sub_list&quot;&gt; }</code>
+        </li>
+      
+        <li class="covered" data-hits="54" data-linenumber="75">
+          <span class="hits">54</span>
+          
+          <code class="ruby">        archive[year].each_key do |month|</code>
+        </li>
+      
+        <li class="covered" data-hits="324" data-linenumber="76">
+          <span class="hits">324</span>
+          
+          <code class="ruby">          markup &lt;&lt; %{ &lt;li class=&quot;nav_item&quot;&gt;#{ archive_link(year, month) }&lt;/li&gt; }</code>
+        </li>
+      
+        <li class="covered" data-hits="324" data-linenumber="77">
+          <span class="hits">324</span>
+          
+          <code class="ruby">          markup &lt;&lt; %{ &lt;ul class=&quot;nav_sub_list&quot;&gt; }</code>
+        </li>
+      
+        <li class="covered" data-hits="324" data-linenumber="78">
+          <span class="hits">324</span>
+          
+          <code class="ruby">          archive[year][month].each do |item|</code>
+        </li>
+      
+        <li class="covered" data-hits="1992" data-linenumber="79">
+          <span class="hits">1992</span>
+          
+          <code class="ruby">            markup &lt;&lt; %{ &lt;li class=&quot;nav_item&quot;&gt;#{ post_link(item) }&lt;/li&gt; }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="80">
+          
+          
+          <code class="ruby">          end</code>
+        </li>
+      
+        <li class="covered" data-hits="324" data-linenumber="81">
+          <span class="hits">324</span>
+          
+          <code class="ruby">          markup &lt;&lt; %{ &lt;/ul&gt; }</code>
+        </li>
+      
+        <li class="covered" data-hits="324" data-linenumber="82">
+          <span class="hits">324</span>
+          
+          <code class="ruby">          markup &lt;&lt; %{ &lt;/li&gt; }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby">        end</code>
+        </li>
+      
+        <li class="covered" data-hits="54" data-linenumber="84">
+          <span class="hits">54</span>
+          
+          <code class="ruby">        markup &lt;&lt; %{ &lt;/ul&gt; }</code>
+        </li>
+      
+        <li class="covered" data-hits="54" data-linenumber="85">
+          <span class="hits">54</span>
+          
+          <code class="ruby">        markup &lt;&lt; %{ &lt;/li&gt; }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="86">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="covered" data-hits="28" data-linenumber="87">
+          <span class="hits">28</span>
+          
+          <code class="ruby">      markup &lt;&lt; %{ &lt;/ul&gt; }</code>
+        </li>
+      
+        <li class="covered" data-hits="28" data-linenumber="88">
+          <span class="hits">28</span>
+          
+          <code class="ruby">      markup</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="89">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="90">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="91">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def post_link post</code>
+        </li>
+      
+        <li class="covered" data-hits="2040" data-linenumber="92">
+          <span class="hits">2040</span>
+          
+          <code class="ruby">      return &quot;&quot; if post.nil? or post.id.blank?</code>
+        </li>
+      
+        <li class="covered" data-hits="2040" data-linenumber="93">
+          <span class="hits">2040</span>
+          
+          <code class="ruby">      &quot;&lt;a href='#{post.title_path}'&gt;#{post.title}&lt;/a&gt;&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="94">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="95">
+          
+          
+          <code class="ruby">      </code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="96">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def months</code>
+        </li>
+      
+        <li class="covered" data-hits="560" data-linenumber="97">
+          <span class="hits">560</span>
+          
+          <code class="ruby">      %w{ january february march april may june july august september october november december }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="98">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="99">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="100">
+          
+          
+          <code class="ruby">    #def latest n=25</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="101">
+          
+          
+          <code class="ruby">      #Post.all.desc(:created_at)[0..n-1]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="102">
+          
+          
+          <code class="ruby">    #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="103">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="104">
+          
+          
+          <code class="ruby">    #def paginate page, show=10</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="105">
+          
+          
+          <code class="ruby">      #p = Post.all.desc(:created_at)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="106">
+          
+          
+          <code class="ruby">      #if p.length &gt;= (page+show)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="107">
+          
+          
+          <code class="ruby">        #return p[page..page+length]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="108">
+          
+          
+          <code class="ruby">      #elsif p.length &gt;= page</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="109">
+          
+          
+          <code class="ruby">        #return p[page..p.length]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="110">
+          
+          
+          <code class="ruby">      #else</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="111">
+          
+          
+          <code class="ruby">        #n = (p.length%show)*show</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="112">
+          
+          
+          <code class="ruby">        #return p[n..p.length]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="113">
+          
+          
+          <code class="ruby">      #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="114">
+          
+          
+          <code class="ruby">    #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="115">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="116">
+          
+          
+          <code class="ruby">    #def pagination page, path=&quot;/&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="117">
+          
+          
+          <code class="ruby">      #ppath = path.gsub!(/\/$/,&quot;&quot;) </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="118">
+          
+          
+          <code class="ruby">      #markup = %{ &lt;span class='pagination'&gt; }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="119">
+          
+          
+          <code class="ruby">      #if page &gt; 0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="120">
+          
+          
+          <code class="ruby">        #markup &lt;&lt; %{ &lt;a href=&quot;#{ppath/&quot;&gt;first&lt;/a&gt; }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="121">
+          
+          
+          <code class="ruby">        #(0..page).each do |n|</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="122">
+          
+          
+          <code class="ruby">        #page_path = &quot;#{path}/#{page}&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="123">
+          
+          
+          <code class="ruby">        #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="124">
+          
+          
+          <code class="ruby">      #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="125">
+          
+          
+          <code class="ruby">      #if page &gt; 1</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="126">
+          
+          
+          <code class="ruby">    #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="127">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="128">
+          
+          
+          <code class="ruby">    #def pagination_link page, path</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="129">
+          
+          
+          <code class="ruby">      #%{ &lt;a href=&quot;#{path}/#{page}&quot;&gt; }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="130">
+          
+          
+          <code class="ruby">    #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="131">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="132">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def set_title_from_status state, post</code>
+        </li>
+      
+        <li class="covered" data-hits="22" data-linenumber="133">
+          <span class="hits">22</span>
+          
+          <code class="ruby">      if state == :preview </code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="134">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        return post[&quot;title&quot;]</code>
+        </li>
+      
+        <li class="covered" data-hits="21" data-linenumber="135">
+          <span class="hits">21</span>
+          
+          <code class="ruby">      elsif post.nil? or post.title.blank?</code>
+        </li>
+      
+        <li class="covered" data-hits="17" data-linenumber="136">
+          <span class="hits">17</span>
+          
+          <code class="ruby">        return settings.title</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="137">
+          
+          
+          <code class="ruby">      else</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="138">
+          <span class="hits">4</span>
+          
+          <code class="ruby">        return post_title(post)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="139">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="140">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="141">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="142">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def set_state_class_from_state state</code>
+        </li>
+      
+        <li class="covered" data-hits="45" data-linenumber="143">
+          <span class="hits">45</span>
+          
+          <code class="ruby">      if state == :index</code>
+        </li>
+      
+        <li class="covered" data-hits="42" data-linenumber="144">
+          <span class="hits">42</span>
+          
+          <code class="ruby">        return &quot;post_index&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="145">
+          
+          
+          <code class="ruby">      else</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="146">
+          <span class="hits">3</span>
+          
+          <code class="ruby">        return &quot;post_show&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="147">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="148">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="149">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="150">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    protected</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="151">
+          
+          
+          <code class="ruby">    # TODO: there has to be a better way</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="152">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def collection_sort collection, date_key=&quot;created_at&quot;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="153">
+          
+          
+          <code class="ruby">      (collection.sort_by { |item| item[date_key] })</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="154">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="155">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def collection_rsort collection, date_key=&quot;created_at&quot;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="156">
+          
+          
+          <code class="ruby">      collection_sort(collection, date_key).reverse</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="157">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="158">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="159">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+      </div>
+    </div>
+  </body>
+</html>

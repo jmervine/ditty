@@ -1,3 +1,11 @@
+require 'simplecov'
+SimpleCov.start do
+  filters = %w( cache config doc log public scripts spec store vendor )
+  filters.each do |f|
+    add_filter "/#{f}/"
+  end
+end
+
 ENV['RACK_ENV'] ||= 'test' # needs to be first
 puts "Running with RACK_ENV=#{ENV['RACK_ENV']}."
 

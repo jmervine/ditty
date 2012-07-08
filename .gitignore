@@ -10,3 +10,5 @@ config/newrelic.yml
 config/unicorn.rb
 config/deploy.rb
 cache/*.cache
+public/coverage
+
