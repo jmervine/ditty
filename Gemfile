@@ -17,14 +17,15 @@ end
 group :mongo do
   gem 'mongo'
   gem 'bson_ext'
-  #gem 'mongo_mapper'
   gem 'mongoid'
+  gem 'will_paginate'
 end
 
 group :test, :development do
   gem 'rspec'
   gem 'rack-test'
   gem 'travis-lint'
+  gem 'simplecov'
 end
 
 group :unicorn do

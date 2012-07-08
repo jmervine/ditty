@@ -281,3 +281,37 @@ code {
 #footer a {
   color: #333;
 }
+
+/* draw pagination thanks to:
+ * http://mislav.uniqpath.com/will_paginate/
+ */
+
+.display_pagination {
+  background: #f1f1f1;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+  padding: 1em;
+  cursor: default; }
+  .display_pagination a, .display_pagination span {
+    padding: 0.2em 0.3em; }
+  .display_pagination .disabled {
+    color: #aaaaaa; }
+  .display_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    background-color: #bebebe;
+    display: inline-block;
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.5;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 1em;
+    text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px; }
+  .display_pagination a {
+    text-decoration: none;
+    color: black; }
+    .display_pagination a:hover, .display_pagination a:focus {
+      text-decoration: underline; }
+
+/* end draw pagination */

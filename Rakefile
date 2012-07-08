@@ -13,7 +13,6 @@ begin
       break unless target_host == Rake::RemoteTask.hosts_for(:app).first
       run "ln -s #{deploy_to}/shared/ditty.yml #{deploy_to}/current/config/ditty.yml"
       run "ln -s #{deploy_to}/shared/newrelic.yml #{deploy_to}/current/config/newrelic.yml"
-      run "ln -s #{deploy_to}/shared/unicorn.rb #{deploy_to}/current/config/unicorn.rb"
     end
   end
 rescue LoadError
@@ -34,9 +33,22 @@ task :console do
   exec "irb -r 'pp' -r './dittyapp.rb'"
 end
 
+desc "start mongo console"
+task :dbconsole do
+  ENV['RACK_ENV'] ||= 'test'
+  begin
+    dbc = YAML.load_file("./config/ditty.yml")[ENV['RACK_ENV']]['database']
+    exec "mongo -u #{dbc['username']} -p #{dbc['password']} #{dbc['name']}"
+  rescue 
+    abort "config/ditty.yml must be present"
+  end
+end
+
 desc "start server"
 task :server do
-  exec 'unicorn --port 9001'
+  ENV['RACK_ENV'] ||= 'development'
+  puts "starting with #{ENV['RACK_ENV']} at http://localhost:9001/"
+  exec 'unicorn --port 9001 ./config.ru'
 end
 
 namespace :unicorn do

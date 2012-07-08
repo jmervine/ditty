@@ -61,14 +61,14 @@ module Helper
     end
 
     private
-    def database_connection!
-      MongoMapper.database = @database['name']
-      if database['username'] && @database['password']
-        unless MongoMapper.database.authenticate(@database['username'], @database['password'])
-          raise "Database Authentication Failed!"
-        end
-      end
-    end
+    #def database_connection!
+      #MongoMapper.database = @database['name']
+      #if database['username'] && @database['password']
+        #unless MongoMapper.database.authenticate(@database['username'], @database['password'])
+          #raise "Database Authentication Failed!"
+        #end
+      #end
+    #end
 
     def ensure_hostname_format host
       return "http://"<<host unless host =~ /^http:\/\//

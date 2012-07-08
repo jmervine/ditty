@@ -5,10 +5,14 @@ require 'sinatra'
 require 'yaml'
 require 'pp'
 require 'haml'
+require 'diskcached'
+require 'mongoid'
+require 'will_paginate'
+require 'will_paginate/array'
+
 # load app libs
 require 'ditty'
 require 'helpers'
-require 'diskcached'
 
 class DittyApp < Sinatra::Application
 
@@ -40,6 +44,7 @@ class DittyApp < Sinatra::Application
         config.database.authenticate(settings.database['username'], settings.database['password'])
       end
     end
+    Mongoid.identity_map_enabled = true
 
     $diskcache = Diskcached.new(File.join(settings.root, 'cache'))
     $diskcache.flush # ensure caches are empty on startup
@@ -93,6 +98,7 @@ class DittyApp < Sinatra::Application
     protected!
     haml :form_post, :locals => { :post => Post.find(params[:id]), :navigation => :_nav_help, :state => :edit }
   end
+
   post "/post/?" do
     protected!
     $diskcache.flush
@@ -134,18 +140,21 @@ class DittyApp < Sinatra::Application
 
   get "/post/:id/delete" do
     protected!
+    $diskcache.flush
     Post.find( params[:id] ).destroy
     redirect "/"
   end
 
   get "/tag/:tag" do
+    params[:page] ||= '1'
+    @cache_key = cache_sha(request.path_info+params[:page])
     begin
       raise Diskcached::NotFound if authorized?
       content = $diskcache.get(@cache_key) 
     rescue Diskcached::NotFound
-      posts = get_posts_from_tag( params[:tag] )
+      posts = get_posts_from_tag( params[:tag] ).paginate( :page => params[:page], :per_page => 5)
       redirect "/tag" if posts.empty?
-      content = haml(:tag, :layout => choose_layout, :locals => { :latest => posts, :tag => params[:tag], :state => :tag })
+      content = haml(:tag, :layout => choose_layout, :locals => { :posts => posts, :tag => params[:tag], :state => :tag })
       $diskcache.set(@cache_key, content) unless authorized?
     end
     content
@@ -193,52 +202,70 @@ class DittyApp < Sinatra::Application
     content
   end
 
-  get "/:year/:month/?" do
-    pass unless params[:year] =~ /[0-9]{4}/
-    pass unless params[:month] =~ /[0-9]{2}/
-
-    begin
-      raise Diskcached::NotFound if authorized?
-      content = $diskcache.get(@cache_key) 
-    rescue Diskcached::NotFound
-      posts = Post.all.desc(:created_at).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i }
-
-      pass if posts.empty?
-
-      content = haml( choose_template(:index), :layout => choose_layout, :locals => { :latest => posts } )
-      $diskcache.set(@cache_key, content) unless authorized?
-    end
-    content
-  end
-
   get "/:year/:month/:day/?" do
     pass unless params[:year] =~ /[0-9]{4}/
     pass unless params[:month] =~ /[0-9]{2}/
     pass unless params[:day] =~ /[0-9]{2}/
 
+    params[:page] ||= '1'
+    @cache_key = cache_sha(request.path_info+params[:page])
     begin
       raise Diskcached::NotFound if authorized?
       content = $diskcache.get(@cache_key) 
     rescue Diskcached::NotFound
-      posts = Post.all.desc(:created_at).select { |p| p.created_at.year.to_i == params[:year].to_i and p.created_at.month.to_i == params[:month].to_i and p.created_at.day.to_i == params[:day].to_i }
+      # TODO: replace with a mongo map/reduce
+      posts = Post.all.desc(:created_at).select do |p| 
+                (p.created_at.year.to_i == params[:year].to_i && p.created_at.month.to_i == params[:month].to_i && p.created_at.day.to_i == params[:day].to_i)
+              end.paginate( :page => params[:page], :per_page => 5)
       pass if posts.empty?
-      content = haml(choose_template(:index), :layout => choose_layout, :locals => { :latest => posts })
+      content = haml(choose_template(:index), :layout => choose_layout, :locals => { :posts => posts })
+      $diskcache.set(@cache_key, content) unless authorized?
+    end
+    content
+  end
+
+  get "/:year/:month/?" do
+    pass unless params[:year] =~ /[0-9]{4}/
+    pass unless params[:month] =~ /[0-9]{2}/
+
+    params[:page] ||= '1'
+    @cache_key = cache_sha(request.path_info+params[:page])
+    begin
+      raise Diskcached::NotFound if authorized?
+      content = $diskcache.get(@cache_key) 
+    rescue Diskcached::NotFound
+      # TODO: replace with a mongo map/reduce
+      posts = Post.all.desc(:created_at).select do |p| 
+                (p.created_at.year.to_i == params[:year].to_i && p.created_at.month.to_i == params[:month].to_i )
+              end.paginate( :page => params[:page], :per_page => 5)
+
+      pass if posts.empty?
+
+      content = haml( choose_template(:index), :layout => choose_layout, :locals => { :posts => posts } )
       $diskcache.set(@cache_key, content) unless authorized?
     end
     content
   end
 
   get "/" do 
+    params[:page] ||= '1'
+    @cache_key = cache_sha('index-'+params[:page])
     begin
       raise Diskcached::NotFound if authorized?
       content = $diskcache.get(@cache_key) 
-      logger.debug("reading index from cache") unless authorized?
+      logger.debug("reading index from cache -- 'index-#{params[:page]}'") unless authorized?
     rescue Diskcached::NotFound
-      logger.debug("storing index to cache") unless authorized?
-      content = haml(:index, :layout => choose_layout)
+      logger.debug("storing index to cache -- 'index-#{params[:page]}'") unless authorized?
+      posts = Post.all.desc(:created_at).paginate( :page => params[:page], :per_page => 5)
+      content = haml(:index, :layout => choose_layout, :locals => { :posts => posts })
       $diskcache.set(@cache_key, content) unless authorized?
     end
     content
+  end
+
+  get "/flush_cache" do
+    protected!
+    "<pre>"+($diskcache.flush).join("\n")+"</pre>"
   end
 
   not_found do

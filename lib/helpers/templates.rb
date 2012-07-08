@@ -97,17 +97,37 @@ module Helper
       %w{ january february march april may june july august september october november december }
     end
 
-    def latest n=25
-      Post.all.desc(:created_at)[0..n-1]
-    end
+    #def latest n=25
+      #Post.all.desc(:created_at)[0..n-1]
+    #end
 
-    def linkify_title title
-      URI::encode title
-    end
+    #def paginate page, show=10
+      #p = Post.all.desc(:created_at)
+      #if p.length >= (page+show)
+        #return p[page..page+length]
+      #elsif p.length >= page
+        #return p[page..p.length]
+      #else
+        #n = (p.length%show)*show
+        #return p[n..p.length]
+      #end
+    #end
 
-    def delinkify_title title
-      URI::decode title
-    end
+    #def pagination page, path="/"
+      #ppath = path.gsub!(/\/$/,"") 
+      #markup = %{ <span class='pagination'> }
+      #if page > 0
+        #markup << %{ <a href="#{ppath/">first</a> }
+        #(0..page).each do |n|
+        #page_path = "#{path}/#{page}"
+        #end
+      #end
+      #if page > 1
+    #end
+
+    #def pagination_link page, path
+      #%{ <a href="#{path}/#{page}"> }
+    #end
 
     def set_title_from_status state, post
       if state == :preview 

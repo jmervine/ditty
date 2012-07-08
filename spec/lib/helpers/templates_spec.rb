@@ -115,16 +115,5 @@ describe Helper::Templates do
       helpers.months[5].should eq "june"
     end
   end
-
-  describe :latest do
-    it "should return the _n_ most recent posts" do
-      helpers.latest.should have(25).items
-      helpers.latest(10).should have(10).items
-    end
-    it "should return the most recent items" do
-      helpers.latest.first.should eq Post.all.desc(:created_at).first
-    end
-  end
-
 end
 
