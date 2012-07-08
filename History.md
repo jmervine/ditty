@@ -1,7 +1,8 @@
-## feature/cache
+## release_0_0_10
 
 * implemented Diskcached on routes
 * added will_paginate to index, tag pages and archive pages
+* added simplecov to tests
 
 ## release_0_0_7
 
