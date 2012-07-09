@@ -1,104 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
 <head>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-  <title>File: Rakefile [RDoc Documentation]</title>
+<title>Rakefile - RDoc Documentation</title>
 
-  <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
-  <script src="./js/jquery.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/thickbox-compressed.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/quicksearch.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/darkfish.js" type="text/javascript"
-    charset="utf-8"></script>
-</head>
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
 
 <body class="file">
-  <div id="metadata">
-    <div id="home-metadata">
-      <div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="./index.html">Home</a>
-          <a href="./index.html#classes">Classes</a>
-          <a href="./index.html#methods">Methods</a>
-        </h3>
-      </div>
-    </div>
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
 
-    <div id="project-metadata">
-      
-      
-      <div id="fileindex-section" class="section project-section">
-        <h3 class="section-header">Files</h3>
-        <ul>
-        
-          <li class="file"><a href="./Gemfile.html">Gemfile</a></li>
-        
-          <li class="file"><a href="./Rakefile.html">Rakefile</a></li>
-        
-        </ul>
-      </div>
-      
 
-      <div id="classindex-section" class="section project-section">
-        <h3 class="section-header">Class Index
-          <span class="search-toggle"><img src="./images/find.png"
-            height="16" width="16" alt="[+]"
-            title="show/hide quicksearch" /></span></h3>
-        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-        <fieldset>
-          <legend>Quicksearch</legend>
-          <input type="text" name="quicksearch" value=""
-            class="quicksearch-field" />
-        </fieldset>
-        </form>
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
 
-        <ul class="link-list">
-        
-          <li><a href="./DittyApp.html">DittyApp</a></li>
-        
-          <li><a href="./HelpersApplication.html">HelpersApplication</a></li>
-        
-          <li><a href="./HelpersTemplates.html">HelpersTemplates</a></li>
-        
-          <li><a href="./Object.html">Object</a></li>
-        
-          <li><a href="./Post.html">Post</a></li>
-        
-          <li><a href="./Tag.html">Tag</a></li>
-        
-        </ul>
-        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
-      </div>
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
 
-      
-    </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Helper.html">Helper</a>
+  
+    <li><a href="./Helper/Application.html">Helper::Application</a>
+  
+    <li><a href="./Helper/Configure.html">Helper::Configure</a>
+  
+    <li><a href="./Helper/Templates.html">Helper::Templates</a>
+  
+    <li><a href="./DittyApp.html">DittyApp</a>
+  
+    <li><a href="./Post.html">Post</a>
+  
+    <li><a href="./Tag.html">Tag</a>
+  
+  </ul>
+</nav>
+
   </div>
+</nav>
 
-  <div id="documentation">
-    
+<div id="documentation" class="description">
+  
 <p>require ‘pp’ require ‘mongo’ require ‘fileutils’</p>
 
 <p>begin</p>
 
-<pre>require 'vlad'
-Vlad.load :scm =&gt; :git, :app =&gt; :unicorn
-desc &quot;deploy&quot;
-task &quot;vlad:deploy&quot; =&gt; %w[ vlad:update vlad:bundle:install vlad:link_config ]
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">'vlad'</span>
+<span class="ruby-constant">Vlad</span>.<span class="ruby-identifier">load</span> :<span class="ruby-identifier">scm</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">git</span>, :<span class="ruby-identifier">app</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">unicorn</span>
+<span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;deploy&quot;</span>
+<span class="ruby-identifier">task</span> <span class="ruby-string">&quot;vlad:deploy&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">%w[ vlad:update vlad:bundle:install vlad:link_config ]</span>
 
-namespace :vlad do
-  remote_task :link_config, :roles =&gt; :app do
-    break unless target_host == Rake::RemoteTask.hosts_for(:app).first
-    run &quot;ln -s #{deploy_to}/shared/ditty.yml #{deploy_to}/current/config/ditty.yml&quot;
-  end
-end</pre>
+<span class="ruby-identifier">namespace</span> :<span class="ruby-identifier">vlad</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">remote_task</span> :<span class="ruby-identifier">link_config</span>, :<span class="ruby-identifier">roles</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">app</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">target_host</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Rake</span><span class="ruby-operator">::</span><span class="ruby-constant">RemoteTask</span>.<span class="ruby-identifier">hosts_for</span>(:<span class="ruby-identifier">app</span>).<span class="ruby-identifier">first</span>
+    <span class="ruby-identifier">run</span> <span class="ruby-node">&quot;ln -s #{deploy_to}/shared/ditty.yml #{deploy_to}/current/config/ditty.yml&quot;</span>
+    <span class="ruby-identifier">run</span> <span class="ruby-node">&quot;ln -s #{deploy_to}/shared/newrelic.yml #{deploy_to}/current/config/newrelic.yml&quot;</span>
+    <span class="ruby-identifier">run</span> <span class="ruby-node">&quot;ln -s #{deploy_to}/shared/unicorn.rb #{deploy_to}/current/config/unicorn.rb&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
 
 <p>rescue LoadError</p>
 
@@ -108,9 +110,10 @@ end</pre>
 
 <p>begin</p>
 
-<pre>require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new(:spec)
-task :default =&gt; :spec</pre>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">'rspec/core/rake_task'</span>
+<span class="ruby-constant">RSpec</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">RakeTask</span>.<span class="ruby-identifier">new</span>(:<span class="ruby-identifier">spec</span>)
+<span class="ruby-identifier">task</span> :<span class="ruby-identifier">default</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">spec</span>
+</pre>
 
 <p>rescue LoadError</p>
 
@@ -122,6 +125,26 @@ task :default =&gt; :spec</pre>
 
 <pre>ENV['RACK_ENV'] ||= &quot;test&quot;
 exec &quot;irb -r 'pp' -r './dittyapp.rb'&quot;</pre>
+
+<p>end</p>
+
+<p>desc “start mongo console” task :dbconsole do</p>
+
+<pre>ENV['RACK_ENV'] ||= 'test'
+begin
+  dbc = YAML.load_file(&quot;./config/ditty.yml&quot;)[ENV['RACK_ENV']]['database']
+  exec &quot;mongo -u #{dbc['username']} -p #{dbc['password']} #{dbc['name']}&quot;
+rescue 
+  abort &quot;config/ditty.yml must be present&quot;
+end</pre>
+
+<p>end</p>
+
+<p>desc “start server” task :server do</p>
+
+<pre>ENV['RACK_ENV'] ||= 'development'
+puts &quot;starting with #{ENV['RACK_ENV']} at http://localhost:9001/&quot;
+exec 'unicorn --port 9001 ./config.ru'</pre>
 
 <p>end</p>
 
@@ -144,6 +167,7 @@ end
 
 task :stop_f do
   %x{ ps aux | grep unicorn | grep -v grep | awk '{print $1}' | xargs kill -9 }
+  %x{ [[ -e log/unicorn.pid ]] &amp;&amp; rm log/unicorn.pid }
 end
 
 desc &quot;Restart unicorn deamonized&quot; 
@@ -155,13 +179,19 @@ end</pre>
 
 <p>end</p>
 
-  </div>
+<p>desc “generate rdocs” task :docs do</p>
 
-  <div id="validator-badges">
-    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-      Rdoc Generator</a> 2</small>.</p>
-  </div>
-</body>
-</html>
+<pre>%x{ rdoc -x ./cache -x ./config/ -x ./coverage -x ./cache -x ./log -x ./public -x ./scripts -x ./spec -x ./store -x ./vendor }</pre>
+
+<p>end</p>
+
+</div>
+
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
 
