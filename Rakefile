@@ -13,6 +13,7 @@ begin
       break unless target_host == Rake::RemoteTask.hosts_for(:app).first
       run "ln -s #{deploy_to}/shared/ditty.yml #{deploy_to}/current/config/ditty.yml"
       run "ln -s #{deploy_to}/shared/newrelic.yml #{deploy_to}/current/config/newrelic.yml"
+      run "ln -s #{deploy_to}/shared/unicorn.rb #{deploy_to}/current/config/unicorn.rb"
     end
   end
 rescue LoadError
