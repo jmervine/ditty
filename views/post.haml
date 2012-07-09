@@ -17,6 +17,16 @@
         %span.tag_link
           %a{ :href => "/tag/#{tag.name}" }
             =tag.name
+    - unless state == :index 
+      -#TODO: so ugly
+      - begin
+        %br
+        %br
+        %center
+          = erb :_post_ads, :layout => false
+        %br
+      - rescue
+        -#don't error if doesn't exist
     - unless settings.disqus.nil? 
       %br
       %br

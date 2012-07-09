@@ -9,4 +9,12 @@
         %ul.nav_sub_list
           - archive[year].each_key do |month|
             %li.nav_item<= archive_link(year, month)
+  - begin
+    -#TODO: so ugly
+    %br
+    %center
+      = erb :_nav_ads, :layout => false
+    %br
+  - rescue
+    -#don't error if '_nav_ads' doesn't exist
 
