@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Helper::Configure - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/helpers/configure.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-contact">#contact</a>
+    
+    <li><a href="#method-i-database">#database</a>
+    
+    <li><a href="#method-i-disqus">#disqus</a>
+    
+    <li><a href="#method-i-environment">#environment</a>
+    
+    <li><a href="#method-i-google_analytics">#google_analytics</a>
+    
+    <li><a href="#method-i-hostname">#hostname</a>
+    
+    <li><a href="#method-i-password">#password</a>
+    
+    <li><a href="#method-i-share_this">#share_this</a>
+    
+    <li><a href="#method-i-timezone">#timezone</a>
+    
+    <li><a href="#method-i-title">#title</a>
+    
+    <li><a href="#method-i-username">#username</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../Rakefile.html">Rakefile</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Helper.html">Helper</a>
+  
+    <li><a href="../Helper/Application.html">Helper::Application</a>
+  
+    <li><a href="../Helper/Configure.html">Helper::Configure</a>
+  
+    <li><a href="../Helper/Templates.html">Helper::Templates</a>
+  
+    <li><a href="../DittyApp.html">DittyApp</a>
+  
+    <li><a href="../Post.html">Post</a>
+  
+    <li><a href="../Tag.html">Tag</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Helper::Configure</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-configuration" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">configuration</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(env, root, file="./config/ditty.yml")</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">env</span>, <span class="ruby-identifier">root</span>, <span class="ruby-identifier">file</span>=<span class="ruby-string">&quot;./config/ditty.yml&quot;</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">configuration</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">root</span>, <span class="ruby-identifier">file</span>))[<span class="ruby-identifier">env</span>]
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Missing configuration for '#{env}'.&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@environment</span>       = <span class="ruby-identifier">env</span>
+  <span class="ruby-ivar">@title</span>             = <span class="ruby-identifier">configuration</span>[<span class="ruby-string">'title'</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">title</span>
+  <span class="ruby-ivar">@hostname</span>          = <span class="ruby-identifier">ensure_hostname_format</span>(<span class="ruby-identifier">configuration</span>[<span class="ruby-string">'hostname'</span>]) <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">hostname</span>
+  <span class="ruby-ivar">@timezone</span>          = <span class="ruby-identifier">configuration</span>[<span class="ruby-string">'timezone'</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">timezone</span>
+  <span class="ruby-ivar">@google_analytics</span>  = <span class="ruby-identifier">configuration</span>[<span class="ruby-string">'google_analytics'</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">google_analytics</span>
+  <span class="ruby-ivar">@share_this</span>        = <span class="ruby-identifier">configuration</span>[<span class="ruby-string">'share_this'</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">share_this</span>
+  <span class="ruby-ivar">@disqus</span>            = <span class="ruby-identifier">configuration</span>[<span class="ruby-string">'disqus_shortname'</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">disqus</span>
+  <span class="ruby-ivar">@contact</span>           = <span class="ruby-identifier">configuration</span>[<span class="ruby-string">'contact'</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">contact</span>
+
+  <span class="ruby-ivar">@database</span>          = <span class="ruby-identifier">configuration</span>[<span class="ruby-string">'database'</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-ivar">@username</span>          = <span class="ruby-identifier">configuration</span>[<span class="ruby-string">'auth'</span>][<span class="ruby-string">'username'</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@password</span>          = <span class="ruby-identifier">configuration</span>[<span class="ruby-string">'auth'</span>][<span class="ruby-string">'password'</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-comment">#database_connection!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-contact" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">contact</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="contact-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">contact</span>
+  <span class="ruby-ivar">@contact</span><span class="ruby-operator">||=</span><span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- contact-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- contact-method -->
+
+    
+      <div id="method-i-database" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">database</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="database-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">database</span>
+  <span class="ruby-ivar">@database</span><span class="ruby-operator">||=</span><span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- database-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- database-method -->
+
+    
+      <div id="method-i-disqus" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">disqus</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="disqus-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">disqus</span>
+  <span class="ruby-ivar">@disqus</span><span class="ruby-operator">||=</span><span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- disqus-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- disqus-method -->
+
+    
+      <div id="method-i-environment" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">environment</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="environment-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">environment</span>
+  <span class="ruby-ivar">@environment</span><span class="ruby-operator">||=</span><span class="ruby-string">&quot;production&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- environment-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- environment-method -->
+
+    
+      <div id="method-i-google_analytics" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">google_analytics</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="google_analytics-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">google_analytics</span>
+  <span class="ruby-ivar">@google_analytics</span><span class="ruby-operator">||=</span><span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- google_analytics-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- google_analytics-method -->
+
+    
+      <div id="method-i-hostname" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hostname</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="hostname-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hostname</span>
+  <span class="ruby-ivar">@hostname</span><span class="ruby-operator">||=</span><span class="ruby-string">&quot;http://localhost&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hostname-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hostname-method -->
+
+    
+      <div id="method-i-password" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">password</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="password-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">password</span>
+  <span class="ruby-ivar">@password</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- password-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- password-method -->
+
+    
+      <div id="method-i-share_this" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">share_this</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="share_this-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">share_this</span>
+  <span class="ruby-ivar">@share_this</span><span class="ruby-operator">||=</span><span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- share_this-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- share_this-method -->
+
+    
+      <div id="method-i-timezone" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">timezone</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="timezone-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">timezone</span>
+  <span class="ruby-ivar">@timezone</span><span class="ruby-operator">||=</span><span class="ruby-string">&quot;America/Los_Angeles&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- timezone-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- timezone-method -->
+
+    
+      <div id="method-i-title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">title</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="title-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>
+  <span class="ruby-ivar">@title</span><span class="ruby-operator">||=</span><span class="ruby-string">&quot;Ditty!&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- title-method -->
+
+    
+      <div id="method-i-username" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">username</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="username-source">
+            <pre><span class="ruby-comment"># File lib/helpers/configure.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">username</span>
+  <span class="ruby-ivar">@username</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- username-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- username-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

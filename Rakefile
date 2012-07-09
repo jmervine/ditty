@@ -82,3 +82,8 @@ namespace :unicorn do
 
 end
 
+desc "generate rdocs"
+task :docs do
+  %x{ rdoc -x ./cache -x ./config/ -x ./coverage -x ./cache -x ./log -x ./public -x ./scripts -x ./spec -x ./store -x ./vendor }
+end
+
