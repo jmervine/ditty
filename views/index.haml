@@ -1,8 +1,0 @@
-- unless posts.count == 0
-  - posts.each do |post| 
-    = haml :post, :layout => false, :locals => { :post => post }
-  .display_pagination
-    = will_paginate posts
-- else
-  %h3 You have no posts! What are you waiting for?
-
