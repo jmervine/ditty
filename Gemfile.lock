@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/jmervine/diskcached.git
+  revision: d982f7dd8b1330c5150da8a3251a1c0bc4237067
+  specs:
+    diskcached (1.1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -12,7 +18,6 @@ GEM
       bson (~> 1.6.4)
     builder (3.0.0)
     diff-lcs (1.1.3)
-    diskcached (1.0.1)
     haml (3.1.6)
     hashr (0.0.21)
     i18n (0.6.0)
@@ -80,7 +85,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
-  diskcached
+  diskcached!
   haml
   mongo
   mongoid

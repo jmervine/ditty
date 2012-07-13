@@ -46,7 +46,7 @@ class DittyApp < Sinatra::Application
     end
     Mongoid.identity_map_enabled = true
 
-    $diskcache = Diskcached.new(File.join(settings.root, 'cache'))
+    $diskcache = Diskcached.new(File.join(settings.root, 'cache'), (30*24*60*60))  # TODO: abstract to config
     $diskcache.flush # ensure caches are empty on startup
   end
 
