@@ -1,12 +1,10 @@
-Sun, 08 Jul 2012 21:26:52 -0700
-./dittyapp.rb	Sun, 08 Jul 2012 21:21:17 -0700
-./Gemfile	Sun, 08 Jul 2012 10:15:21 -0700
-./Rakefile	Sun, 08 Jul 2012 21:26:47 -0700
-./lib/ditty.rb	Sun, 08 Jul 2012 21:21:17 -0700
-./lib/helpers.rb	Sun, 08 Jul 2012 21:21:17 -0700
-./lib/ditty/comment.rb	Sun, 08 Jul 2012 21:21:17 -0700
-./lib/ditty/tag.rb	Sun, 08 Jul 2012 21:21:17 -0700
-./lib/ditty/post.rb	Sun, 08 Jul 2012 21:21:17 -0700
-./lib/helpers/templates.rb	Sun, 08 Jul 2012 21:21:17 -0700
-./lib/helpers/application.rb	Sun, 08 Jul 2012 21:21:17 -0700
-./lib/helpers/configure.rb	Sun, 08 Jul 2012 21:21:17 -0700
+Fri, 13 Jul 2012 03:23:19 -0400
+./dittyapp.rb	Fri, 13 Jul 2012 03:22:16 -0400
+./lib/ditty/post.rb	Tue, 10 Jul 2012 00:49:05 -0400
+./lib/ditty/tag.rb	Tue, 10 Jul 2012 00:49:05 -0400
+./lib/ditty/comment.rb	Tue, 10 Jul 2012 00:49:05 -0400
+./lib/ditty.rb	Tue, 10 Jul 2012 00:49:05 -0400
+./lib/helpers/configure.rb	Tue, 10 Jul 2012 00:49:05 -0400
+./lib/helpers/application.rb	Tue, 10 Jul 2012 00:49:05 -0400
+./lib/helpers/templates.rb	Tue, 10 Jul 2012 00:49:05 -0400
+./lib/helpers.rb	Tue, 10 Jul 2012 00:49:05 -0400
