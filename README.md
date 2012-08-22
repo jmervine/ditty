@@ -1,7 +1,3 @@
-ditty
-=====
+# This is dead. Working on a replacement using [Nesta](http://nestacms.com/).
 
-Super simple Sinatra based blog.
-
-## This is dead. Working on a replacement using [Nesta](http://nestacms.org).
-
+That said, my blog is currently running on it at http://rubyops.net.
