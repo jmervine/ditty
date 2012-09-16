@@ -14,6 +14,8 @@
 #           #see http://tzinfo.rubyforge.org/ for details
 #   google_analytics: <track id>
 #   share_this: <publisher id>
+#   linkedin_path: <linkedin path>
+#       # e.g. http://www.linkedin.com/in/mervinej
 #   contact: "mailto:foo@example.com"
 
 test: 
@@ -29,6 +31,7 @@ test:
   #timezone: "America/Los_Angeles"
   google_analytics: google_analytics_track_id
   share_this: publisher_id
+  linkedin_path: linkedin_path_url
   contact: "mailto:example@example.org"
 travis:
   title: "My TEST Ditty's!"
@@ -39,6 +42,7 @@ travis:
     username: test
     password: test
   google_analytics: google_analytics_track_id
+  linkedin_path: linkedin_path_url
   share_this: publisher_id
   contact: "mailto:example@example.org"
 stage:
@@ -52,6 +56,7 @@ stage:
     username: test
     password: test
   share_this: publisher_id
+  linkedin_path: "http://www.linkedin.com/in/mervinej"
   contact: "mailto:example@example.org"
 #production:
   #title: SET ME

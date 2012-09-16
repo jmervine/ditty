@@ -15,6 +15,7 @@ module Helper
       @timezone          = configuration['timezone'] rescue timezone
       @google_analytics  = configuration['google_analytics'] rescue google_analytics
       @share_this        = configuration['share_this'] rescue share_this
+      @linkedin_path     = configuration['linkedin_path'] rescue linkedin_path
       @disqus            = configuration['disqus_shortname'] rescue disqus
       @contact           = configuration['contact'] rescue contact
 
@@ -43,6 +44,9 @@ module Helper
     end
     def share_this
       @share_this||=nil
+    end
+    def linkedin_path
+      @linkedin_path||=nil
     end
     def disqus
       @disqus||=nil

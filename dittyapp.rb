@@ -31,6 +31,7 @@ class DittyApp < Sinatra::Application
     set :hostname,         @configuration.hostname
     set :google_analytics, @configuration.google_analytics
     set :share_this,       @configuration.share_this
+    set :linkedin_path,    @configuration.linkedin_path
     set :disqus,           @configuration.disqus
     set :contact,          @configuration.contact
     set :database,         @configuration.database
