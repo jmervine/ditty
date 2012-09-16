@@ -14,8 +14,8 @@
       %br
       Tags: 
       - post.tags.each do |tag|
-        %span.tag_link
-          %a{ :href => "/tag/#{tag.name}" }
+        %span.tag_link<
+          %a{ :href => "/tag/#{tag.name}" }<
             =tag.name
     - unless state == :index 
       -#TODO: so ugly

@@ -9,10 +9,9 @@
         %ul.nav_sub_list
           - archive[year].each_key do |month|
             %li.nav_item<= archive_link(year, month)
-    %br
-    = haml :_about, :layout => false
+  %br
+  = haml :_about, :layout => false
   - begin
-    -#TODO: so ugly
     %br
     %center
       = erb :_nav_ads, :layout => false
