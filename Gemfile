@@ -5,7 +5,7 @@ gem 'rake'
 gem 'redcarpet'
 gem 'rack-mobile-detect'
 gem 'tzinfo'
-gem 'rdoc'
+gem 'yard'
 gem 'diskcached'#, :git => "https://github.com/jmervine/diskcached.git"
 
 gem 'haml'

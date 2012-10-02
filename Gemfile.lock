@@ -16,7 +16,6 @@ GEM
     haml (3.1.6)
     hashr (0.0.21)
     i18n (0.6.0)
-    json (1.7.3)
     kgio (2.7.4)
     mongo (1.6.4)
       bson (~> 1.6.4)
@@ -39,8 +38,6 @@ GEM
     rake-remote_task (2.0.6)
       open4 (~> 1.0)
       rake (~> 0.8)
-    rdoc (3.12)
-      json (~> 1.4)
     redcarpet (2.1.1)
     rspec (2.11.0)
       rspec-core (~> 2.11.0)
@@ -74,6 +71,7 @@ GEM
     vlad-unicorn (2.1.1)
       vlad (~> 2.0)
     will_paginate (3.0.3)
+    yard (0.8.2.1)
 
 PLATFORMS
   ruby
@@ -88,7 +86,6 @@ DEPENDENCIES
   rack-mobile-detect
   rack-test
   rake
-  rdoc
   redcarpet
   rspec
   simplecov
@@ -100,3 +97,4 @@ DEPENDENCIES
   vlad-git
   vlad-unicorn
   will_paginate
+  yard
