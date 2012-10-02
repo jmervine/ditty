@@ -11,9 +11,8 @@ begin
   namespace :vlad do
     remote_task :link_config, :roles => :app do
       break unless target_host == Rake::RemoteTask.hosts_for(:app).first
-      run "ln -s #{deploy_to}/shared/ditty.yml #{deploy_to}/current/config/ditty.yml"
-      run "ln -s #{deploy_to}/shared/newrelic.yml #{deploy_to}/current/config/newrelic.yml"
-      run "ln -s #{deploy_to}/shared/unicorn.rb #{deploy_to}/current/config/unicorn.rb"
+      run "mv #{deploy_to}/current/config #{deploy_to}/current/old_config"
+      run "ln -s #{deploy_to}/shared/config #{deploy_to}/current/config"
     end
   end
 rescue LoadError
