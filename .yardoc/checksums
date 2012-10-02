@@ -1,0 +1,6 @@
+lib/ditty/tag.rb cd6a4d7b01a8c217e5958528ce07e5513c4eb0a5
+lib/ditty/post.rb ca53cfe3604189facf1108b57776af4b03508e89
+lib/ditty/comment.rb a75879c4acee3d392e030d43d6a6500a31f237bb
+lib/helpers/configure.rb 526e82c2e71c2007e57a8467834acc5392d80d43
+lib/helpers/templates.rb 057231ef7d555ab9c9ac09933599591d2f9818cf
+lib/helpers/application.rb a2b035f0efc5ab3c583225ab31d3a273f655e9dc
